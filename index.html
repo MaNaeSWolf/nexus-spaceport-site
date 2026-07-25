@@ -10,6 +10,20 @@
 <meta property="og:title" content="Nexus Spaceports — The ground beneath every orbital launch">
 <meta property="og:description" content="Neutral, multi-user spaceport infrastructure. Primary site secured in Mozambique.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://manaeswolf.github.io/nexus-spaceport-site/">
+<meta property="og:image" content="https://manaeswolf.github.io/nexus-spaceport-site/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Concept render of a Nexus launch pad">
+<meta property="og:site_name" content="Nexus Spaceports">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nexus Spaceports — The ground beneath every orbital launch">
+<meta name="twitter:description" content="Neutral, multi-user spaceport infrastructure. Primary site secured in Mozambique.">
+<meta name="twitter:image" content="https://manaeswolf.github.io/nexus-spaceport-site/assets/og-image.jpg">
+<meta name="theme-color" content="#05070a">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@200;300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -207,9 +221,18 @@ select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,va
   background-position:calc(100% - 19px) 50%,calc(100% - 14px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
 select option{background:#0b1119;color:var(--tp)}
 button.btn{border:0;width:100%;font-size:13px}
-.ok{grid-column:1/-1;display:none;border:1px solid rgba(120,255,180,.3);background:rgba(120,255,180,.06);
-  color:#7ef0b4;font-family:var(--fm);font-size:11.5px;letter-spacing:.1em;padding:14px 16px}
-.ok.show{display:block}
+button.btn[disabled]{opacity:.45;cursor:progress}
+/* form feedback */
+.msg{grid-column:1/-1;display:none;border:1px solid;font-family:var(--fm);font-size:11.5px;
+  letter-spacing:.1em;line-height:1.7;padding:14px 16px}
+.msg.show{display:block}
+.msg.good{border-color:rgba(120,255,180,.3);background:rgba(120,255,180,.06);color:#7ef0b4}
+.msg.bad{border-color:rgba(255,122,60,.4);background:rgba(255,122,60,.07);color:#ff9d6e}
+.msg a{color:inherit;text-decoration:underline}
+.fe{display:none;font-family:var(--fm);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent-2);margin-top:7px}
+.fe.show{display:block}
+input.bad,select.bad,textarea.bad{border-color:var(--accent-2)}
 .people{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:56px}
 .people > div{background:var(--bg2);padding:26px}
 .people .nm{font-family:var(--fd);font-size:17px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tp)}
@@ -556,11 +579,13 @@ footer li a:hover{color:var(--accent)}
 
     <div class="g2 rv" style="margin-top:clamp(40px,5vw,64px);background:transparent;gap:clamp(20px,2.5vw,32px)">
       <div class="band" style="background:transparent">
-        <img src="assets/site-render.png" alt="Morrumbene launch complex concept render">
+        <img src="assets/site-render.jpg" alt="Morrumbene launch complex concept render"
+             width="1149" height="1369" loading="lazy" decoding="async">
         <div class="cap">Concept render · Morrumbene launch complex, Mozambique</div>
       </div>
       <div class="band" style="background:transparent">
-        <img src="assets/pad.png" alt="Morrumbene launch pad concept">
+        <img src="assets/pad.jpg" alt="Morrumbene launch pad concept"
+             width="1586" height="992" loading="lazy" decoding="async">
         <div class="cap">Concept · Morrumbene pad configuration, Mozambique</div>
       </div>
     </div>
@@ -811,10 +836,10 @@ footer li a:hover{color:var(--accent)}
 
       <div>
         <form id="enq" novalidate>
-          <div><label for="fn">First name</label><input id="fn" name="fn" required autocomplete="given-name"></div>
-          <div><label for="ln">Last name</label><input id="ln" name="ln" required autocomplete="family-name"></div>
+          <div><label for="fn">First name</label><input id="fn" name="fn" required autocomplete="given-name" aria-describedby="e-fn"><span class="fe" id="e-fn"></span></div>
+          <div><label for="ln">Last name</label><input id="ln" name="ln" required autocomplete="family-name" aria-describedby="e-ln"><span class="fe" id="e-ln"></span></div>
           <div class="f-full"><label for="org">Organisation</label><input id="org" name="org" autocomplete="organization"></div>
-          <div class="f-full"><label for="em">Email</label><input id="em" name="em" type="email" required autocomplete="email"></div>
+          <div class="f-full"><label for="em">Email</label><input id="em" name="em" type="email" required autocomplete="email" aria-describedby="e-em"><span class="fe" id="e-em"></span></div>
           <div class="f-full"><label for="ty">Investor type</label>
             <select id="ty" name="ty">
               <option value="">Select…</option>
@@ -829,8 +854,8 @@ footer li a:hover{color:var(--accent)}
             </select>
           </div>
           <div class="f-full"><label for="ms">Message (optional)</label><textarea id="ms" name="ms"></textarea></div>
-          <div class="f-full"><button class="btn btn-p" type="submit">Submit enquiry →</button></div>
-          <div class="ok" id="ok">Enquiry received. A member of the team will be in touch shortly.</div>
+          <div class="f-full"><button class="btn btn-p" type="submit" id="sub">Submit enquiry →</button></div>
+          <div class="msg" id="msg" role="status" aria-live="polite"></div>
         </form>
       </div>
     </div>
@@ -917,19 +942,86 @@ footer li a:hover{color:var(--accent)}
   var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});
   els.forEach(function(e){io.observe(e)});
 })();
-/* enquiry form — replace the handler below with your endpoint (Formspree, Netlify, etc.) */
+/* ── enquiry form ───────────────────────────────────────────────────────────
+   To deliver enquiries to an inbox, create a free form at https://formspree.io
+   (or Netlify Forms / Basin) and paste its endpoint URL into ENDPOINT below.
+   Nothing else needs to change.
+
+   While ENDPOINT is empty the form falls back to opening the visitor's email
+   client. That fallback is unreliable — plenty of machines have no mail client
+   configured — so it says so plainly and shows the address to copy, rather
+   than claiming the enquiry was received when it may not have been.
+   ─────────────────────────────────────────────────────────────────────────── */
 (function(){
+  var ENDPOINT = '';                          /* e.g. 'https://formspree.io/f/abcdwxyz' */
+  var ADDRESS  = 'info@nexus-spaceport.com';
+
   var f=document.getElementById('enq');if(!f)return;
+  var msg=document.getElementById('msg'),sub=document.getElementById('sub');
+
+  function setMsg(kind,html){msg.className='msg show '+kind;msg.innerHTML=html}
+  function clearMsg(){msg.className='msg';msg.innerHTML=''}
+
+  function mark(id,text){
+    var el=document.getElementById(id),e=document.getElementById('e-'+id);
+    if(text){el.classList.add('bad');e.textContent=text;e.classList.add('show')}
+    else{el.classList.remove('bad');e.textContent='';e.classList.remove('show')}
+    return !text;
+  }
+  function validate(){
+    var em=f.em.value.trim(),ok=true;
+    ok=mark('fn',f.fn.value.trim()?'':'Required')&&ok;
+    ok=mark('ln',f.ln.value.trim()?'':'Required')&&ok;
+    ok=mark('em',!em?'Required':(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)?'':'Enter a valid email address'))&&ok;
+    return ok;
+  }
+  ['fn','ln','em'].forEach(function(id){
+    document.getElementById(id).addEventListener('input',function(){
+      if(this.classList.contains('bad'))validate();
+    });
+  });
+
   f.addEventListener('submit',function(ev){
     ev.preventDefault();
-    if(!f.fn.value.trim()||!f.em.value.trim()||f.em.value.indexOf('@')<0){
-      f.querySelector('#em').focus();return;
+    clearMsg();
+    if(!validate()){
+      setMsg('bad','Please correct the highlighted fields.');
+      f.querySelector('.bad').focus();
+      return;
     }
-    /* TODO: POST to a backend or form service. Fallback below opens the user's mail client. */
-    var body='Name: '+f.fn.value+' '+f.ln.value+'\nOrganisation: '+f.org.value+'\nEmail: '+f.em.value+'\nInvestor type: '+f.ty.value+'\n\n'+f.ms.value;
-    window.location.href='mailto:info@nexus-spaceport.com?subject='+encodeURIComponent('Investor enquiry — '+f.fn.value+' '+f.ln.value)+'&body='+encodeURIComponent(body);
-    document.getElementById('ok').classList.add('show');
-    f.reset();
+    var d={
+      firstName:f.fn.value.trim(),lastName:f.ln.value.trim(),
+      organisation:f.org.value.trim(),email:f.em.value.trim(),
+      investorType:f.ty.value,message:f.ms.value.trim()
+    };
+
+    if(!ENDPOINT){
+      var body='Name: '+d.firstName+' '+d.lastName+'\nOrganisation: '+d.organisation+
+               '\nEmail: '+d.email+'\nInvestor type: '+d.investorType+'\n\n'+d.message;
+      window.location.href='mailto:'+ADDRESS+
+        '?subject='+encodeURIComponent('Investor enquiry — '+d.firstName+' '+d.lastName)+
+        '&body='+encodeURIComponent(body);
+      setMsg('bad','Opening your email client now. If nothing opens, your enquiry has '+
+             '<strong>not</strong> been sent — please write to '+
+             '<a href="mailto:'+ADDRESS+'">'+ADDRESS+'</a> directly.');
+      return;
+    }
+
+    sub.disabled=true;sub.textContent='Sending…';
+    fetch(ENDPOINT,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(d)
+    }).then(function(r){
+      if(!r.ok)throw new Error(r.status);
+      setMsg('good','Enquiry received. A member of the team will be in touch shortly.');
+      f.reset();
+    }).catch(function(){
+      setMsg('bad','Something went wrong sending your enquiry. Please email '+
+             '<a href="mailto:'+ADDRESS+'">'+ADDRESS+'</a> directly.');
+    }).then(function(){
+      sub.disabled=false;sub.textContent='Submit enquiry →';
+    });
   });
 })();
 </script>
