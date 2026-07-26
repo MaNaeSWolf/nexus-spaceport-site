@@ -11,13 +11,14 @@ Live at https://manaeswolf.github.io/nexus-spaceport-site/
 - `.nojekyll` — tells GitHub Pages to serve files as-is, without Jekyll processing
 - `robots.txt` — search-engine exclusion (see note below)
 
-## Wiring up the enquiry form
+## ⚠ Wiring up the enquiry form — required before this goes live
 
-The investor enquiry form is **not yet connected to an inbox**. Until it is, it
-falls back to opening the visitor's mail client, and tells them plainly that the
-enquiry may not have sent.
+Every email address was removed from the page (spam exposure raised in review),
+so **the form is now the only contact route on the site**. It is not yet
+connected to an inbox, which means there is currently **no working way for a
+visitor to reach you**. The form says so plainly rather than pretending to send.
 
-To make it deliver properly:
+This must be done before the site is shown to anyone real:
 
 1. Create a free form at https://formspree.io (Netlify Forms and Basin work the same way)
 2. Copy the endpoint URL it gives you, e.g. `https://formspree.io/f/abcdwxyz`
@@ -26,6 +27,15 @@ To make it deliver properly:
 
 Nothing else needs changing — the success, failure and validation paths are
 already written against it.
+
+## Versions
+
+- `/` — the current site, near-black palette
+- `/v2/` — visual concept: deep ocean-ink background instead of black, amber
+  accent, full-bleed sea-up masterplan render, ghosted section numerals,
+  statement break, corner-bracket panels, staggered reveals
+
+Both share the same `assets/` folder. v2 references it as `../assets/`.
 
 ## Keeping it out of search results
 

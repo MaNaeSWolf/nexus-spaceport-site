@@ -66,12 +66,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:60;height:56px;display:flex;alig
 nav.solid{background:rgba(5,7,10,.93)}
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
 .brand img{height:34px;width:auto;display:block}
-.brand .bt{font-family:var(--fm);font-size:12px;letter-spacing:.2em;color:var(--tp);white-space:nowrap}
+.brand .bt{font-family:var(--fm);font-size:13px;letter-spacing:.2em;color:var(--tp);white-space:nowrap}
 .navlinks{display:flex;list-style:none;gap:0;margin-left:auto}
 .navlinks a{font-family:var(--fd);font-size:13px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;
   color:var(--ts);text-decoration:none;padding:0 13px;height:56px;display:flex;align-items:center;transition:color .2s}
 .navlinks a:hover{color:var(--tp)}
-.navcta{font-family:var(--fd);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+.navcta{font-family:var(--fd);font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
   color:var(--accent);border:1px solid var(--accent);padding:7px 18px;text-decoration:none;margin-left:18px;
   transition:.2s;white-space:nowrap}
 .navcta:hover{background:var(--accent);color:#05070a}
@@ -91,7 +91,7 @@ nav.solid{background:rgba(5,7,10,.93)}
 /* ── layout primitives ────────────────────────────────────────── */
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
 section{padding:clamp(72px,9vw,132px) 0;position:relative}
-.eyebrow{font-family:var(--fm);font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);
+.eyebrow{font-family:var(--fm);font-size:12.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);
   display:flex;align-items:center;gap:13px;margin-bottom:26px}
 .eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);flex-shrink:0}
 h1{font-family:var(--fd);font-size:clamp(46px,8.4vw,104px);font-weight:700;line-height:.92;letter-spacing:-.005em;
@@ -129,7 +129,7 @@ p{font-size:16px;line-height:1.78}
 .tick > div{padding:22px clamp(16px,3vw,40px);border-right:1px solid var(--border)}
 .tick > div:last-child{border-right:0}
 .tick .k{font-family:var(--fd);font-size:clamp(22px,2.5vw,32px);font-weight:600;color:var(--tp);line-height:1;margin-bottom:7px}
-.tick .l{font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--tm);line-height:1.5}
+.tick .l{font-family:var(--fm);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tm);line-height:1.5}
 
 /* ── panels / grids ───────────────────────────────────────────── */
 .panel{background:var(--panel);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
@@ -145,7 +145,7 @@ p{font-size:16px;line-height:1.78}
 .nl{border-top:1px solid var(--border)}
 .nl > li{list-style:none;display:grid;grid-template-columns:56px minmax(0,1fr);gap:clamp(14px,2.5vw,32px);
   padding:24px 0;border-bottom:1px solid var(--border);align-items:start}
-.nl .n{font-family:var(--fm);font-size:11.5px;letter-spacing:.14em;color:var(--accent);padding-top:4px}
+.nl .n{font-family:var(--fm);font-size:12.5px;letter-spacing:.14em;color:var(--accent);padding-top:4px}
 .nl p{color:var(--ts);font-size:15.5px;max-width:74ch}
 
 /* definition rows */
@@ -154,7 +154,7 @@ p{font-size:16px;line-height:1.78}
   border-bottom:1px solid var(--border);align-items:baseline}
 .rows .r > .lab{font-family:var(--fd);font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tp)}
 .rows .r > .val{font-size:15.5px;color:var(--ts)}
-.rows .r > .val .u{font-family:var(--fm);font-size:12.5px;color:var(--accent);display:block;margin-bottom:3px;letter-spacing:.1em}
+.rows .r > .val .u{font-family:var(--fm);font-size:14px;color:var(--accent);display:block;margin-bottom:3px;letter-spacing:.1em}
 
 /* stat blocks */
 .stat{padding:clamp(22px,2.6vw,34px)}
@@ -163,7 +163,7 @@ p{font-size:16px;line-height:1.78}
 .stat p{font-size:15px;color:var(--ts)}
 
 /* tags */
-.tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:10.5px;letter-spacing:.16em;
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:12px;letter-spacing:.16em;
   text-transform:uppercase;padding:5px 11px;border:1px solid var(--border-hi);color:var(--accent);white-space:nowrap}
 .tag.warm{border-color:rgba(255,210,120,.35);color:var(--gold)}
 .tag.live{border-color:rgba(120,255,180,.3);color:#7ef0b4}
@@ -176,16 +176,16 @@ p{font-size:16px;line-height:1.78}
 .site:hover{background:#0b1119}
 .site .hd{padding:26px clamp(20px,2.2vw,30px) 20px;border-bottom:1px solid var(--border)}
 .site .bd{padding:8px clamp(20px,2.2vw,30px) 26px;flex:1}
-.site .co{font-family:var(--fm);font-size:12px;letter-spacing:.1em;color:var(--accent);margin-top:9px}
+.site .co{font-family:var(--fm);font-size:13px;letter-spacing:.1em;color:var(--accent);margin-top:9px}
 .site dl{display:grid;grid-template-columns:auto 1fr;gap:0}
-.site dt{font-family:var(--fm);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
+.site dt{font-family:var(--fm);font-size:12.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
   padding:11px 18px 11px 0;border-bottom:1px solid rgba(255,255,255,.07);white-space:nowrap}
 .site dd{font-size:14.5px;color:var(--ts);padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);text-align:right}
 .site dt:last-of-type,.site dd:last-of-type{border-bottom:0}
 
 /* table */
 .tbl{width:100%;border-collapse:collapse;font-size:14.5px}
-.tbl th{font-family:var(--fm);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
+.tbl th{font-family:var(--fm);font-size:12.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
   text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--border-hi);font-weight:400;white-space:nowrap}
 .tbl td{padding:14px 14px 14px 0;border-bottom:1px solid var(--border);color:var(--ts);vertical-align:top}
 .tbl td:first-child{font-family:var(--fd);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tp);font-size:14px}
@@ -196,7 +196,7 @@ p{font-size:16px;line-height:1.78}
 .why{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
 .why > div{background:var(--bg2);padding:clamp(26px,3vw,40px);transition:background .3s}
 .why > div:hover{background:#0b1119}
-.why .n{font-family:var(--fm);font-size:11.5px;letter-spacing:.2em;color:var(--accent);margin-bottom:16px;display:block}
+.why .n{font-family:var(--fm);font-size:12.5px;letter-spacing:.2em;color:var(--accent);margin-bottom:16px;display:block}
 .why h3{margin-bottom:12px}
 .why p{color:var(--ts);font-size:15.5px}
 
@@ -205,13 +205,13 @@ p{font-size:16px;line-height:1.78}
 .band img{width:100%;height:auto;display:block;opacity:.78;filter:saturate(.85) contrast(1.05)}
 .band .cap{position:absolute;left:0;bottom:0;right:0;padding:20px clamp(18px,2.4vw,30px);
   background:linear-gradient(0deg,rgba(5,7,10,.92),rgba(5,7,10,0));
-  font-family:var(--fm);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ts)}
+  font-family:var(--fm);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ts)}
 
 /* invest / form */
 #invest{border-top:1px solid var(--border-hi);background:linear-gradient(180deg,rgba(8,11,17,.55),rgba(5,7,10,.9))}
 form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .f-full{grid-column:1/-1}
-label{display:block;font-family:var(--fm);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+label{display:block;font-family:var(--fm);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--tm);margin-bottom:8px}
 input,select,textarea{width:100%;background:rgba(255,255,255,.028);border:1px solid var(--border);
   color:var(--tp);font-family:var(--fb);font-size:15.5px;font-weight:300;padding:13px 15px;outline:none;transition:.2s;border-radius:0}
@@ -223,33 +223,33 @@ select option{background:#0b1119;color:var(--tp)}
 button.btn{border:0;width:100%;font-size:14px}
 button.btn[disabled]{opacity:.45;cursor:progress}
 /* form feedback */
-.msg{grid-column:1/-1;display:none;border:1px solid;font-family:var(--fm);font-size:12.5px;
+.msg{grid-column:1/-1;display:none;border:1px solid;font-family:var(--fm);font-size:13.5px;
   letter-spacing:.1em;line-height:1.7;padding:14px 16px}
 .msg.show{display:block}
 .msg.good{border-color:rgba(120,255,180,.3);background:rgba(120,255,180,.06);color:#7ef0b4}
 .msg.bad{border-color:rgba(255,122,60,.4);background:rgba(255,122,60,.07);color:#ff9d6e}
 .msg a{color:inherit;text-decoration:underline}
-.fe{display:none;font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+.fe{display:none;font-family:var(--fm);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--accent-2);margin-top:7px}
 .fe.show{display:block}
 input.bad,select.bad,textarea.bad{border-color:var(--accent-2)}
 .people{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:56px}
 .people > div{background:var(--bg2);padding:26px}
 .people .nm{font-family:var(--fd);font-size:17px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tp)}
-.people .rl{font-family:var(--fm);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin:6px 0 12px}
+.people .rl{font-family:var(--fm);font-size:12.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin:6px 0 12px}
 .people a{font-size:14px;color:var(--accent);text-decoration:none;word-break:break-all}
 .people a:hover{text-decoration:underline}
 
 /* footer */
 footer{border-top:1px solid var(--border);padding:56px 0 40px;background:rgba(5,7,10,.92)}
 .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:44px}
-footer h5{font-family:var(--fm);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--tm);margin-bottom:16px}
+footer h5{font-family:var(--fm);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--tm);margin-bottom:16px}
 footer ul{list-style:none}
 footer li{margin-bottom:9px}
 footer li a{font-size:14.5px;color:var(--ts);text-decoration:none;transition:color .2s}
 footer li a:hover{color:var(--accent)}
-.legal{border-top:1px solid var(--border);padding-top:26px;font-size:12.5px;color:var(--tm);line-height:1.75}
-.legal .fine{margin-top:14px;font-size:12px;max-width:92ch}
+.legal{border-top:1px solid var(--border);padding-top:26px;font-size:13.5px;color:var(--tm);line-height:1.75}
+.legal .fine{margin-top:14px;font-size:13px;max-width:92ch}
 
 /* responsive */
 @media(max-width:1000px){
@@ -830,7 +830,7 @@ footer li a:hover{color:var(--accent)}
         </p>
         <div class="rows" style="border-top:1px solid var(--border)">
           <div class="r" style="grid-template-columns:1fr"><div class="lab">Nexus Launch Services Ltd</div><div class="val" style="margin-top:4px">20 Wenlock Road, London N1 7GU, United Kingdom · Company No. 15915121</div></div>
-          <div class="r" style="grid-template-columns:1fr"><div class="lab">General Enquiries</div><div class="val" style="margin-top:4px"><a href="mailto:info@nexus-spaceport.com" style="color:var(--accent);text-decoration:none">info@nexus-spaceport.com</a></div></div>
+          <div class="r" style="grid-template-columns:1fr"><div class="lab">General Enquiries</div><div class="val" style="margin-top:4px">All enquiries are handled through the form opposite. A named member of the team responds to every submission.</div></div>
         </div>
       </div>
 
@@ -864,17 +864,14 @@ footer li a:hover{color:var(--accent)}
       <div>
         <div class="nm">Sean Wessels</div>
         <div class="rl">Chief Executive Officer</div>
-        <a href="mailto:sean.wessels@nexus-spaceport.com">sean.wessels@nexus-spaceport.com</a>
       </div>
       <div>
         <div class="nm">Richard A. J. Gale</div>
         <div class="rl">Chairman</div>
-        <a href="mailto:richardaj.gale@nexus-spaceport.com">richardaj.gale@nexus-spaceport.com</a>
       </div>
       <div>
         <div class="nm">Marcus Allington</div>
         <div class="rl">Corporate Development</div>
-        <a href="mailto:marcus.allington@nexus-spaceport.com">marcus.allington@nexus-spaceport.com</a>
       </div>
     </div>
   </div>
@@ -906,7 +903,6 @@ footer li a:hover{color:var(--accent)}
       <div>
         <h5>Contact</h5>
         <ul>
-          <li><a href="mailto:info@nexus-spaceport.com">info@nexus-spaceport.com</a></li>
           <li><a href="#invest">Investor enquiry</a></li>
           <li class="dim" style="font-size:13px;color:var(--tm)">20 Wenlock Road<br>London N1 7GU<br>United Kingdom</li>
         </ul>
@@ -947,14 +943,13 @@ footer li a:hover{color:var(--accent)}
    (or Netlify Forms / Basin) and paste its endpoint URL into ENDPOINT below.
    Nothing else needs to change.
 
-   While ENDPOINT is empty the form falls back to opening the visitor's email
-   client. That fallback is unreliable — plenty of machines have no mail client
-   configured — so it says so plainly and shows the address to copy, rather
-   than claiming the enquiry was received when it may not have been.
+   Every email address has been removed from the page at the client's request
+   (spam exposure), so there is deliberately NO mail fallback. Until ENDPOINT is
+   set there is no working contact route at all: the form tells the visitor
+   plainly that nothing was sent rather than pretending otherwise.
    ─────────────────────────────────────────────────────────────────────────── */
 (function(){
   var ENDPOINT = '';                          /* e.g. 'https://formspree.io/f/abcdwxyz' */
-  var ADDRESS  = 'info@nexus-spaceport.com';
 
   var f=document.getElementById('enq');if(!f)return;
   var msg=document.getElementById('msg'),sub=document.getElementById('sub');
@@ -996,14 +991,8 @@ footer li a:hover{color:var(--accent)}
     };
 
     if(!ENDPOINT){
-      var body='Name: '+d.firstName+' '+d.lastName+'\nOrganisation: '+d.organisation+
-               '\nEmail: '+d.email+'\nInvestor type: '+d.investorType+'\n\n'+d.message;
-      window.location.href='mailto:'+ADDRESS+
-        '?subject='+encodeURIComponent('Investor enquiry — '+d.firstName+' '+d.lastName)+
-        '&body='+encodeURIComponent(body);
-      setMsg('bad','Opening your email client now. If nothing opens, your enquiry has '+
-             '<strong>not</strong> been sent — please write to '+
-             '<a href="mailto:'+ADDRESS+'">'+ADDRESS+'</a> directly.');
+      setMsg('bad','Enquiries are not being accepted on this preview build, so your message has '+
+             '<strong>not</strong> been sent. Please try again once the site is live.');
       return;
     }
 
@@ -1017,8 +1006,8 @@ footer li a:hover{color:var(--accent)}
       setMsg('good','Enquiry received. A member of the team will be in touch shortly.');
       f.reset();
     }).catch(function(){
-      setMsg('bad','Something went wrong sending your enquiry. Please email '+
-             '<a href="mailto:'+ADDRESS+'">'+ADDRESS+'</a> directly.');
+      setMsg('bad','Something went wrong and your enquiry was <strong>not</strong> submitted. '+
+             'Please try again in a moment.');
     }).then(function(){
       sub.disabled=false;sub.textContent='Submit enquiry →';
     });
