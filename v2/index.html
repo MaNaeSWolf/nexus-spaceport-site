@@ -38,27 +38,34 @@
   --border:rgba(186,232,242,.14);
   --border-hi:rgba(255,180,112,.3);
   --accent:#ffb470; --accent-2:#ff8a5c; --gold:#ffd89a;
-  --tp:#eaf6f8; --ts:#a4c5cd; --tm:#7fa3ad;
+  --tp:#f4fbfc; --ts:#d3e6ea; --tm:#a8c6ce;
   --fd:'Barlow Condensed',Impact,sans-serif;
   --fb:'Barlow',system-ui,sans-serif;
   --fm:'Share Tech Mono',ui-monospace,monospace;
   --maxw:1280px;
 }
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:var(--fb);background:var(--bg);color:var(--ts);line-height:1.65;overflow-x:hidden;font-weight:300;
+body{font-family:var(--fb);background:var(--bg);color:var(--ts);line-height:1.65;overflow-x:hidden;font-weight:400;
   -webkit-font-smoothing:antialiased}
 ::selection{background:rgba(255,180,112,.3);color:#fff}
 a{color:inherit}
 
 /* ── background stack ─────────────────────────────────────────── */
 #bg{position:fixed;inset:0;z-index:0;pointer-events:none}
-#globe{position:absolute;inset:0;width:100%;height:100%;opacity:1}
+#globe{position:absolute;inset:0;width:100%;height:100%;opacity:.85}
 #bg .vign{position:absolute;inset:0;
-  background:radial-gradient(ellipse 105% 85% at 66% 40%,rgba(var(--bgRGB),0) 0%,rgba(var(--bgRGB),.24) 52%,rgba(var(--bgRGB),.8) 100%)}
+  background:radial-gradient(ellipse 108% 88% at 66% 40%,rgba(var(--bgRGB),0) 0%,rgba(var(--bgRGB),.34) 50%,rgba(var(--bgRGB),.9) 100%)}
 #bg .grain{position:absolute;inset:0;opacity:.055;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-@media(min-width:900px){#globe{left:24%;width:90%}}
 main,nav,footer{position:relative;z-index:2}
+/* The globe is decorative but it sits behind every section. Let it read at full
+   strength across the hero, then lay a scrim over it so body copy always has a
+   near-solid backdrop instead of competing with coastlines and orbit lines. */
+main{background:linear-gradient(180deg,
+  rgba(var(--bgRGB),0) 0,
+  rgba(var(--bgRGB),0) 76vh,
+  rgba(var(--bgRGB),.72) 118vh,
+  rgba(var(--bgRGB),.82) 100%)}
 
 /* ── nav ──────────────────────────────────────────────────────── */
 nav{position:fixed;top:0;left:0;right:0;z-index:60;height:56px;display:flex;align-items:center;
@@ -103,11 +110,11 @@ h2{font-family:var(--fd);font-size:clamp(32px,4.6vw,62px);font-weight:600;line-h
 h3{font-family:var(--fd);font-size:clamp(19px,2vw,25px);font-weight:500;letter-spacing:.05em;text-transform:uppercase;
   color:var(--tp);margin-bottom:10px;line-height:1.15}
 h4{font-family:var(--fd);font-size:16px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--tp);margin-bottom:7px}
-.lead{font-size:clamp(16.5px,1.35vw,19px);line-height:1.8;color:#cfe4e9;max-width:66ch;font-weight:300}
+.lead{font-size:clamp(16.5px,1.35vw,19px);line-height:1.8;color:#e4f1f4;max-width:66ch;font-weight:400}
 p{font-size:16px;line-height:1.78}
 .dim{color:var(--tm)}
 .acc{color:var(--accent)}
-.hollow{-webkit-text-stroke:1px rgba(234,246,248,.55);color:transparent}
+.hollow{-webkit-text-stroke:1px rgba(244,251,252,.6);color:transparent}
 .rule{height:1px;background:linear-gradient(90deg,var(--border-hi),transparent);margin:0 0 44px}
 
 /* reveal */
@@ -118,7 +125,7 @@ p{font-size:16px;line-height:1.78}
 /* ── hero ─────────────────────────────────────────────────────── */
 #hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:0}
 .hero-in{max-width:min(640px,100%)}
-.hero-sub{font-size:clamp(16px,1.5vw,19.5px);line-height:1.75;color:#c3dbe1;max-width:52ch;margin-bottom:40px;font-weight:300}
+.hero-sub{font-size:clamp(16px,1.5vw,19.5px);line-height:1.75;color:#dfeef1;max-width:52ch;margin-bottom:40px;font-weight:400}
 .hero-act{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:64px}
 .btn{font-family:var(--fd);font-size:13.5px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
   padding:15px 34px;text-decoration:none;display:inline-block;cursor:pointer;border:1px solid transparent;transition:.2s}
@@ -216,7 +223,7 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 label{display:block;font-family:var(--fm);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--tm);margin-bottom:8px}
 input,select,textarea{width:100%;background:rgba(255,255,255,.028);border:1px solid var(--border);
-  color:var(--tp);font-family:var(--fb);font-size:15.5px;font-weight:300;padding:13px 15px;outline:none;transition:.2s;border-radius:0}
+  color:var(--tp);font-family:var(--fb);font-size:15.5px;font-weight:400;padding:13px 15px;outline:none;transition:.2s;border-radius:0}
 input:focus,select:focus,textarea:focus{border-color:var(--accent);background:rgba(255,180,112,.07)}
 textarea{resize:vertical;min-height:104px}
 select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--tm) 50%),linear-gradient(135deg,var(--tm) 50%,transparent 50%);
@@ -259,7 +266,7 @@ footer li a:hover{color:var(--accent)}
 .wrap{position:relative;z-index:1}
 section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:clamp(4px,2vw,28px);
   font-family:var(--fd);font-weight:700;font-size:clamp(180px,27vw,440px);line-height:.78;
-  letter-spacing:-.05em;color:rgba(234,246,248,.04);pointer-events:none;z-index:0;user-select:none}
+  letter-spacing:-.05em;color:rgba(244,251,252,.045);pointer-events:none;z-index:0;user-select:none}
 
 /* full-bleed figure */
 .fullbleed{position:relative;width:100vw;margin-left:50%;transform:translateX(-50%);
