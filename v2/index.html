@@ -75,12 +75,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:60;height:56px;display:flex;alig
 nav.solid{background:rgba(var(--bgRGB),.93)}
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
 .brand img{height:34px;width:auto;display:block}
-.brand .bt{font-family:var(--fm);font-size:13px;letter-spacing:.2em;color:var(--tp);white-space:nowrap}
+.brand .bt{font-family:var(--fm);font-size:14px;letter-spacing:.2em;color:var(--tp);white-space:nowrap}
 .navlinks{display:flex;list-style:none;gap:0;margin-left:auto}
-.navlinks a{font-family:var(--fd);font-size:13px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;
+.navlinks a{font-family:var(--fd);font-size:14px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;
   color:var(--ts);text-decoration:none;padding:0 13px;height:56px;display:flex;align-items:center;transition:color .2s}
 .navlinks a:hover{color:var(--tp)}
-.navcta{font-family:var(--fd);font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+.navcta{font-family:var(--fd);font-size:14px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
   color:var(--accent);border:1px solid var(--accent);padding:7px 18px;text-decoration:none;margin-left:18px;
   transition:.2s;white-space:nowrap}
 .navcta:hover{background:var(--accent);color:var(--bg)}
@@ -93,14 +93,14 @@ nav.solid{background:rgba(var(--bgRGB),.93)}
   border-bottom:1px solid var(--border);padding:12px 24px 24px;flex-direction:column;
   transform:translateY(-10px);opacity:0;pointer-events:none;transition:.25s}
 .drawer.open{opacity:1;transform:none;pointer-events:all}
-.drawer a{font-family:var(--fd);font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--ts);
+.drawer a{font-family:var(--fd);font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--ts);
   text-decoration:none;padding:15px 0;border-bottom:1px solid var(--border)}
 .drawer a:last-child{border:0;color:var(--accent)}
 
 /* ── layout primitives ────────────────────────────────────────── */
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
 section{padding:clamp(72px,9vw,132px) 0;position:relative}
-.eyebrow{font-family:var(--fm);font-size:12.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);
+.eyebrow{font-family:var(--fm);font-size:13.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);
   display:flex;align-items:center;gap:13px;margin-bottom:26px}
 .eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);flex-shrink:0}
 h1{font-family:var(--fd);font-size:clamp(46px,8.4vw,104px);font-weight:700;line-height:.92;letter-spacing:-.005em;
@@ -109,9 +109,9 @@ h2{font-family:var(--fd);font-size:clamp(32px,4.6vw,62px);font-weight:600;line-h
   color:var(--tp);text-transform:uppercase;margin-bottom:26px}
 h3{font-family:var(--fd);font-size:clamp(19px,2vw,25px);font-weight:500;letter-spacing:.05em;text-transform:uppercase;
   color:var(--tp);margin-bottom:10px;line-height:1.15}
-h4{font-family:var(--fd);font-size:16px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--tp);margin-bottom:7px}
-.lead{font-size:clamp(16.5px,1.35vw,19px);line-height:1.8;color:#e4f1f4;max-width:66ch;font-weight:400}
-p{font-size:16px;line-height:1.78}
+h4{font-family:var(--fd);font-size:17px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--tp);margin-bottom:7px}
+.lead{font-size:clamp(17.5px,1.4vw,20px);line-height:1.8;color:#e4f1f4;max-width:66ch;font-weight:400}
+p{font-size:17px;line-height:1.78}
 .dim{color:var(--tm)}
 .acc{color:var(--accent)}
 .hollow{-webkit-text-stroke:1px rgba(244,251,252,.6);color:transparent}
@@ -127,7 +127,7 @@ p{font-size:16px;line-height:1.78}
 .hero-in{max-width:min(640px,100%)}
 .hero-sub{font-size:clamp(16px,1.5vw,19.5px);line-height:1.75;color:#dfeef1;max-width:52ch;margin-bottom:40px;font-weight:400}
 .hero-act{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:64px}
-.btn{font-family:var(--fd);font-size:13.5px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
+.btn{font-family:var(--fd);font-size:15px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
   padding:15px 34px;text-decoration:none;display:inline-block;cursor:pointer;border:1px solid transparent;transition:.2s}
 .btn-p{background:var(--accent);color:var(--bg)}
 .btn-p:hover{background:#ffc894}
@@ -138,7 +138,7 @@ p{font-size:16px;line-height:1.78}
 .tick > div{padding:22px clamp(16px,3vw,40px);border-right:1px solid var(--border)}
 .tick > div:last-child{border-right:0}
 .tick .k{font-family:var(--fd);font-size:clamp(22px,2.5vw,32px);font-weight:600;color:var(--tp);line-height:1;margin-bottom:7px}
-.tick .l{font-family:var(--fm);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tm);line-height:1.5}
+.tick .l{font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tm);line-height:1.5}
 
 /* ── panels / grids ───────────────────────────────────────────── */
 .panel{background:var(--panel);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
@@ -154,25 +154,25 @@ p{font-size:16px;line-height:1.78}
 .nl{border-top:1px solid var(--border)}
 .nl > li{list-style:none;display:grid;grid-template-columns:56px minmax(0,1fr);gap:clamp(14px,2.5vw,32px);
   padding:24px 0;border-bottom:1px solid var(--border);align-items:start}
-.nl .n{font-family:var(--fm);font-size:12.5px;letter-spacing:.14em;color:var(--accent);padding-top:4px}
-.nl p{color:var(--ts);font-size:15.5px;max-width:74ch}
+.nl .n{font-family:var(--fm);font-size:13.5px;letter-spacing:.14em;color:var(--accent);padding-top:4px}
+.nl p{color:var(--ts);font-size:16.5px;max-width:74ch}
 
 /* definition rows */
 .rows{border-top:1px solid var(--border)}
 .rows .r{display:grid;grid-template-columns:200px minmax(0,1fr);gap:clamp(14px,3vw,40px);padding:18px 0;
   border-bottom:1px solid var(--border);align-items:baseline}
-.rows .r > .lab{font-family:var(--fd);font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tp)}
-.rows .r > .val{font-size:15.5px;color:var(--ts)}
-.rows .r > .val .u{font-family:var(--fm);font-size:14px;color:var(--accent);display:block;margin-bottom:3px;letter-spacing:.1em}
+.rows .r > .lab{font-family:var(--fd);font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tp)}
+.rows .r > .val{font-size:16.5px;color:var(--ts)}
+.rows .r > .val .u{font-family:var(--fm);font-size:15px;color:var(--accent);display:block;margin-bottom:3px;letter-spacing:.1em}
 
 /* stat blocks */
 .stat{padding:clamp(22px,2.6vw,34px)}
 .stat .k{font-family:var(--fd);font-size:clamp(34px,4.4vw,54px);font-weight:700;color:var(--tp);line-height:1;margin-bottom:12px}
 .stat .k small{font-size:.5em;font-weight:500;color:var(--accent);letter-spacing:.05em}
-.stat p{font-size:15px;color:var(--ts)}
+.stat p{font-size:16px;color:var(--ts)}
 
 /* tags */
-.tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:12px;letter-spacing:.16em;
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:13px;letter-spacing:.16em;
   text-transform:uppercase;padding:5px 11px;border:1px solid var(--border-hi);color:var(--accent);white-space:nowrap}
 .tag.warm{border-color:rgba(255,210,120,.35);color:var(--gold)}
 .tag.live{border-color:rgba(120,255,180,.3);color:#7ef0b4}
@@ -185,80 +185,80 @@ p{font-size:16px;line-height:1.78}
 .site:hover{background:var(--hov)}
 .site .hd{padding:26px clamp(20px,2.2vw,30px) 20px;border-bottom:1px solid var(--border)}
 .site .bd{padding:8px clamp(20px,2.2vw,30px) 26px;flex:1}
-.site .co{font-family:var(--fm);font-size:13px;letter-spacing:.1em;color:var(--accent);margin-top:9px}
+.site .co{font-family:var(--fm);font-size:14px;letter-spacing:.1em;color:var(--accent);margin-top:9px}
 .site dl{display:grid;grid-template-columns:auto 1fr;gap:0}
-.site dt{font-family:var(--fm);font-size:12.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
+.site dt{font-family:var(--fm);font-size:13.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
   padding:11px 18px 11px 0;border-bottom:1px solid rgba(255,255,255,.07);white-space:nowrap}
-.site dd{font-size:14.5px;color:var(--ts);padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);text-align:right}
+.site dd{font-size:15.5px;color:var(--ts);padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);text-align:right}
 .site dt:last-of-type,.site dd:last-of-type{border-bottom:0}
 
 /* table */
-.tbl{width:100%;border-collapse:collapse;font-size:14.5px}
-.tbl th{font-family:var(--fm);font-size:12.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
+.tbl{width:100%;border-collapse:collapse;font-size:15.5px}
+.tbl th{font-family:var(--fm);font-size:14px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
   text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--border-hi);font-weight:400;white-space:nowrap}
 .tbl td{padding:14px 14px 14px 0;border-bottom:1px solid var(--border);color:var(--ts);vertical-align:top}
-.tbl td:first-child{font-family:var(--fd);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tp);font-size:14px}
-.tbl .num{font-family:var(--fm);font-size:13.5px;color:var(--accent)}
-.note{font-size:13.5px;color:var(--tm);margin-top:18px;line-height:1.65;max-width:88ch}
+.tbl td:first-child{font-family:var(--fd);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tp);font-size:15px}
+.tbl .num{font-family:var(--fm);font-size:15px;color:var(--accent)}
+.note{font-size:15px;color:var(--tm);margin-top:18px;line-height:1.65;max-width:88ch}
 
 /* why-invest */
 .why{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
 .why > div{background:var(--bg2);padding:clamp(26px,3vw,40px);transition:background .3s}
 .why > div:hover{background:var(--hov)}
-.why .n{font-family:var(--fm);font-size:12.5px;letter-spacing:.2em;color:var(--accent);margin-bottom:16px;display:block}
+.why .n{font-family:var(--fm);font-size:13.5px;letter-spacing:.2em;color:var(--accent);margin-bottom:16px;display:block}
 .why h3{margin-bottom:12px}
-.why p{color:var(--ts);font-size:15.5px}
+.why p{color:var(--ts);font-size:16.5px}
 
 /* image band */
 .band{position:relative;border:1px solid var(--border);overflow:hidden;background:var(--bg2)}
 .band img{width:100%;height:auto;display:block;opacity:.78;filter:saturate(.85) contrast(1.05)}
 .band .cap{position:absolute;left:0;bottom:0;right:0;padding:20px clamp(18px,2.4vw,30px);
   background:linear-gradient(0deg,rgba(var(--bgRGB),.92),rgba(var(--bgRGB),0));
-  font-family:var(--fm);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ts)}
+  font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ts)}
 
 /* invest / form */
 #invest{border-top:1px solid var(--border-hi);background:linear-gradient(180deg,rgba(var(--bg2RGB),.55),rgba(var(--bgRGB),.9))}
 form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .f-full{grid-column:1/-1}
-label{display:block;font-family:var(--fm);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;
+label{display:block;font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--tm);margin-bottom:8px}
 input,select,textarea{width:100%;background:rgba(255,255,255,.028);border:1px solid var(--border);
-  color:var(--tp);font-family:var(--fb);font-size:15.5px;font-weight:400;padding:13px 15px;outline:none;transition:.2s;border-radius:0}
+  color:var(--tp);font-family:var(--fb);font-size:16.5px;font-weight:400;padding:13px 15px;outline:none;transition:.2s;border-radius:0}
 input:focus,select:focus,textarea:focus{border-color:var(--accent);background:rgba(255,180,112,.07)}
 textarea{resize:vertical;min-height:104px}
 select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--tm) 50%),linear-gradient(135deg,var(--tm) 50%,transparent 50%);
   background-position:calc(100% - 19px) 50%,calc(100% - 14px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
 select option{background:var(--hov);color:var(--tp)}
-button.btn{border:0;width:100%;font-size:14px}
+button.btn{border:0;width:100%;font-size:15px}
 button.btn[disabled]{opacity:.45;cursor:progress}
 /* form feedback */
-.msg{grid-column:1/-1;display:none;border:1px solid;font-family:var(--fm);font-size:13.5px;
+.msg{grid-column:1/-1;display:none;border:1px solid;font-family:var(--fm);font-size:15px;
   letter-spacing:.1em;line-height:1.7;padding:14px 16px}
 .msg.show{display:block}
 .msg.good{border-color:rgba(120,255,180,.3);background:rgba(120,255,180,.06);color:#7ef0b4}
 .msg.bad{border-color:rgba(255,122,60,.4);background:rgba(255,122,60,.07);color:#ff9d6e}
 .msg a{color:inherit;text-decoration:underline}
-.fe{display:none;font-family:var(--fm);font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+.fe{display:none;font-family:var(--fm);font-size:13px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--accent-2);margin-top:7px}
 .fe.show{display:block}
 input.bad,select.bad,textarea.bad{border-color:var(--accent-2)}
 .people{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:56px}
 .people > div{background:var(--bg2);padding:26px}
 .people .nm{font-family:var(--fd);font-size:17px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tp)}
-.people .rl{font-family:var(--fm);font-size:12.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin:6px 0 12px}
-.people a{font-size:14px;color:var(--accent);text-decoration:none;word-break:break-all}
+.people .rl{font-family:var(--fm);font-size:13.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin:6px 0 12px}
+.people a{font-size:15px;color:var(--accent);text-decoration:none;word-break:break-all}
 .people a:hover{text-decoration:underline}
 
 /* footer */
 footer{border-top:1px solid var(--border);padding:56px 0 40px;background:rgba(var(--bgRGB),.92)}
 .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:44px}
-footer h5{font-family:var(--fm);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--tm);margin-bottom:16px}
+footer h5{font-family:var(--fm);font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--tm);margin-bottom:16px}
 footer ul{list-style:none}
 footer li{margin-bottom:9px}
-footer li a{font-size:14.5px;color:var(--ts);text-decoration:none;transition:color .2s}
+footer li a{font-size:15.5px;color:var(--ts);text-decoration:none;transition:color .2s}
 footer li a:hover{color:var(--accent)}
-.legal{border-top:1px solid var(--border);padding-top:26px;font-size:13.5px;color:var(--tm);line-height:1.75}
-.legal .fine{margin-top:14px;font-size:13px;max-width:92ch}
+.legal{border-top:1px solid var(--border);padding-top:26px;font-size:15px;color:var(--tm);line-height:1.75}
+.legal .fine{margin-top:14px;font-size:14px;max-width:92ch}
 
 /* ══════════════ v2 additions ══════════════ */
 
@@ -269,20 +269,17 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   letter-spacing:-.05em;color:rgba(244,251,252,.045);pointer-events:none;z-index:0;user-select:none}
 
 /* full-bleed figure */
-.fullbleed{position:relative;width:100vw;margin-left:50%;transform:translateX(-50%);
+/* Sits outside .wrap, so width:100% is the full document width. Deliberately no
+   100vw - that includes the scrollbar and pushes the frame off the right edge. */
+.fullbleed{position:relative;width:100%;
   margin-top:clamp(48px,6vw,88px);margin-bottom:clamp(48px,6vw,88px);overflow:hidden;background:var(--bg2);
   border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .fullbleed picture,.fullbleed img{display:block;width:100%}
 .fullbleed img{height:auto}
-@media(min-width:900px){
-  /* 2.1:1 asset at full width lands well under the cap on any normal display,
-     so the whole frame is visible - no cover-cropping the site off screen. */
-  .fullbleed img{height:auto;max-height:90vh;object-fit:cover;object-position:50% 50%}
-}
 .fullbleed figcaption{position:absolute;left:0;right:0;bottom:0;
   padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(18px,2.4vw,30px);
   background:linear-gradient(0deg,rgba(var(--bgRGB),.94) 0%,rgba(var(--bgRGB),.5) 46%,rgba(var(--bgRGB),0) 100%);
-  font-family:var(--fm);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ts)}
+  font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ts)}
 .fullbleed .fc-k{color:var(--accent);margin-right:14px}
 
 /* statement / rhythm break */
@@ -338,7 +335,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   .nl > li{grid-template-columns:1fr;gap:8px}
   form{grid-template-columns:1fr}
   #globe{opacity:.5}
-  .tbl{font-size:13px}
+  .tbl{font-size:14px}
   section[data-n]::before{font-size:clamp(120px,34vw,200px);color:rgba(238,244,250,.022)}
   .statement{padding:clamp(80px,18vw,120px) 0}
 }
@@ -579,7 +576,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         <div class="hd">
           <div class="tag live"><span class="dot"></span>Primary · Phase 1</div>
           <h3 style="margin-top:16px">Morrumbene</h3>
-          <p class="dim" style="font-size:13px">Mozambique · Inhambane Province</p>
+          <p class="dim" style="font-size:14px">Mozambique · Inhambane Province</p>
           <div class="co">23°35′48″S · 35°25′15″E</div>
         </div>
         <div class="bd">
@@ -600,7 +597,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         <div class="hd">
           <div class="tag">Development Site</div>
           <h3 style="margin-top:16px">Palawan</h3>
-          <p class="dim" style="font-size:13px">Philippines · Asia-Pacific corridor</p>
+          <p class="dim" style="font-size:14px">Philippines · Asia-Pacific corridor</p>
           <div class="co">8°31′53″N · 117°32′42″E</div>
         </div>
         <div class="bd">
@@ -619,7 +616,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         <div class="hd">
           <div class="tag warm"><span class="dot"></span>New · Agreement Pending</div>
           <h3 style="margin-top:16px">Ahanta West</h3>
-          <p class="dim" style="font-size:13px">Ghana · Western Region</p>
+          <p class="dim" style="font-size:14px">Ghana · Western Region</p>
           <div class="co">Cape Three Points · ~4°45′N · 2°05′W</div>
         </div>
         <div class="bd">
@@ -651,16 +648,18 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         site was chosen.
       </p>
     </div>
+  </div>
 
-    <figure class="fullbleed rv">
-      <picture>
-        <source media="(min-width:900px)" srcset="../assets/site-render-landscape.jpg" width="1369" height="652">
-        <img src="../assets/site-render.jpg" alt="Concept masterplan of the Morrumbene launch complex, Mozambique"
-             width="1149" height="1369" loading="lazy" decoding="async">
-      </picture>
-      <figcaption><span class="fc-k">Concept masterplan</span> Morrumbene launch complex · Inhambane, Mozambique · 2,000 ha · sea to the north, downrange</figcaption>
-    </figure>
+  <figure class="fullbleed rv">
+    <picture>
+      <source media="(min-width:900px)" srcset="../assets/site-render-landscape.jpg" width="1369" height="652">
+      <img src="../assets/site-render.jpg" alt="Concept masterplan of the Morrumbene launch complex, Mozambique"
+           width="1149" height="1369" loading="lazy" decoding="async">
+    </picture>
+    <figcaption><span class="fc-k">Concept masterplan</span> Morrumbene launch complex · Inhambane, Mozambique · 2,000 ha · sea to the north, downrange</figcaption>
+  </figure>
 
+  <div class="wrap">
     <div class="band rv" style="margin-top:clamp(40px,5vw,64px)">
       <img src="../assets/pad.jpg" alt="Morrumbene launch pad concept"
            width="1586" height="992" loading="lazy" decoding="async">
@@ -961,7 +960,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
     <div class="fgrid">
       <div>
         <a class="brand" href="#hero" style="margin-bottom:18px"><img src="../assets/logo.png" alt="Nexus" width="705" height="647"><span class="bt">NEXUS&nbsp;SPACEPORTS</span></a>
-        <p class="dim" style="max-width:44ch;font-size:13.5px">
+        <p class="dim" style="max-width:44ch;font-size:15px">
           Developing and operating the neutral, multi-user launch infrastructure that the next phase
           of orbital growth depends on.
         </p>
@@ -981,7 +980,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         <h5>Contact</h5>
         <ul>
           <li><a href="#invest">Investor enquiry</a></li>
-          <li class="dim" style="font-size:13px;color:var(--tm)">20 Wenlock Road<br>London N1 7GU<br>United Kingdom</li>
+          <li class="dim" style="font-size:14px;color:var(--tm)">20 Wenlock Road<br>London N1 7GU<br>United Kingdom</li>
         </ul>
       </div>
     </div>
