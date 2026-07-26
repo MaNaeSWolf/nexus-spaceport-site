@@ -1,0 +1,5 @@
+# Keep LF in the working tree. These files are edited by scripts that match on
+# exact strings; a CRLF checkout silently breaks every multi-line match.
+* text=auto eol=lf
+*.png binary
+*.jpg binary

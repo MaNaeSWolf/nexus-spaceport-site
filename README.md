@@ -37,6 +37,16 @@ already written against it.
 
 Both share the same `assets/` folder. v2 references it as `../assets/`.
 
+v2 also has a light/dark toggle in the nav. It defaults to the OS
+`prefers-color-scheme`, remembers the choice in `localStorage`, and re-themes the
+globe canvas as well as the CSS. The theme is applied by a small inline script in
+`<head>` so there is no flash of the wrong palette on load.
+
+Note: `assets/globe.source.js` is a readable reference copy of the globe script as
+inlined in the **live** page. v2's inlined copy has since diverged — it takes a
+theme-aware palette and an alpha multiplier. Treat the live page as the source of
+truth for that file.
+
 ## Keeping it out of search results
 
 The `<meta name="robots" content="noindex, nofollow">` tag in `index.html` is
