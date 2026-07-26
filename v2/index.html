@@ -25,9 +25,8 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <script>/* set the theme before first paint so there is no flash */
-(function(){try{var t=localStorage.getItem('nx-theme');
-if(!t)t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
-document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
+(function(){var t=null;try{t=localStorage.getItem('nx-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t||'light')})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@200;300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -42,7 +41,8 @@ document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
   --border:rgba(186,232,242,.14);
   --border-hi:rgba(255,180,112,.3);
   --accent:#ffb470; --accent-2:#ff8a5c; --gold:#ffd89a;
-  --tp:#f4fbfc; --ts:#d3e6ea; --tm:#a8c6ce;
+  --tp:#f4fbfc; --ts:#d3e6ea; --tm:#a8c6ce; --tl:#e4f1f4;
+  --border-soft:rgba(255,255,255,.07);
   --fd:'Barlow Condensed',Impact,sans-serif;
   --fb:'Barlow',system-ui,sans-serif;
   --fm:'Share Tech Mono',ui-monospace,monospace;
@@ -59,7 +59,8 @@ document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
   --border:rgba(18,40,50,.18);
   --border-hi:rgba(141,55,8,.42);
   --accent:#8d3708; --accent-2:#7d2d0d; --gold:#6d4108;
-  --tp:#0e1a21; --ts:#28434f; --tm:#3d5765;
+  --tp:#0e1a21; --ts:#1e343e; --tm:#2e4552; --tl:#1a2f39;
+  --border-soft:rgba(18,40,50,.13);
 }
 :root[data-theme="light"] ::selection{background:rgba(141,55,8,.22)}
 :root[data-theme="light"] .hollow{-webkit-text-stroke:1px rgba(16,29,37,.5)}
@@ -78,6 +79,7 @@ document.documentElement.setAttribute('data-theme',t)}catch(e){}})();</script>
 :root[data-theme="light"] .tag.warm{border-color:rgba(140,80,10,.4);color:#8c500a}
 :root[data-theme="light"] .msg.good{border-color:rgba(14,110,70,.4);background:rgba(14,110,70,.07);color:#0b5637}
 :root[data-theme="light"] .msg.bad{border-color:rgba(150,50,20,.45);background:rgba(150,50,20,.07);color:#8c3310}
+:root[data-theme="light"] #network{--accent:#0d5f63;--border-hi:rgba(13,95,99,.34)}
 
 /* theme toggle */
 .themetog{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--border);
@@ -154,7 +156,7 @@ h2{font-family:var(--fd);font-size:clamp(32px,4.6vw,62px);font-weight:600;line-h
 h3{font-family:var(--fd);font-size:clamp(19px,2vw,25px);font-weight:500;letter-spacing:.05em;text-transform:uppercase;
   color:var(--tp);margin-bottom:10px;line-height:1.15}
 h4{font-family:var(--fd);font-size:17px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--tp);margin-bottom:7px}
-.lead{font-size:clamp(17.5px,1.4vw,20px);line-height:1.8;color:#e4f1f4;max-width:66ch;font-weight:400}
+.lead{font-size:clamp(17.5px,1.4vw,20px);line-height:1.8;color:var(--tl);max-width:66ch;font-weight:400}
 p{font-size:17px;line-height:1.78}
 .dim{color:var(--tm)}
 .acc{color:var(--accent)}
@@ -169,7 +171,7 @@ p{font-size:17px;line-height:1.78}
 /* ── hero ─────────────────────────────────────────────────────── */
 #hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:0}
 .hero-in{max-width:min(640px,100%)}
-.hero-sub{font-size:clamp(16px,1.5vw,19.5px);line-height:1.75;color:#dfeef1;max-width:52ch;margin-bottom:40px;font-weight:400}
+.hero-sub{font-size:clamp(16px,1.5vw,19.5px);line-height:1.75;color:var(--tl);max-width:52ch;margin-bottom:40px;font-weight:400}
 .hero-act{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:64px}
 .btn{font-family:var(--fd);font-size:15px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
   padding:15px 34px;text-decoration:none;display:inline-block;cursor:pointer;border:1px solid transparent;transition:.2s}
@@ -232,8 +234,8 @@ p{font-size:17px;line-height:1.78}
 .site .co{font-family:var(--fm);font-size:14px;letter-spacing:.1em;color:var(--accent);margin-top:9px}
 .site dl{display:grid;grid-template-columns:auto 1fr;gap:0}
 .site dt{font-family:var(--fm);font-size:13.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
-  padding:11px 18px 11px 0;border-bottom:1px solid rgba(255,255,255,.07);white-space:nowrap}
-.site dd{font-size:15.5px;color:var(--ts);padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);text-align:right}
+  padding:11px 18px 11px 0;border-bottom:1px solid var(--border-soft);white-space:nowrap}
+.site dd{font-size:15.5px;color:var(--ts);padding:11px 0;border-bottom:1px solid var(--border-soft);text-align:right}
 .site dt:last-of-type,.site dd:last-of-type{border-bottom:0}
 
 /* table */
@@ -255,6 +257,7 @@ p{font-size:17px;line-height:1.78}
 
 /* image band */
 .band{position:relative;border:1px solid var(--border);overflow:hidden;background:var(--bg2)}
+.band picture{display:block}
 .band img{width:100%;height:auto;display:block;opacity:.78;filter:saturate(.85) contrast(1.05)}
 .band .cap{position:absolute;left:0;bottom:0;right:0;padding:20px clamp(18px,2.4vw,30px);
   background:linear-gradient(0deg,rgba(var(--bgRGB),.92),rgba(var(--bgRGB),0));
@@ -313,23 +316,6 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   letter-spacing:-.05em;color:rgba(244,251,252,.045);pointer-events:none;z-index:0;user-select:none}
 
 /* full-bleed figure */
-/* Sits outside .wrap, so width:100% is the full document width. Deliberately no
-   100vw - that includes the scrollbar and pushes the frame off the right edge. */
-.fullbleed{position:relative;width:100%;
-  margin-top:clamp(48px,6vw,88px);margin-bottom:clamp(48px,6vw,88px);overflow:hidden;background:var(--bg2);
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-/* The source render is only 1369px wide, so stretching it across a 1920px
-   display upscales it 1.4x and it goes soft. Cap at roughly native width,
-   centre it, and let the figure background bleed either side instead. */
-.fb-in{position:relative;width:100%;max-width:1440px;margin:0 auto}
-.fullbleed picture,.fullbleed img{display:block;width:100%}
-.fullbleed img{height:auto}
-.fullbleed figcaption{position:absolute;left:0;right:0;bottom:0;
-  padding:clamp(48px,7vw,96px) clamp(20px,4vw,48px) clamp(18px,2.4vw,30px);
-  background:linear-gradient(0deg,rgba(var(--bgRGB),.94) 0%,rgba(var(--bgRGB),.5) 46%,rgba(var(--bgRGB),0) 100%);
-  font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ts)}
-.fullbleed .fc-k{color:var(--accent);margin-right:14px}
-
 /* statement / rhythm break */
 .statement{padding:clamp(104px,15vw,230px) 0;border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(var(--bgRGB),.35),rgba(var(--bg2RGB),.9))}
@@ -386,7 +372,8 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   form{grid-template-columns:1fr}
   #globe{opacity:.5}
   .tbl{font-size:14px}
-  section[data-n]::before{font-size:clamp(120px,34vw,200px);color:rgba(238,244,250,.022)}
+  section[data-n]::before{font-size:clamp(120px,34vw,200px);color:rgba(244,251,252,.03)}
+  :root[data-theme="light"] section[data-n]::before{color:rgba(16,29,37,.04)}
   .statement{padding:clamp(80px,18vw,120px) 0}
 }
 </style>
@@ -699,20 +686,16 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         site was chosen.
       </p>
     </div>
-  </div>
 
-  <figure class="fullbleed rv">
-    <div class="fb-in">
-    <picture>
-      <source media="(min-width:900px)" srcset="../assets/site-render-landscape.jpg" width="1369" height="652">
-      <img src="../assets/site-render.jpg" alt="Concept masterplan of the Morrumbene launch complex, Mozambique"
-           width="1149" height="1369" loading="lazy" decoding="async">
-    </picture>
-    <figcaption><span class="fc-k">Concept masterplan</span> Morrumbene launch complex · Inhambane, Mozambique · 2,000 ha · sea to the north, downrange</figcaption>
-    </div>
-  </figure>
+    <figure class="band rv" style="margin-top:clamp(40px,5vw,64px)">
+      <picture>
+        <source media="(min-width:900px)" srcset="../assets/site-render-landscape.jpg" width="1369" height="652">
+        <img src="../assets/site-render.jpg" alt="Concept masterplan of the Morrumbene launch complex, Mozambique"
+             width="1149" height="1369" loading="lazy" decoding="async">
+      </picture>
+      <figcaption class="cap">Concept masterplan · Morrumbene launch complex, Mozambique · 2,000 ha secured</figcaption>
+    </figure>
 
-  <div class="wrap">
     <div class="band rv" style="margin-top:clamp(40px,5vw,64px)">
       <img src="../assets/pad.jpg" alt="Morrumbene launch pad concept"
            width="1586" height="992" loading="lazy" decoding="async">
