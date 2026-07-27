@@ -66,7 +66,8 @@ document.documentElement.setAttribute('data-theme',t||'light')})();</script>
 }
 :root[data-theme="light"] ::selection{background:rgba(11,92,150,.2)}
 :root[data-theme="light"] .hollow{-webkit-text-stroke:1px rgba(16,29,37,.5)}
-:root[data-theme="light"] section[data-n]::before{color:rgba(16,29,37,.055)}
+:root[data-theme="light"] section[data-n]::before{color:rgba(11,92,150,.095);
+  -webkit-text-stroke:2px rgba(11,92,150,.22)}
 :root[data-theme="light"] #bg .grain{mix-blend-mode:multiply;opacity:.05}
 :root[data-theme="light"] #globe{opacity:.9}
 :root[data-theme="light"] .btn-p:hover{background:#07456f}
@@ -315,7 +316,12 @@ footer li a:hover{color:var(--accent)}
 .wrap{position:relative;z-index:1}
 section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:clamp(4px,2vw,28px);
   font-family:var(--fd);font-weight:700;font-size:clamp(180px,27vw,440px);line-height:.78;
-  letter-spacing:-.05em;color:rgba(244,251,252,.045);pointer-events:none;z-index:0;user-select:none}
+  letter-spacing:-.05em;pointer-events:none;z-index:0;user-select:none;
+  /* Blue rather than a neutral tint. The outline carries most of the visible
+     colour while covering very little area, so body copy sitting over a numeral
+     keeps its contrast: worst case 7.8:1 dark, 5.9:1 light. */
+  color:rgba(124,201,255,.095);
+  -webkit-text-stroke:2px rgba(124,201,255,.20)}
 
 /* full-bleed figure */
 /* locator map */
@@ -410,8 +416,10 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
     letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin-bottom:5px}
   .tbl td:first-child::before{display:none}
   .tbl td:first-child{font-size:19px;padding-bottom:8px}
-  section[data-n]::before{font-size:clamp(120px,34vw,200px);color:rgba(244,251,252,.03)}
-  :root[data-theme="light"] section[data-n]::before{color:rgba(16,29,37,.04)}
+  section[data-n]::before{font-size:clamp(120px,34vw,200px);
+    color:rgba(124,201,255,.07);-webkit-text-stroke-width:1.5px}
+  :root[data-theme="light"] section[data-n]::before{
+    color:rgba(11,92,150,.07);-webkit-text-stroke-width:1.5px}
   .statement{padding:clamp(80px,18vw,120px) 0}
 }
 </style>
