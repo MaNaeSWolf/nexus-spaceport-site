@@ -319,8 +319,27 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
 
 /* full-bleed figure */
 /* locator map */
+.mapfig{background:var(--bg2)}
 #sitemap{display:block;width:100%;height:auto;aspect-ratio:170/76}
 @supports not (aspect-ratio:1){#sitemap{height:min(46vw,420px)}}
+/* Names live in HTML rather than on the canvas: no overlap at any width,
+   selectable, and readable on a phone where the map strip is only ~165px tall. */
+.maplegend{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border);border-top:1px solid var(--border)}
+.maplegend li{background:var(--bg2);padding:15px clamp(14px,2vw,22px);
+  display:flex;align-items:baseline;gap:11px;flex-wrap:wrap}
+.maplegend .mk{display:inline-flex;align-items:center;justify-content:center;
+  width:23px;height:23px;border:1px solid var(--accent);color:var(--accent);
+  font-family:var(--fm);font-size:13px;flex-shrink:0;align-self:center}
+.maplegend b{font-family:var(--fd);font-size:17px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--tp)}
+.maplegend i{font-family:var(--fm);font-size:13px;font-style:normal;color:var(--tm);
+  width:100%;padding-left:34px;letter-spacing:.06em}
+@media(max-width:760px){
+  .maplegend{grid-template-columns:1fr}
+  .maplegend li{padding:13px 16px}
+  .maplegend i{padding-left:0;width:auto}
+}
 
 /* statement / rhythm break */
 .statement{padding:clamp(104px,15vw,230px) 0;border-top:1px solid var(--border);
@@ -377,7 +396,20 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   .nl > li{grid-template-columns:1fr;gap:8px}
   form{grid-template-columns:1fr}
   #globe{opacity:.5}
-  .tbl{font-size:14px}
+  /* A three-column table cannot fit a phone; it was being clipped by
+     overflow-x:hidden, so the last column was unreachable. Stack it instead,
+     with each cell carrying its column heading. */
+  .tbl{font-size:14px;display:block}
+  .tbl thead{display:none}
+  .tbl tbody,.tbl tr,.tbl td{display:block;width:auto}
+  .tbl tr{border-bottom:1px solid var(--border);padding:16px 0}
+  .tbl tr:last-child{border-bottom:0}
+  .tbl td{border:0;padding:0 0 10px}
+  .tbl td:last-child{padding-bottom:0}
+  .tbl td::before{content:attr(data-l);display:block;font-family:var(--fm);font-size:13px;
+    letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin-bottom:5px}
+  .tbl td:first-child::before{display:none}
+  .tbl td:first-child{font-size:19px;padding-bottom:8px}
   section[data-n]::before{font-size:clamp(120px,34vw,200px);color:rgba(244,251,252,.03)}
   :root[data-theme="light"] section[data-n]::before{color:rgba(16,29,37,.04)}
   .statement{padding:clamp(80px,18vw,120px) 0}
@@ -502,10 +534,10 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         <table class="tbl">
           <thead><tr><th>Region</th><th>Cadence</th><th>Position</th></tr></thead>
           <tbody>
-            <tr><td>USA</td><td class="num">350–450&nbsp;/yr</td><td>Cape Canaveral and Vandenberg account for more than half of global launches. Every Cape pad is currently occupied. Physical ceiling reached around 2030.</td></tr>
-            <tr><td>China</td><td class="num">~120&nbsp;/yr</td><td>Wenchang capped near 120/yr. Inland sites constrained by population overflight. Approaching its own ceiling.</td></tr>
-            <tr><td>Europe</td><td class="num">~3 orbital&nbsp;/yr</td><td>Three orbital launches in 2024 — behind Japan, India and Iran. Ariane 6 delayed by years; Vega-C grounded.</td></tr>
-            <tr><td>Russia</td><td class="num">Exited</td><td>Removed from the commercial launch market following the invasion of Ukraine, withdrawing a significant tranche of available capacity.</td></tr>
+            <tr><td data-l="Region">USA</td><td class="num" data-l="Cadence">350–450&nbsp;/yr</td><td data-l="Position">Cape Canaveral and Vandenberg account for more than half of global launches. Every Cape pad is currently occupied. Physical ceiling reached around 2030.</td></tr>
+            <tr><td data-l="Region">China</td><td class="num" data-l="Cadence">~120&nbsp;/yr</td><td data-l="Position">Wenchang capped near 120/yr. Inland sites constrained by population overflight. Approaching its own ceiling.</td></tr>
+            <tr><td data-l="Region">Europe</td><td class="num" data-l="Cadence">~3 orbital&nbsp;/yr</td><td data-l="Position">Three orbital launches in 2024 — behind Japan, India and Iran. Ariane 6 delayed by years; Vega-C grounded.</td></tr>
+            <tr><td data-l="Region">Russia</td><td class="num" data-l="Cadence">Exited</td><td data-l="Position">Removed from the commercial launch market following the invasion of Ukraine, withdrawing a significant tranche of available capacity.</td></tr>
           </tbody>
         </table>
       </div>
@@ -614,9 +646,13 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
       <div class="rule" style="margin-top:44px"></div>
     </div>
 
-    <figure class="band rv" style="margin-bottom:clamp(30px,4vw,46px)">
-      <canvas id="sitemap" role="img" aria-label="Map of the Indian Ocean region showing three Nexus spaceport locations: Ahanta West on the Atlantic coast of Ghana, Morrumbene on the Indian Ocean coast of Mozambique, and Palawan in the western Philippines."></canvas>
-      <figcaption class="cap">Site locations · Atlantic, Indian Ocean and Asia-Pacific corridors</figcaption>
+    <figure class="band mapfig rv" style="margin-bottom:clamp(30px,4vw,46px)">
+      <canvas id="sitemap" role="img" aria-label="Locator map of the Atlantic, Indian Ocean and Asia-Pacific region showing the three Nexus spaceport sites: Morrumbene on the Indian Ocean coast of Mozambique, Palawan in the western Philippines, and Ahanta West on the Atlantic coast of Ghana."></canvas>
+      <ol class="maplegend">
+        <li><span class="mk">1</span><b>Morrumbene</b><i>Mozambique · 23°35′S 35°25′E</i></li>
+        <li><span class="mk">2</span><b>Palawan</b><i>Philippines · 8°32′N 117°33′E</i></li>
+        <li><span class="mk">3</span><b>Ahanta West</b><i>Ghana · 4°45′N 2°05′W</i></li>
+      </ol>
     </figure>
 
     <div class="sites rv">
@@ -896,13 +932,13 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
       <table class="tbl">
         <thead><tr><th>Area</th><th>Current status</th><th>Next milestone</th></tr></thead>
         <tbody>
-          <tr><td>Primary Site</td><td>Morrumbene reserved — 2,000 ha, recognised within the national port development programme</td><td>Finalise legal site control and boundary confirmation</td></tr>
-          <tr><td>Master Planning</td><td>Initial land-use and zoning model prepared for the full Phase 1 build</td><td>Independent engineering review</td></tr>
-          <tr><td>Safety Framework</td><td>Internal preliminary framework prepared</td><td>Independent validation</td></tr>
-          <tr><td>Further Sites</td><td>Palawan and Ahanta West both at MOU and site-selection stage</td><td>Definitive site agreements and regulatory pathway</td></tr>
-          <tr><td>Customers</td><td>Target operator universe identified</td><td>LOIs, reservation agreements, technical reviews</td></tr>
-          <tr><td>Regulation</td><td>Compliance strategy developed</td><td>Host-country pathway and legal opinions</td></tr>
-          <tr><td>Financing</td><td>Corporate round underway</td><td>Project-finance-ready package</td></tr>
+          <tr><td data-l="Area">Primary Site</td><td data-l="Current status">Morrumbene reserved — 2,000 ha, recognised within the national port development programme</td><td data-l="Next milestone">Finalise legal site control and boundary confirmation</td></tr>
+          <tr><td data-l="Area">Master Planning</td><td data-l="Current status">Initial land-use and zoning model prepared for the full Phase 1 build</td><td data-l="Next milestone">Independent engineering review</td></tr>
+          <tr><td data-l="Area">Safety Framework</td><td data-l="Current status">Internal preliminary framework prepared</td><td data-l="Next milestone">Independent validation</td></tr>
+          <tr><td data-l="Area">Further Sites</td><td data-l="Current status">Palawan and Ahanta West both at MOU and site-selection stage</td><td data-l="Next milestone">Definitive site agreements and regulatory pathway</td></tr>
+          <tr><td data-l="Area">Customers</td><td data-l="Current status">Target operator universe identified</td><td data-l="Next milestone">LOIs, reservation agreements, technical reviews</td></tr>
+          <tr><td data-l="Area">Regulation</td><td data-l="Current status">Compliance strategy developed</td><td data-l="Next milestone">Host-country pathway and legal opinions</td></tr>
+          <tr><td data-l="Area">Financing</td><td data-l="Current status">Corporate round underway</td><td data-l="Next milestone">Project-finance-ready package</td></tr>
         </tbody>
       </table>
       <p class="note">
@@ -1039,92 +1075,6 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   addEventListener('scroll',function(){nav.classList.toggle('solid',scrollY>40)},{passive:true});
   b.addEventListener('click',function(){b.classList.toggle('open');d.classList.toggle('open')});
   d.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){b.classList.remove('open');d.classList.remove('open')})});
-})();
-/* locator map - reuses the coastline data the globe already ships */
-(function(){
-  var cv=document.getElementById('sitemap'); if(!cv) return;
-  var ctx=cv.getContext('2d');
-  var LON0=-30, LON1=140, LAT0=36, LAT1=-40;
-  var SITES=[
-    {ph:'3', n:'Ahanta West', c:'Ghana',       lat:4.75,   lon:-2.08},
-    {ph:'1', n:'Morrumbene',  c:'Mozambique',  lat:-23.60, lon:35.42},
-    {ph:'2', n:'Palawan',     c:'Philippines', lat:8.53,   lon:117.55}
-  ];
-  var RINGS=(function(){
-    var raw=window.__NX_COAST__||'', out=[], parts=raw.split(';');
-    for(var i=0;i<parts.length;i++){
-      if(!parts[i])continue;
-      var v=parts[i].split(','), px=0, py=0, ring=[];
-      for(var j=0;j<v.length;j+=2){ px+=+v[j]; py+=+v[j+1]; ring.push([py/10,px/10]); }
-      out.push(ring);
-    }
-    return out;
-  })();
-  function css(n,f){ var v=getComputedStyle(document.documentElement).getPropertyValue(n).trim(); return v||f; }
-  function draw(){
-    var W=cv.clientWidth, H=cv.clientHeight;
-    if(!W||!H) return;
-    var DPR=Math.min(window.devicePixelRatio||1,2);
-    cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
-    ctx.setTransform(DPR,0,0,DPR,0,0);
-    var X=function(lon){return (lon-LON0)/(LON1-LON0)*W;};
-    var Y=function(lat){return (LAT0-lat)/(LAT0-LAT1)*H;};
-    var ink=css('--tp','#0b1a24'), sec=css('--ts','#1b3644'), mut=css('--tm','#2b4a5c'),
-        acc=css('--accent','#0b5c96'), bg2=css('--bg2','#dde9f2'), bg=css('--bg','#eef4f9');
-    ctx.clearRect(0,0,W,H);
-    ctx.fillStyle=bg2; ctx.fillRect(0,0,W,H);
-    /* graticule */
-    ctx.strokeStyle=mut; ctx.globalAlpha=.18; ctx.lineWidth=.6;
-    for(var lo=-20;lo<=140;lo+=20){ ctx.beginPath(); ctx.moveTo(X(lo),0); ctx.lineTo(X(lo),H); ctx.stroke(); }
-    for(var la=-40;la<=36;la+=20){ ctx.beginPath(); ctx.moveTo(0,Y(la)); ctx.lineTo(W,Y(la)); ctx.stroke(); }
-    /* equator */
-    ctx.globalAlpha=.42; ctx.lineWidth=1; ctx.setLineDash([5,4]);
-    ctx.beginPath(); ctx.moveTo(0,Y(0)); ctx.lineTo(W,Y(0)); ctx.stroke(); ctx.setLineDash([]);
-    /* coastlines */
-    ctx.globalAlpha=.72; ctx.strokeStyle=sec; ctx.lineWidth=.85;
-    ctx.lineJoin='round'; ctx.lineCap='round';
-    for(var r=0;r<RINGS.length;r++){
-      var ring=RINGS[r]; if(ring.length<2) continue;
-      ctx.beginPath(); var pen=false;
-      for(var k=0;k<ring.length;k++){
-        var lat=ring[k][0], lon=ring[k][1];
-        if(k>0 && Math.abs(lon-ring[k-1][1])>90){ pen=false; }   /* antimeridian jump */
-        var x=X(lon), y=Y(lat);
-        if(!pen){ ctx.moveTo(x,y); pen=true; } else ctx.lineTo(x,y);
-      }
-      ctx.stroke();
-    }
-    ctx.globalAlpha=1;
-    /* equator label */
-    ctx.font='500 10px ui-monospace,Menlo,Consolas,monospace';
-    ctx.fillStyle=mut; ctx.textBaseline='bottom';
-    ctx.fillText('EQUATOR', 8, Y(0)-4);
-    /* sites */
-    for(var i=0;i<SITES.length;i++){
-      var st=SITES[i], x=X(st.lon), y=Y(st.lat);
-      ctx.beginPath(); ctx.arc(x,y,11,0,6.2832);
-      ctx.strokeStyle=acc; ctx.globalAlpha=.38; ctx.lineWidth=1; ctx.stroke();
-      ctx.globalAlpha=1;
-      ctx.beginPath(); ctx.arc(x,y,4,0,6.2832); ctx.fillStyle=acc; ctx.fill();
-      var flip = x > W*0.68;
-      var lx = flip ? x-17 : x+17;
-      ctx.textAlign = flip ? 'right' : 'left';
-      ctx.textBaseline='alphabetic';
-      ctx.font='700 13px "Barlow Condensed",Impact,sans-serif';
-      ctx.fillStyle=ink;
-      ctx.fillText('PHASE '+st.ph+' \u00b7 '+st.n.toUpperCase(), lx, y-1);
-      ctx.font='500 11px ui-monospace,Menlo,Consolas,monospace';
-      ctx.fillStyle=mut;
-      ctx.fillText(st.c.toUpperCase(), lx, y+13);
-    }
-    ctx.textAlign='left';
-  }
-  var raf=null;
-  function schedule(){ if(raf) return; raf=setTimeout(function(){ raf=null; draw(); },60); }
-  draw();
-  window.addEventListener('resize', schedule);
-  window.addEventListener('nx-theme', schedule);
-  if(document.fonts && document.fonts.ready) document.fonts.ready.then(draw).catch(function(){});
 })();
 /* theme toggle - persists the choice, defaults to the OS preference */
 (function(){
@@ -1643,6 +1593,99 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   } else {
     requestAnimationFrame(frame);
   }
+})();
+</script>
+
+<script>
+/* ── locator map ─────────────────────────────────────────────────────────────
+   Reuses the coastline payload the globe already ships. MUST run after the
+   __NX_COAST__ block, which is why it lives down here rather than with the
+   other page scripts. Draws geography and numbered pins only - all naming is
+   in the HTML legend, so nothing can collide at narrow widths.
+   ──────────────────────────────────────────────────────────────────────────── */
+(function(){
+  var cv=document.getElementById('sitemap'); if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var LON0=-30, LON1=140, LAT0=36, LAT1=-40;
+  var SITES=[
+    {n:1, lat:-23.60, lon:35.42},   /* Morrumbene  */
+    {n:2, lat:8.53,   lon:117.55},  /* Palawan     */
+    {n:3, lat:4.75,   lon:-2.08}    /* Ahanta West */
+  ];
+  var raw = window.__NX_COAST__ || '';
+  if(!raw && window.console) console.warn('sitemap: __NX_COAST__ missing - map will render without coastlines');
+  var RINGS=(function(){
+    var out=[], parts=raw.split(';');
+    for(var i=0;i<parts.length;i++){
+      if(!parts[i])continue;
+      var v=parts[i].split(','), px=0, py=0, ring=[];
+      for(var j=0;j<v.length-1;j+=2){ px+=+v[j]; py+=+v[j+1]; ring.push([py/10,px/10]); }
+      if(ring.length>1) out.push(ring);
+    }
+    return out;
+  })();
+  function css(n,f){ var v=getComputedStyle(document.documentElement).getPropertyValue(n).trim(); return v||f; }
+  function draw(){
+    var W=cv.clientWidth, H=cv.clientHeight;
+    if(!W||!H) return;
+    var DPR=Math.min(window.devicePixelRatio||1,2);
+    cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    var X=function(lon){return (lon-LON0)/(LON1-LON0)*W;};
+    var Y=function(lat){return (LAT0-lat)/(LAT0-LAT1)*H;};
+    var sec=css('--ts','#1b3644'), mut=css('--tm','#2b4a5c'),
+        acc=css('--accent','#0b5c96'), bg=css('--bg','#eef4f9'), bg2=css('--bg2','#dde9f2');
+    var small = W < 620;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle=bg2; ctx.fillRect(0,0,W,H);
+    /* graticule */
+    ctx.strokeStyle=mut; ctx.globalAlpha=.16; ctx.lineWidth=.6;
+    for(var lo=-20;lo<=140;lo+=20){ ctx.beginPath(); ctx.moveTo(X(lo),0); ctx.lineTo(X(lo),H); ctx.stroke(); }
+    for(var la=-40;la<=36;la+=20){ ctx.beginPath(); ctx.moveTo(0,Y(la)); ctx.lineTo(W,Y(la)); ctx.stroke(); }
+    /* equator */
+    ctx.globalAlpha=.4; ctx.lineWidth=1; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(0,Y(0)); ctx.lineTo(W,Y(0)); ctx.stroke(); ctx.setLineDash([]);
+    /* coastlines - thicken slightly on small canvases so they still read */
+    ctx.globalAlpha=.78; ctx.strokeStyle=sec;
+    ctx.lineWidth=Math.max(.6, Math.min(1, W/1150));
+    ctx.lineJoin='round'; ctx.lineCap='round';
+    for(var r=0;r<RINGS.length;r++){
+      var ring=RINGS[r];
+      ctx.beginPath(); var pen=false;
+      for(var k=0;k<ring.length;k++){
+        var lat=ring[k][0], lon=ring[k][1];
+        if(k>0 && Math.abs(lon-ring[k-1][1])>90) pen=false;   /* antimeridian jump */
+        var x=X(lon), y=Y(lat);
+        if(!pen){ ctx.moveTo(x,y); pen=true; } else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+    ctx.globalAlpha=1;
+    if(!small){
+      ctx.font='500 11px ui-monospace,Menlo,Consolas,monospace';
+      ctx.fillStyle=mut; ctx.textBaseline='bottom'; ctx.textAlign='left';
+      ctx.globalAlpha=.75; ctx.fillText('EQUATOR', 10, Y(0)-5); ctx.globalAlpha=1;
+    }
+    /* numbered pins */
+    var rad = Math.max(9, Math.min(13, W/62));
+    for(var i=0;i<SITES.length;i++){
+      var st=SITES[i], px2=X(st.lon), py2=Y(st.lat);
+      ctx.beginPath(); ctx.arc(px2,py2,rad+6,0,6.2832);
+      ctx.strokeStyle=acc; ctx.globalAlpha=.34; ctx.lineWidth=1; ctx.stroke(); ctx.globalAlpha=1;
+      ctx.beginPath(); ctx.arc(px2,py2,rad,0,6.2832); ctx.fillStyle=acc; ctx.fill();
+      ctx.fillStyle=bg;
+      ctx.font='700 '+Math.round(rad*1.15)+'px "Barlow Condensed",Impact,sans-serif';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(String(st.n), px2, py2+0.5);
+    }
+    ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+  }
+  var t=null;
+  function schedule(){ if(t) clearTimeout(t); t=setTimeout(function(){ t=null; draw(); }, 80); }
+  draw();
+  window.addEventListener('resize', schedule);
+  window.addEventListener('nx-theme', schedule);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(draw).catch(function(){});
 })();
 </script>
 </body>

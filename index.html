@@ -272,7 +272,20 @@ footer li a:hover{color:var(--accent)}
   .nl > li{grid-template-columns:1fr;gap:8px}
   form{grid-template-columns:1fr}
   #globe{opacity:.55}
-  .tbl{font-size:14px}
+  /* A three-column table cannot fit a phone; it was being clipped by
+     overflow-x:hidden, so the last column was unreachable. Stack it instead,
+     with each cell carrying its column heading. */
+  .tbl{font-size:14px;display:block}
+  .tbl thead{display:none}
+  .tbl tbody,.tbl tr,.tbl td{display:block;width:auto}
+  .tbl tr{border-bottom:1px solid var(--border);padding:16px 0}
+  .tbl tr:last-child{border-bottom:0}
+  .tbl td{border:0;padding:0 0 10px}
+  .tbl td:last-child{padding-bottom:0}
+  .tbl td::before{content:attr(data-l);display:block;font-family:var(--fm);font-size:13px;
+    letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin-bottom:5px}
+  .tbl td:first-child::before{display:none}
+  .tbl td:first-child{font-size:19px;padding-bottom:8px}
 }
 </style>
 </head>
@@ -387,10 +400,10 @@ footer li a:hover{color:var(--accent)}
         <table class="tbl">
           <thead><tr><th>Region</th><th>Cadence</th><th>Position</th></tr></thead>
           <tbody>
-            <tr><td>USA</td><td class="num">350–450&nbsp;/yr</td><td>Cape Canaveral and Vandenberg account for more than half of global launches. Every Cape pad is currently occupied. Physical ceiling reached around 2030.</td></tr>
-            <tr><td>China</td><td class="num">~120&nbsp;/yr</td><td>Wenchang capped near 120/yr. Inland sites constrained by population overflight. Approaching its own ceiling.</td></tr>
-            <tr><td>Europe</td><td class="num">~3 orbital&nbsp;/yr</td><td>Three orbital launches in 2024 — behind Japan, India and Iran. Ariane 6 delayed by years; Vega-C grounded.</td></tr>
-            <tr><td>Russia</td><td class="num">Exited</td><td>Removed from the commercial launch market following the invasion of Ukraine, withdrawing a significant tranche of available capacity.</td></tr>
+            <tr><td data-l="Region">USA</td><td class="num" data-l="Cadence">350–450&nbsp;/yr</td><td data-l="Position">Cape Canaveral and Vandenberg account for more than half of global launches. Every Cape pad is currently occupied. Physical ceiling reached around 2030.</td></tr>
+            <tr><td data-l="Region">China</td><td class="num" data-l="Cadence">~120&nbsp;/yr</td><td data-l="Position">Wenchang capped near 120/yr. Inland sites constrained by population overflight. Approaching its own ceiling.</td></tr>
+            <tr><td data-l="Region">Europe</td><td class="num" data-l="Cadence">~3 orbital&nbsp;/yr</td><td data-l="Position">Three orbital launches in 2024 — behind Japan, India and Iran. Ariane 6 delayed by years; Vega-C grounded.</td></tr>
+            <tr><td data-l="Region">Russia</td><td class="num" data-l="Cadence">Exited</td><td data-l="Position">Removed from the commercial launch market following the invasion of Ukraine, withdrawing a significant tranche of available capacity.</td></tr>
           </tbody>
         </table>
       </div>
@@ -789,13 +802,13 @@ footer li a:hover{color:var(--accent)}
       <table class="tbl">
         <thead><tr><th>Area</th><th>Current status</th><th>Next milestone</th></tr></thead>
         <tbody>
-          <tr><td>Primary Site</td><td>Morrumbene secured — 2,000 ha, recognised within the national port development programme</td><td>Finalise legal site control and boundary confirmation</td></tr>
-          <tr><td>Master Planning</td><td>Initial land-use and zoning model prepared for the full Phase 1 build</td><td>Independent engineering review</td></tr>
-          <tr><td>Safety Framework</td><td>Internal preliminary framework prepared</td><td>Independent validation</td></tr>
-          <tr><td>Further Sites</td><td>Palawan under evaluation; Ahanta West in early government discussion</td><td>Site agreements and regulatory pathway</td></tr>
-          <tr><td>Customers</td><td>Target operator universe identified</td><td>LOIs, reservation agreements, technical reviews</td></tr>
-          <tr><td>Regulation</td><td>Compliance strategy developed</td><td>Host-country pathway and legal opinions</td></tr>
-          <tr><td>Financing</td><td>Corporate round underway</td><td>Project-finance-ready package</td></tr>
+          <tr><td data-l="Area">Primary Site</td><td data-l="Current status">Morrumbene secured — 2,000 ha, recognised within the national port development programme</td><td data-l="Next milestone">Finalise legal site control and boundary confirmation</td></tr>
+          <tr><td data-l="Area">Master Planning</td><td data-l="Current status">Initial land-use and zoning model prepared for the full Phase 1 build</td><td data-l="Next milestone">Independent engineering review</td></tr>
+          <tr><td data-l="Area">Safety Framework</td><td data-l="Current status">Internal preliminary framework prepared</td><td data-l="Next milestone">Independent validation</td></tr>
+          <tr><td data-l="Area">Further Sites</td><td data-l="Current status">Palawan under evaluation; Ahanta West in early government discussion</td><td data-l="Next milestone">Site agreements and regulatory pathway</td></tr>
+          <tr><td data-l="Area">Customers</td><td data-l="Current status">Target operator universe identified</td><td data-l="Next milestone">LOIs, reservation agreements, technical reviews</td></tr>
+          <tr><td data-l="Area">Regulation</td><td data-l="Current status">Compliance strategy developed</td><td data-l="Next milestone">Host-country pathway and legal opinions</td></tr>
+          <tr><td data-l="Area">Financing</td><td data-l="Current status">Corporate round underway</td><td data-l="Next milestone">Project-finance-ready package</td></tr>
         </tbody>
       </table>
       <p class="note">
