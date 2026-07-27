@@ -8,7 +8,7 @@
 <title>Nexus Spaceports — Visual Concept v2</title>
 <meta name="description" content="Nexus develops and operates neutral, multi-user spaceport infrastructure. Primary site: 2,000 hectares of Indian Ocean coast at Morrumbene, Mozambique. Rocket-agnostic, multi-tenant, modelled on the commercial airport.">
 <meta property="og:title" content="Nexus Spaceports — The ground beneath every orbital launch">
-<meta property="og:description" content="Neutral, multi-user spaceport infrastructure. Primary site secured in Mozambique.">
+<meta property="og:description" content="Neutral, multi-user spaceport infrastructure. Primary site reserved in Mozambique.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://manaeswolf.github.io/nexus-spaceport-site/v2/">
 <meta property="og:image" content="https://manaeswolf.github.io/nexus-spaceport-site/assets/og-image.jpg">
@@ -18,9 +18,9 @@
 <meta property="og:site_name" content="Nexus Spaceports">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Nexus Spaceports — The ground beneath every orbital launch">
-<meta name="twitter:description" content="Neutral, multi-user spaceport infrastructure. Primary site secured in Mozambique.">
+<meta name="twitter:description" content="Neutral, multi-user spaceport infrastructure. Primary site reserved in Mozambique.">
 <meta name="twitter:image" content="https://manaeswolf.github.io/nexus-spaceport-site/assets/og-image.jpg">
-<meta name="theme-color" content="#04151c">
+<meta name="theme-color" content="#eef4f9">
 <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
@@ -39,8 +39,8 @@ document.documentElement.setAttribute('data-theme',t||'light')})();</script>
   --bg:#04151c; --bg2:#07202a; --panel:rgba(9,38,49,.6);
   --bgRGB:4,21,28; --bg2RGB:7,32,42; --hov:#0a2c39;
   --border:rgba(186,232,242,.14);
-  --border-hi:rgba(255,180,112,.3);
-  --accent:#ffb470; --accent-2:#ff8a5c; --gold:#ffd89a;
+  --border-hi:rgba(124,201,255,.32);
+  --accent:#7cc9ff; --accent-2:#ff8a5c; --gold:#ffd89a;
   --tp:#f4fbfc; --ts:#d3e6ea; --tm:#a8c6ce; --tl:#e4f1f4;
   --border-soft:rgba(255,255,255,.07);
   --fd:'Barlow Condensed',Impact,sans-serif;
@@ -54,20 +54,22 @@ document.documentElement.setAttribute('data-theme',t||'light')})();</script>
    near-transparent whites, bright mint/peach status colours, the dimmed
    imagery, and the outline headline stroke. */
 :root[data-theme="light"]{
-  --bg:#f4f1ea; --bg2:#e9e3d8; --panel:rgba(255,255,255,.66);
-  --bgRGB:244,241,234; --bg2RGB:233,227,216; --hov:#ded5c4;
-  --border:rgba(18,40,50,.18);
-  --border-hi:rgba(141,55,8,.42);
-  --accent:#8d3708; --accent-2:#7d2d0d; --gold:#6d4108;
-  --tp:#0e1a21; --ts:#1e343e; --tm:#2e4552; --tl:#1a2f39;
-  --border-soft:rgba(18,40,50,.13);
+  /* Pale blue carries the "baby blue" idea as a SURFACE. As a text or accent
+     colour it cannot clear AA on a light ground, so the accent is a deep azure. */
+  --bg:#eef4f9; --bg2:#dde9f2; --panel:rgba(255,255,255,.7);
+  --bgRGB:238,244,249; --bg2RGB:221,233,242; --hov:#cfdfec;
+  --border:rgba(16,52,78,.18);
+  --border-hi:rgba(11,92,150,.36);
+  --accent:#0b5c96; --accent-2:#9a3412; --gold:#7a5510;
+  --tp:#0b1a24; --ts:#1b3644; --tm:#2b4a5c; --tl:#16303e;
+  --border-soft:rgba(16,52,78,.13);
 }
-:root[data-theme="light"] ::selection{background:rgba(141,55,8,.22)}
+:root[data-theme="light"] ::selection{background:rgba(11,92,150,.2)}
 :root[data-theme="light"] .hollow{-webkit-text-stroke:1px rgba(16,29,37,.5)}
 :root[data-theme="light"] section[data-n]::before{color:rgba(16,29,37,.055)}
 :root[data-theme="light"] #bg .grain{mix-blend-mode:multiply;opacity:.05}
 :root[data-theme="light"] #globe{opacity:.9}
-:root[data-theme="light"] .btn-p:hover{background:#6d2a06}
+:root[data-theme="light"] .btn-p:hover{background:#07456f}
 :root[data-theme="light"] .band img{opacity:1;filter:none}
 :root[data-theme="light"] input,
 :root[data-theme="light"] select,
@@ -79,7 +81,7 @@ document.documentElement.setAttribute('data-theme',t||'light')})();</script>
 :root[data-theme="light"] .tag.warm{border-color:rgba(140,80,10,.4);color:#8c500a}
 :root[data-theme="light"] .msg.good{border-color:rgba(14,110,70,.4);background:rgba(14,110,70,.07);color:#0b5637}
 :root[data-theme="light"] .msg.bad{border-color:rgba(150,50,20,.45);background:rgba(150,50,20,.07);color:#8c3310}
-:root[data-theme="light"] #network{--accent:#0d5f63;--border-hi:rgba(13,95,99,.34)}
+:root[data-theme="light"] #network{--accent:#8d3708;--border-hi:rgba(141,55,8,.42)}
 
 /* theme toggle */
 .themetog{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--border);
@@ -93,7 +95,7 @@ document.documentElement.setAttribute('data-theme',t||'light')})();</script>
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--fb);background:var(--bg);color:var(--ts);line-height:1.65;overflow-x:hidden;font-weight:400;
   -webkit-font-smoothing:antialiased}
-::selection{background:rgba(255,180,112,.3);color:#fff}
+::selection{background:rgba(124,201,255,.3);color:#fff}
 a{color:inherit}
 
 /* ── background stack ─────────────────────────────────────────── */
@@ -176,7 +178,7 @@ p{font-size:17px;line-height:1.78}
 .btn{font-family:var(--fd);font-size:15px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
   padding:15px 34px;text-decoration:none;display:inline-block;cursor:pointer;border:1px solid transparent;transition:.2s}
 .btn-p{background:var(--accent);color:var(--bg)}
-.btn-p:hover{background:#ffc894}
+.btn-p:hover{background:#aadcff}
 .btn-g{background:transparent;color:var(--ts);border-color:var(--border-hi)}
 .btn-g:hover{color:var(--tp);border-color:var(--accent)}
 .tick{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);
@@ -271,7 +273,7 @@ label{display:block;font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;
   color:var(--tm);margin-bottom:8px}
 input,select,textarea{width:100%;background:rgba(255,255,255,.028);border:1px solid var(--border);
   color:var(--tp);font-family:var(--fb);font-size:16.5px;font-weight:400;padding:13px 15px;outline:none;transition:.2s;border-radius:0}
-input:focus,select:focus,textarea:focus{border-color:var(--accent);background:rgba(255,180,112,.07)}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);background:rgba(124,201,255,.09)}
 textarea{resize:vertical;min-height:104px}
 select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--tm) 50%),linear-gradient(135deg,var(--tm) 50%,transparent 50%);
   background-position:calc(100% - 19px) 50%,calc(100% - 14px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
@@ -316,6 +318,10 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   letter-spacing:-.05em;color:rgba(244,251,252,.045);pointer-events:none;z-index:0;user-select:none}
 
 /* full-bleed figure */
+/* locator map */
+#sitemap{display:block;width:100%;height:auto;aspect-ratio:170/76}
+@supports not (aspect-ratio:1){#sitemap{height:min(46vw,420px)}}
+
 /* statement / rhythm break */
 .statement{padding:clamp(104px,15vw,230px) 0;border-top:1px solid var(--border);
   border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(var(--bgRGB),.35),rgba(var(--bg2RGB),.9))}
@@ -331,7 +337,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
 .panel:hover::before,.panel:hover::after{border-color:var(--accent)}
 
 /* ember palette for the Africa / network material */
-#network{--accent:#5fd4d8;--border-hi:rgba(95,212,216,.32)}
+#network{--accent:#ffb470;--border-hi:rgba(255,180,112,.32)}
 
 /* staggered grid children */
 .stag > *{opacity:0;transform:translateY(15px);
@@ -434,7 +440,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   </div>
   <div class="tick">
     <div><div class="k">3 SITES</div><div class="l">Two continents<br>Three ocean corridors</div></div>
-    <div><div class="k">2,000 ha</div><div class="l">Primary site secured<br>Morrumbene, Mozambique</div></div>
+    <div><div class="k">2,000 ha</div><div class="l">Primary site reserved<br>Morrumbene, Mozambique</div></div>
     <div><div class="k">76+</div><div class="l">Rockets in development<br>across 20 countries</div></div>
     <div><div class="k">~2030</div><div class="l">When US launch capacity<br>hits its physical ceiling</div></div>
   </div>
@@ -454,7 +460,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
       </p>
       <p class="lead" style="margin-top:20px">
         Nexus exists to take that position while it is still available. We have taken the first one:
-        2,000 hectares of Mozambican coastline, secured.
+        2,000 hectares of Mozambican coastline, reserved.
       </p>
     </div>
   </div>
@@ -608,18 +614,23 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
       <div class="rule" style="margin-top:44px"></div>
     </div>
 
+    <figure class="band rv" style="margin-bottom:clamp(30px,4vw,46px)">
+      <canvas id="sitemap" role="img" aria-label="Map of the Indian Ocean region showing three Nexus spaceport locations: Ahanta West on the Atlantic coast of Ghana, Morrumbene on the Indian Ocean coast of Mozambique, and Palawan in the western Philippines."></canvas>
+      <figcaption class="cap">Site locations · Atlantic, Indian Ocean and Asia-Pacific corridors</figcaption>
+    </figure>
+
     <div class="sites rv">
       <!-- MOZAMBIQUE -->
       <article class="site">
         <div class="hd">
-          <div class="tag live"><span class="dot"></span>Primary · Phase 1</div>
+          <div class="tag live"><span class="dot"></span>Phase 1 · Primary</div>
           <h3 style="margin-top:16px">Morrumbene</h3>
           <p class="dim" style="font-size:14px">Mozambique · Inhambane Province</p>
           <div class="co">23°35′48″S · 35°25′15″E</div>
         </div>
         <div class="bd">
           <dl>
-            <dt>Site area</dt><dd>2,000 ha secured</dd>
+            <dt>Site area</dt><dd>2,000 ha reserved</dd>
             <dt>Pads planned</dt><dd>13 · Phase 1</dd>
             <dt>Corridor</dt><dd>Indian Ocean · east through south-east</dd>
             <dt>Propellant</dt><dd>On-site H₂, O₂, CH₄ + RP-1</dd>
@@ -633,7 +644,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
       <!-- PHILIPPINES -->
       <article class="site">
         <div class="hd">
-          <div class="tag">Development Site</div>
+          <div class="tag"><span class="dot"></span>Phase 2</div>
           <h3 style="margin-top:16px">Palawan</h3>
           <p class="dim" style="font-size:14px">Philippines · Asia-Pacific corridor</p>
           <div class="co">8°31′53″N · 117°32′42″E</div>
@@ -644,7 +655,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
             <dt>Pads planned</dt><dd>6 · initial concept</dd>
             <dt>Corridor</dt><dd>East-south-east · Sulu Sea to Pacific</dd>
             <dt>Advantage</dt><dd>Low-inclination delta-v for GEO, MEO and constellations</dd>
-            <dt>Status</dt><dd>Site evaluation &amp; engagement</dd>
+            <dt>Status</dt><dd>MOU and site selection</dd>
           </dl>
         </div>
       </article>
@@ -652,7 +663,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
       <!-- GHANA -->
       <article class="site">
         <div class="hd">
-          <div class="tag warm"><span class="dot"></span>New · Agreement Pending</div>
+          <div class="tag warm"><span class="dot"></span>Phase 3</div>
           <h3 style="margin-top:16px">Ahanta West</h3>
           <p class="dim" style="font-size:14px">Ghana · Western Region</p>
           <div class="co">Cape Three Points · ~4°45′N · 2°05′W</div>
@@ -663,7 +674,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
             <dt>Nexus role</dt><dd>Proposed launch service provider</dd>
             <dt>Corridor</dt><dd>South Atlantic · southerly</dd>
             <dt>Advantage</dt><dd>Polar and sun-synchronous access</dd>
-            <dt>Status</dt><dd>Under discussion — not yet contracted</dd>
+            <dt>Status</dt><dd>MOU and site selection</dd>
           </dl>
         </div>
       </article>
@@ -675,7 +686,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
       <p class="lead">
         Morrumbene sits on Mozambique's Inhambane coast at 23°35′48″S, 35°25′15″E — near-equatorial,
         ocean-facing and sparsely populated, with open Indian Ocean downrange and a coastline that
-        turns away from the flight path rather than into it. Two thousand hectares are secured, the
+        turns away from the flight path rather than into it. Two thousand hectares are reserved, the
         site is recognised within the national port development programme, and it is the site the
         entire Nexus programme is built around.
       </p>
@@ -693,7 +704,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         <img src="../assets/site-render.jpg" alt="Concept masterplan of the Morrumbene launch complex, Mozambique"
              width="1149" height="1369" loading="lazy" decoding="async">
       </picture>
-      <figcaption class="cap">Concept masterplan · Morrumbene launch complex, Mozambique · 2,000 ha secured</figcaption>
+      <figcaption class="cap">Concept masterplan · Morrumbene launch complex, Mozambique · 2,000 ha reserved</figcaption>
     </figure>
 
     <div class="band rv" style="margin-top:clamp(40px,5vw,64px)">
@@ -734,8 +745,8 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
       </p>
       <div class="rows">
         <div class="r"><div class="lab">Morrumbene</div><div class="val"><span class="u">Phase 1 · Primary</span>The broadest corridor in the network and the anchor of the platform — low through high inclination, both directions of the Indian Ocean, and the full physical build.</div></div>
-        <div class="r"><div class="lab">Palawan</div><div class="val"><span class="u">Development site</span>Near-equatorial latitude and the strongest delta-v advantage for GEO, MEO and equatorial constellation work. Highest-scoring location in the Nexus global site analysis.</div></div>
-        <div class="r"><div class="lab">Ahanta West</div><div class="val"><span class="u">Early discussion</span>Atlantic frontage on the opposite side of the continent, opening polar and sun-synchronous access and a second ocean basin. Government-identified site; nothing contracted.</div></div>
+        <div class="r"><div class="lab">Palawan</div><div class="val"><span class="u">Phase 2 · MOU and site selection</span>Near-equatorial latitude and the strongest delta-v advantage for GEO, MEO and equatorial constellation work. Highest-scoring location in the Nexus global site analysis.</div></div>
+        <div class="r"><div class="lab">Ahanta West</div><div class="val"><span class="u">Phase 3 · MOU and site selection</span>Atlantic frontage on the opposite side of the continent, opening polar and sun-synchronous access and a second ocean basin. Government-identified site; memorandum of understanding in place, site selection under way.</div></div>
       </div>
     </div>
 
@@ -787,21 +798,6 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         <div class="r"><div class="lab">European Controls</div><div class="val">EU Dual-Use Regulation is treated as a separate compliance layer from ITAR. Less extraterritorial in effect, but tightening — particularly on China-facing aerospace cooperation.</div></div>
         <div class="r"><div class="lab">US Subsidiary</div><div class="val">A separately incorporated US subsidiary operating under a Special Security Agreement preserves eligibility for NASA and US civil agency work while maintaining corporate separation.</div></div>
         <div class="r"><div class="lab">MTCR &amp; Africa</div><div class="val">The MTCR's explicit civilian carve-out enables launch infrastructure development. Nexus works with non-restricted infrastructure suppliers where possible and maintains transparent, commercial-only positioning.</div></div>
-      </div>
-    </div>
-
-    <div class="rv" style="margin-top:clamp(56px,7vw,96px)">
-      <h3>Accepted launch vehicle policy</h3>
-      <p class="lead" style="margin:16px 0 30px">
-        Rocket-agnostic, with clearly drawn boundaries. Operators know exactly what the facility will
-        and will not host before they design around it.
-      </p>
-      <div class="rows">
-        <div class="r"><div class="lab">Propellants</div><div class="val"><span class="u">Accepted</span>LH₂, LOX and LCH₄ produced on-site via solar-powered electrolysis and pyrolysis. RP-1 supplied externally and available at the facility.</div></div>
-        <div class="r"><div class="lab">Solid Boosters</div><div class="val"><span class="u">Accepted</span>Solid-fuelled boosters and strap-ons up to a maximum total solid propellant mass of 600 tonnes per vehicle configuration.</div></div>
-        <div class="r"><div class="lab">Toxic Propellants</div><div class="val"><span class="u" style="color:var(--accent-2)">Not accepted</span>Highly toxic propellants — including hydrazine-based monopropellants and hypergolics such as NTO and UDMH — are not supported.</div></div>
-        <div class="r"><div class="lab">Military Payloads</div><div class="val"><span class="u" style="color:var(--accent-2)">Not accepted</span>Nexus facilities are strictly commercial and politically neutral. Military payloads, weapons systems and classified government missions are excluded.</div></div>
-        <div class="r"><div class="lab">Vehicle Origins</div><div class="val"><span class="u">All nations</span>Subject to applicable export controls and the dual-zone compliance architecture. Commercial operators from any nation may use the ITAR-free zones.</div></div>
       </div>
     </div>
   </div>
@@ -900,10 +896,10 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
       <table class="tbl">
         <thead><tr><th>Area</th><th>Current status</th><th>Next milestone</th></tr></thead>
         <tbody>
-          <tr><td>Primary Site</td><td>Morrumbene secured — 2,000 ha, recognised within the national port development programme</td><td>Finalise legal site control and boundary confirmation</td></tr>
+          <tr><td>Primary Site</td><td>Morrumbene reserved — 2,000 ha, recognised within the national port development programme</td><td>Finalise legal site control and boundary confirmation</td></tr>
           <tr><td>Master Planning</td><td>Initial land-use and zoning model prepared for the full Phase 1 build</td><td>Independent engineering review</td></tr>
           <tr><td>Safety Framework</td><td>Internal preliminary framework prepared</td><td>Independent validation</td></tr>
-          <tr><td>Further Sites</td><td>Palawan under evaluation; Ahanta West in early government discussion</td><td>Site agreements and regulatory pathway</td></tr>
+          <tr><td>Further Sites</td><td>Palawan and Ahanta West both at MOU and site-selection stage</td><td>Definitive site agreements and regulatory pathway</td></tr>
           <tr><td>Customers</td><td>Target operator universe identified</td><td>LOIs, reservation agreements, technical reviews</td></tr>
           <tr><td>Regulation</td><td>Compliance strategy developed</td><td>Host-country pathway and legal opinions</td></tr>
           <tr><td>Financing</td><td>Corporate round underway</td><td>Project-finance-ready package</td></tr>
@@ -1027,8 +1023,9 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         sell, or a solicitation of an offer to buy, any security or interest in any Nexus entity, and
         it should not be relied upon in connection with any investment decision. Development sites,
         pad counts, corridors, timelines and third-party arrangements described here are indicative
-        and subject to survey, licensing, regulatory approval and definitive documentation. The Ghana
-        opportunity is under discussion and no binding agreement has been executed. Forward-looking
+        and subject to survey, licensing, regulatory approval and definitive documentation. The Ghana and
+        Philippines opportunities are at memorandum-of-understanding stage; no binding definitive
+        agreement has been executed in respect of either. Forward-looking
         statements are not guarantees of future performance.
       </div>
     </div>
@@ -1043,6 +1040,92 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   b.addEventListener('click',function(){b.classList.toggle('open');d.classList.toggle('open')});
   d.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){b.classList.remove('open');d.classList.remove('open')})});
 })();
+/* locator map - reuses the coastline data the globe already ships */
+(function(){
+  var cv=document.getElementById('sitemap'); if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var LON0=-30, LON1=140, LAT0=36, LAT1=-40;
+  var SITES=[
+    {ph:'3', n:'Ahanta West', c:'Ghana',       lat:4.75,   lon:-2.08},
+    {ph:'1', n:'Morrumbene',  c:'Mozambique',  lat:-23.60, lon:35.42},
+    {ph:'2', n:'Palawan',     c:'Philippines', lat:8.53,   lon:117.55}
+  ];
+  var RINGS=(function(){
+    var raw=window.__NX_COAST__||'', out=[], parts=raw.split(';');
+    for(var i=0;i<parts.length;i++){
+      if(!parts[i])continue;
+      var v=parts[i].split(','), px=0, py=0, ring=[];
+      for(var j=0;j<v.length;j+=2){ px+=+v[j]; py+=+v[j+1]; ring.push([py/10,px/10]); }
+      out.push(ring);
+    }
+    return out;
+  })();
+  function css(n,f){ var v=getComputedStyle(document.documentElement).getPropertyValue(n).trim(); return v||f; }
+  function draw(){
+    var W=cv.clientWidth, H=cv.clientHeight;
+    if(!W||!H) return;
+    var DPR=Math.min(window.devicePixelRatio||1,2);
+    cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    var X=function(lon){return (lon-LON0)/(LON1-LON0)*W;};
+    var Y=function(lat){return (LAT0-lat)/(LAT0-LAT1)*H;};
+    var ink=css('--tp','#0b1a24'), sec=css('--ts','#1b3644'), mut=css('--tm','#2b4a5c'),
+        acc=css('--accent','#0b5c96'), bg2=css('--bg2','#dde9f2'), bg=css('--bg','#eef4f9');
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle=bg2; ctx.fillRect(0,0,W,H);
+    /* graticule */
+    ctx.strokeStyle=mut; ctx.globalAlpha=.18; ctx.lineWidth=.6;
+    for(var lo=-20;lo<=140;lo+=20){ ctx.beginPath(); ctx.moveTo(X(lo),0); ctx.lineTo(X(lo),H); ctx.stroke(); }
+    for(var la=-40;la<=36;la+=20){ ctx.beginPath(); ctx.moveTo(0,Y(la)); ctx.lineTo(W,Y(la)); ctx.stroke(); }
+    /* equator */
+    ctx.globalAlpha=.42; ctx.lineWidth=1; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(0,Y(0)); ctx.lineTo(W,Y(0)); ctx.stroke(); ctx.setLineDash([]);
+    /* coastlines */
+    ctx.globalAlpha=.72; ctx.strokeStyle=sec; ctx.lineWidth=.85;
+    ctx.lineJoin='round'; ctx.lineCap='round';
+    for(var r=0;r<RINGS.length;r++){
+      var ring=RINGS[r]; if(ring.length<2) continue;
+      ctx.beginPath(); var pen=false;
+      for(var k=0;k<ring.length;k++){
+        var lat=ring[k][0], lon=ring[k][1];
+        if(k>0 && Math.abs(lon-ring[k-1][1])>90){ pen=false; }   /* antimeridian jump */
+        var x=X(lon), y=Y(lat);
+        if(!pen){ ctx.moveTo(x,y); pen=true; } else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+    ctx.globalAlpha=1;
+    /* equator label */
+    ctx.font='500 10px ui-monospace,Menlo,Consolas,monospace';
+    ctx.fillStyle=mut; ctx.textBaseline='bottom';
+    ctx.fillText('EQUATOR', 8, Y(0)-4);
+    /* sites */
+    for(var i=0;i<SITES.length;i++){
+      var st=SITES[i], x=X(st.lon), y=Y(st.lat);
+      ctx.beginPath(); ctx.arc(x,y,11,0,6.2832);
+      ctx.strokeStyle=acc; ctx.globalAlpha=.38; ctx.lineWidth=1; ctx.stroke();
+      ctx.globalAlpha=1;
+      ctx.beginPath(); ctx.arc(x,y,4,0,6.2832); ctx.fillStyle=acc; ctx.fill();
+      var flip = x > W*0.68;
+      var lx = flip ? x-17 : x+17;
+      ctx.textAlign = flip ? 'right' : 'left';
+      ctx.textBaseline='alphabetic';
+      ctx.font='700 13px "Barlow Condensed",Impact,sans-serif';
+      ctx.fillStyle=ink;
+      ctx.fillText('PHASE '+st.ph+' \u00b7 '+st.n.toUpperCase(), lx, y-1);
+      ctx.font='500 11px ui-monospace,Menlo,Consolas,monospace';
+      ctx.fillStyle=mut;
+      ctx.fillText(st.c.toUpperCase(), lx, y+13);
+    }
+    ctx.textAlign='left';
+  }
+  var raf=null;
+  function schedule(){ if(raf) return; raf=setTimeout(function(){ raf=null; draw(); },60); }
+  draw();
+  window.addEventListener('resize', schedule);
+  window.addEventListener('nx-theme', schedule);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(draw).catch(function(){});
+})();
 /* theme toggle - persists the choice, defaults to the OS preference */
 (function(){
   var root=document.documentElement,btn=document.getElementById('themetog');
@@ -1054,7 +1137,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
     btn.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
     btn.querySelector('.tt-lab').textContent=light?'Dark':'Light';
     var m=document.querySelector('meta[name="theme-color"]');
-    if(m)m.setAttribute('content',light?'#f4f1ea':'#04151c');
+    if(m)m.setAttribute('content',light?'#eef4f9':'#04151c');
     if(save){try{localStorage.setItem('nx-theme',t)}catch(e){}}
     try{window.dispatchEvent(new CustomEvent('nx-theme',{detail:t}))}catch(e){}
   }
@@ -1331,8 +1414,8 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
 
   /* ---------- palette ----------------------------------------------------- */
   var PAL = {
-    dark:  { grid: [110, 205, 215], land: [178, 236, 242], hot: [255, 172, 96], site: [255, 222, 160] },
-    light: { grid: [16,  84, 100],  land: [10,  52,  66],  hot: [150,  62, 12], site: [120,  72,  8] }
+    dark:  { grid: [ 92, 168, 232], land: [166, 216, 255], hot: [255, 172, 96], site: [255, 222, 160] },
+    light: { grid: [ 14,  66, 108], land: [ 10,  42,  74],  hot: [150,  62, 12], site: [120,  72,  8] }
   };
   /* Stroke alphas were tuned for light-on-dark. Dark-on-light needs more of
      them to read, hence the multiplier rather than editing every call site. */
