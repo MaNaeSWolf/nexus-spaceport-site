@@ -133,6 +133,9 @@ nav.solid{background:rgba(var(--bgRGB),.93)}
   color:var(--accent);border:1px solid var(--accent);padding:7px 18px;text-decoration:none;margin-left:18px;
   transition:.2s;white-space:nowrap}
 .navcta:hover{background:var(--accent);color:var(--bg)}
+/* An email address does not survive uppercase with .18em tracking - too wide for
+   the nav and hard to read. These links opt out of the display-face treatment. */
+.mailcta{font-family:var(--fm);text-transform:none;letter-spacing:.02em;font-size:13px;font-weight:400}
 .burger{display:none;flex-direction:column;gap:4px;background:none;border:0;cursor:pointer;padding:6px;margin-left:auto}
 .burger span{display:block;width:22px;height:1.5px;background:var(--ts);transition:.25s}
 .burger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
@@ -381,10 +384,15 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
 }
 
 /* responsive */
-@media(max-width:1000px){
+/* The address is far wider than the old "Investor Enquiry" label, so the nav
+   runs out of room sooner. These live in their own queries so the section
+   layout breakpoint below is unaffected. */
+@media(max-width:1180px){.themetog .tt-lab{display:none}}
+@media(max-width:1100px){
   .navlinks{display:none}.navcta{display:none}.burger{display:flex}.drawer{display:flex}
   .themetog{margin-left:auto;margin-right:4px}
-  .themetog .tt-lab{display:none}
+}
+@media(max-width:1000px){
   .split{grid-template-columns:1fr;gap:34px}
   .sites{grid-template-columns:1fr}
   .why{grid-template-columns:1fr}
@@ -446,7 +454,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
     <li><a href="#status">Status</a></li>
   </ul>
   <button class="themetog" id="themetog" type="button" aria-pressed="false" aria-label="Switch to light theme"><span class="tt-ico" aria-hidden="true"></span><span class="tt-lab">Light</span></button>
-  <a class="navcta" href="#invest">Investor Enquiry</a>
+  <a class="navcta mailcta" href="mailto:info@nexus-spaceport.com">info@nexus-spaceport.com</a>
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="drawer" id="drawer">
@@ -456,7 +464,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   <a href="#discipline">Discipline</a>
   <a href="#why">Why Nexus</a>
   <a href="#status">Status</a>
-  <a href="#invest">Investor Enquiry →</a>
+  <a class="mailcta" href="mailto:info@nexus-spaceport.com">info@nexus-spaceport.com</a>
 </div>
 
 <main>
@@ -474,7 +482,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
       </p>
       <div class="hero-act">
         <a class="btn btn-p" href="#why">Why Nexus</a>
-        <a class="btn btn-g" href="#invest">Investor Enquiry</a>
+        <a class="btn btn-g mailcta" href="mailto:info@nexus-spaceport.com">info@nexus-spaceport.com</a>
       </div>
     </div>
   </div>
@@ -982,7 +990,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         </p>
         <div class="rows" style="border-top:1px solid var(--border)">
           <div class="r" style="grid-template-columns:1fr"><div class="lab">Nexus Launch Services Ltd</div><div class="val" style="margin-top:4px">20 Wenlock Road, London N1 7GU, United Kingdom · Company No. 15915121</div></div>
-          <div class="r" style="grid-template-columns:1fr"><div class="lab">General Enquiries</div><div class="val" style="margin-top:4px">All enquiries are handled through the form opposite. A named member of the team responds to every submission.</div></div>
+          <div class="r" style="grid-template-columns:1fr"><div class="lab">General Enquiries</div><div class="val" style="margin-top:4px"><a href="mailto:info@nexus-spaceport.com" style="color:var(--accent);text-decoration:none">info@nexus-spaceport.com</a></div></div>
         </div>
       </div>
 
@@ -1055,7 +1063,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
       <div>
         <h5>Contact</h5>
         <ul>
-          <li><a href="#invest">Investor enquiry</a></li>
+          <li><a href="mailto:info@nexus-spaceport.com">info@nexus-spaceport.com</a></li>
           <li class="dim" style="font-size:14px;color:var(--tm)">20 Wenlock Road<br>London N1 7GU<br>United Kingdom</li>
         </ul>
       </div>
