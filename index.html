@@ -30,419 +30,7 @@ document.documentElement.setAttribute('data-theme',t||'light')})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@200;300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  /* v2: deep ocean ink rather than the near-black everyone else in space uses.
-     Sampled from the water in the Morrumbene masterplan, with a warm amber
-     accent for contrast. RGB triplets exist so rgba() can reuse them. */
-  --bg:#04151c; --bg2:#07202a; --panel:rgba(9,38,49,.6);
-  --bgRGB:4,21,28; --bg2RGB:7,32,42; --hov:#0a2c39;
-  --border:rgba(186,232,242,.14);
-  --border-hi:rgba(124,201,255,.32);
-  --accent:#7cc9ff; --accent-2:#ff8a5c; --gold:#ffd89a;
-  --tp:#f4fbfc; --ts:#d3e6ea; --tm:#a8c6ce; --tl:#e4f1f4;
-  --border-soft:rgba(255,255,255,.07);
-  --fd:'Barlow Condensed',Impact,sans-serif;
-  --fb:'Barlow',system-ui,sans-serif;
-  --fm:'Share Tech Mono',ui-monospace,monospace;
-  --maxw:1280px;
-}
-/* ── light theme ────────────────────────────────────────────────────────────
-   Because every surface colour above is a variable, the theme is mostly a
-   variable swap. The handful of rules below are the ones that assumed dark:
-   near-transparent whites, bright mint/peach status colours, the dimmed
-   imagery, and the outline headline stroke. */
-:root[data-theme="light"]{
-  /* Pale blue carries the "baby blue" idea as a SURFACE. As a text or accent
-     colour it cannot clear AA on a light ground, so the accent is a deep azure. */
-  --bg:#eef4f9; --bg2:#dde9f2; --panel:rgba(255,255,255,.7);
-  --bgRGB:238,244,249; --bg2RGB:221,233,242; --hov:#cfdfec;
-  --border:rgba(16,52,78,.18);
-  --border-hi:rgba(11,92,150,.36);
-  --accent:#0b5c96; --accent-2:#9a3412; --gold:#7a5510;
-  --tp:#0b1a24; --ts:#1b3644; --tm:#2b4a5c; --tl:#16303e;
-  --border-soft:rgba(16,52,78,.13);
-}
-:root[data-theme="light"] ::selection{background:rgba(11,92,150,.2)}
-:root[data-theme="light"] .hollow{-webkit-text-stroke:1px rgba(16,29,37,.5)}
-:root[data-theme="light"] section[data-n]::before{color:rgba(11,92,150,.095);
-  -webkit-text-stroke:2px rgba(11,92,150,.22)}
-:root[data-theme="light"] #bg .grain{mix-blend-mode:multiply;opacity:.05}
-:root[data-theme="light"] #globe{opacity:.9}
-:root[data-theme="light"] .btn-p:hover{background:#07456f}
-:root[data-theme="light"] .band img{opacity:1;filter:none}
-:root[data-theme="light"] input,
-:root[data-theme="light"] select,
-:root[data-theme="light"] textarea{background:rgba(255,255,255,.75)}
-:root[data-theme="light"] input:focus,
-:root[data-theme="light"] select:focus,
-:root[data-theme="light"] textarea:focus{background:#fff}
-:root[data-theme="light"] .tag.live{border-color:rgba(14,110,70,.4);color:#0e6e46}
-:root[data-theme="light"] .tag.warm{border-color:rgba(140,80,10,.4);color:#8c500a}
-:root[data-theme="light"] .msg.good{border-color:rgba(14,110,70,.4);background:rgba(14,110,70,.07);color:#0b5637}
-:root[data-theme="light"] .msg.bad{border-color:rgba(150,50,20,.45);background:rgba(150,50,20,.07);color:#8c3310}
-:root[data-theme="light"] #network{--accent:#8d3708;--border-hi:rgba(141,55,8,.42)}
-
-/* theme toggle */
-.themetog{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--border);
-  color:var(--ts);font-family:var(--fd);font-size:13px;font-weight:600;letter-spacing:.16em;
-  text-transform:uppercase;padding:6px 12px;margin-left:16px;cursor:pointer;transition:.2s;white-space:nowrap}
-.themetog:hover{color:var(--tp);border-color:var(--accent)}
-.themetog .tt-ico{width:11px;height:11px;border-radius:50%;background:currentColor;
-  box-shadow:inset -3px -1px 0 0 var(--bg);flex-shrink:0}
-:root[data-theme="light"] .themetog .tt-ico{box-shadow:none}
-
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:var(--fb);background:var(--bg);color:var(--ts);line-height:1.65;overflow-x:hidden;font-weight:400;
-  -webkit-font-smoothing:antialiased}
-::selection{background:rgba(124,201,255,.3);color:#fff}
-a{color:inherit}
-
-/* ── background stack ─────────────────────────────────────────── */
-#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
-#globe{position:absolute;inset:0;width:100%;height:100%;opacity:.85}
-#bg .vign{position:absolute;inset:0;
-  background:radial-gradient(ellipse 108% 88% at 66% 40%,rgba(var(--bgRGB),0) 0%,rgba(var(--bgRGB),.34) 50%,rgba(var(--bgRGB),.9) 100%)}
-#bg .grain{position:absolute;inset:0;opacity:.055;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-main,nav,footer{position:relative;z-index:2}
-/* The globe is decorative but it sits behind every section. Let it read at full
-   strength across the hero, then lay a scrim over it so body copy always has a
-   near-solid backdrop instead of competing with coastlines and orbit lines. */
-main{background:linear-gradient(180deg,
-  rgba(var(--bgRGB),0) 0,
-  rgba(var(--bgRGB),0) 76vh,
-  rgba(var(--bgRGB),.72) 118vh,
-  rgba(var(--bgRGB),.82) 100%)}
-
-/* ── nav ──────────────────────────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:60;height:56px;display:flex;align-items:center;
-  justify-content:space-between;padding:0 clamp(16px,3vw,40px);
-  background:rgba(var(--bgRGB),.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border);transition:background .3s}
-nav.solid{background:rgba(var(--bgRGB),.93)}
-.brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
-.brand img{height:34px;width:auto;display:block}
-.brand .bt{font-family:var(--fm);font-size:14px;letter-spacing:.2em;color:var(--tp);white-space:nowrap}
-.navlinks{display:flex;list-style:none;gap:0;margin-left:auto}
-.navlinks a{font-family:var(--fd);font-size:14px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--ts);text-decoration:none;padding:0 13px;height:56px;display:flex;align-items:center;transition:color .2s}
-.navlinks a:hover{color:var(--tp)}
-.navcta{font-family:var(--fd);font-size:14px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent);border:1px solid var(--accent);padding:7px 18px;text-decoration:none;margin-left:18px;
-  transition:.2s;white-space:nowrap}
-.navcta:hover{background:var(--accent);color:var(--bg)}
-/* An email address does not survive uppercase with .18em tracking - too wide for
-   the nav and hard to read. These links opt out of the display-face treatment. */
-/* Both .btn and .drawer a set text-transform:uppercase and are declared later,
-   so this needs enough specificity to win outright rather than relying on order
-   - otherwise the address renders, and copies, as INFO@NEXUS-SPACEPORT.COM. */
-a.mailcta,.drawer a.mailcta{font-family:var(--fm);text-transform:none;letter-spacing:.02em;font-size:13px;font-weight:400}
-/* The address is never a contiguous string in the served HTML. The @ and the dot
-   are CSS-generated, so it renders correctly without JavaScript and with no flash
-   of placeholder text; screen readers announce generated content, so it still
-   reads aloud correctly. JS then attaches the real mail link. */
-.eml{white-space:nowrap}
-.eml span{font-style:normal;font-weight:inherit}
-.eml span:nth-child(2)::before{content:"\0040"}
-.eml span:nth-child(4)::before{content:"\002E"}
-.nospam{display:none}
-.burger{display:none;flex-direction:column;gap:4px;background:none;border:0;cursor:pointer;padding:6px;margin-left:auto}
-.burger span{display:block;width:22px;height:1.5px;background:var(--ts);transition:.25s}
-.burger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
-.burger.open span:nth-child(2){opacity:0}
-.burger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
-.drawer{display:none;position:fixed;top:56px;left:0;right:0;z-index:59;background:rgba(var(--bgRGB),.985);
-  border-bottom:1px solid var(--border);padding:12px 24px 24px;flex-direction:column;
-  transform:translateY(-10px);opacity:0;pointer-events:none;transition:.25s}
-.drawer.open{opacity:1;transform:none;pointer-events:all}
-.drawer a{font-family:var(--fd);font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--ts);
-  text-decoration:none;padding:15px 0;border-bottom:1px solid var(--border)}
-.drawer a:last-child{border:0;color:var(--accent)}
-
-/* ── layout primitives ────────────────────────────────────────── */
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,4vw,48px)}
-section{padding:clamp(72px,9vw,132px) 0;position:relative}
-.eyebrow{font-family:var(--fm);font-size:13.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);
-  display:flex;align-items:center;gap:13px;margin-bottom:26px}
-.eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);flex-shrink:0}
-h1{font-family:var(--fd);font-size:clamp(46px,8.4vw,104px);font-weight:700;line-height:.92;letter-spacing:-.005em;
-  color:var(--tp);text-transform:uppercase;margin-bottom:30px}
-h2{font-family:var(--fd);font-size:clamp(32px,4.6vw,62px);font-weight:600;line-height:.98;letter-spacing:.002em;
-  color:var(--tp);text-transform:uppercase;margin-bottom:26px}
-h3{font-family:var(--fd);font-size:clamp(19px,2vw,25px);font-weight:500;letter-spacing:.05em;text-transform:uppercase;
-  color:var(--tp);margin-bottom:10px;line-height:1.15}
-h4{font-family:var(--fd);font-size:17px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--tp);margin-bottom:7px}
-.lead{font-size:clamp(17.5px,1.4vw,20px);line-height:1.8;color:var(--tl);max-width:66ch;font-weight:400}
-p{font-size:17px;line-height:1.78}
-.dim{color:var(--tm)}
-.acc{color:var(--accent)}
-.hollow{-webkit-text-stroke:1px rgba(244,251,252,.6);color:transparent}
-.rule{height:1px;background:linear-gradient(90deg,var(--border-hi),transparent);margin:0 0 44px}
-
-/* reveal */
-.rv{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.3,1),transform .8s cubic-bezier(.2,.7,.3,1)}
-.rv.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
-
-/* ── hero ─────────────────────────────────────────────────────── */
-#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:0}
-.hero-in{max-width:min(640px,100%)}
-.hero-sub{font-size:clamp(16px,1.5vw,19.5px);line-height:1.75;color:var(--tl);max-width:52ch;margin-bottom:40px;font-weight:400}
-.hero-act{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:64px}
-.btn{font-family:var(--fd);font-size:15px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
-  padding:15px 34px;text-decoration:none;display:inline-block;cursor:pointer;border:1px solid transparent;transition:.2s}
-.btn-p{background:var(--accent);color:var(--bg)}
-.btn-p:hover{background:#aadcff}
-.btn-g{background:transparent;color:var(--ts);border-color:var(--border-hi)}
-.btn-g:hover{color:var(--tp);border-color:var(--accent)}
-.tick{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);
-  background:linear-gradient(180deg,rgba(var(--bg2RGB),.5),rgba(var(--bg2RGB),.1))}
-.tick > div{padding:22px clamp(16px,3vw,40px);border-right:1px solid var(--border)}
-.tick > div:last-child{border-right:0}
-.tick .k{font-family:var(--fd);font-size:clamp(22px,2.5vw,32px);font-weight:600;color:var(--tp);line-height:1;margin-bottom:7px}
-.tick .l{font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tm);line-height:1.5}
-
-/* ── panels / grids ───────────────────────────────────────────── */
-.panel{background:var(--panel);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);
-  border:1px solid var(--border);padding:clamp(22px,2.6vw,34px);transition:border-color .3s,transform .3s}
-.panel:hover{border-color:var(--border-hi)}
-.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border)}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
-.g2 > *,.g3 > *,.g4 > *{background:var(--bg2)}
-.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(30px,5vw,80px);align-items:start}
-
-/* numbered list */
-.nl{border-top:1px solid var(--border)}
-.nl > li{list-style:none;display:grid;grid-template-columns:56px minmax(0,1fr);gap:clamp(14px,2.5vw,32px);
-  padding:24px 0;border-bottom:1px solid var(--border);align-items:start}
-.nl .n{font-family:var(--fm);font-size:13.5px;letter-spacing:.14em;color:var(--accent);padding-top:4px}
-.nl p{color:var(--ts);font-size:16.5px;max-width:74ch}
-
-/* definition rows */
-.rows{border-top:1px solid var(--border)}
-.rows .r{display:grid;grid-template-columns:200px minmax(0,1fr);gap:clamp(14px,3vw,40px);padding:18px 0;
-  border-bottom:1px solid var(--border);align-items:baseline}
-.rows .r > .lab{font-family:var(--fd);font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--tp)}
-.rows .r > .val{font-size:16.5px;color:var(--ts)}
-.rows .r > .val .u{font-family:var(--fm);font-size:15px;color:var(--accent);display:block;margin-bottom:3px;letter-spacing:.1em}
-
-/* stat blocks */
-.stat{padding:clamp(22px,2.6vw,34px)}
-.stat .k{font-family:var(--fd);font-size:clamp(34px,4.4vw,54px);font-weight:700;color:var(--tp);line-height:1;margin-bottom:12px}
-.stat .k small{font-size:.5em;font-weight:500;color:var(--accent);letter-spacing:.05em}
-.stat p{font-size:16px;color:var(--ts)}
-
-/* tags */
-.tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:13px;letter-spacing:.16em;
-  text-transform:uppercase;padding:5px 11px;border:1px solid var(--border-hi);color:var(--accent);white-space:nowrap}
-.tag.warm{border-color:rgba(255,210,120,.35);color:var(--gold)}
-.tag.live{border-color:rgba(120,255,180,.3);color:#7ef0b4}
-.tag .dot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:bp 2.4s ease-in-out infinite}
-@keyframes bp{0%,100%{opacity:1}50%{opacity:.25}}
-
-/* site cards */
-.sites{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-.site{background:var(--bg2);padding:0;display:flex;flex-direction:column;transition:background .3s}
-.site:hover{background:var(--hov)}
-.site .hd{padding:26px clamp(20px,2.2vw,30px) 20px;border-bottom:1px solid var(--border)}
-.site .bd{padding:8px clamp(20px,2.2vw,30px) 26px;flex:1}
-.site .co{font-family:var(--fm);font-size:14px;letter-spacing:.1em;color:var(--accent);margin-top:9px}
-.site dl{display:grid;grid-template-columns:auto 1fr;gap:0}
-.site dt{font-family:var(--fm);font-size:13.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
-  padding:11px 18px 11px 0;border-bottom:1px solid var(--border-soft);white-space:nowrap}
-.site dd{font-size:15.5px;color:var(--ts);padding:11px 0;border-bottom:1px solid var(--border-soft);text-align:right}
-.site dt:last-of-type,.site dd:last-of-type{border-bottom:0}
-
-/* table */
-.tbl{width:100%;border-collapse:collapse;font-size:15.5px}
-.tbl th{font-family:var(--fm);font-size:14px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
-  text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--border-hi);font-weight:400;white-space:nowrap}
-.tbl td{padding:14px 14px 14px 0;border-bottom:1px solid var(--border);color:var(--ts);vertical-align:top}
-.tbl td:first-child{font-family:var(--fd);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tp);font-size:15px}
-.tbl .num{font-family:var(--fm);font-size:15px;color:var(--accent)}
-.note{font-size:15px;color:var(--tm);margin-top:18px;line-height:1.65;max-width:88ch}
-
-/* why-invest */
-.why{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-.why > div{background:var(--bg2);padding:clamp(26px,3vw,40px);transition:background .3s}
-.why > div:hover{background:var(--hov)}
-.why .n{font-family:var(--fm);font-size:13.5px;letter-spacing:.2em;color:var(--accent);margin-bottom:16px;display:block}
-.why h3{margin-bottom:12px}
-.why p{color:var(--ts);font-size:16.5px}
-
-/* image band */
-.band{position:relative;border:1px solid var(--border);overflow:hidden;background:var(--bg2)}
-.band picture{display:block}
-.band img{width:100%;height:auto;display:block;opacity:.78;filter:saturate(.85) contrast(1.05)}
-.band .cap{position:absolute;left:0;bottom:0;right:0;padding:20px clamp(18px,2.4vw,30px);
-  background:linear-gradient(0deg,rgba(var(--bgRGB),.92),rgba(var(--bgRGB),0));
-  font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ts)}
-
-/* invest / form */
-#invest{border-top:1px solid var(--border-hi);background:linear-gradient(180deg,rgba(var(--bg2RGB),.55),rgba(var(--bgRGB),.9))}
-form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.f-full{grid-column:1/-1}
-label{display:block;font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--tm);margin-bottom:8px}
-input,select,textarea{width:100%;background:rgba(255,255,255,.028);border:1px solid var(--border);
-  color:var(--tp);font-family:var(--fb);font-size:16.5px;font-weight:400;padding:13px 15px;outline:none;transition:.2s;border-radius:0}
-input:focus,select:focus,textarea:focus{border-color:var(--accent);background:rgba(124,201,255,.09)}
-textarea{resize:vertical;min-height:104px}
-select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--tm) 50%),linear-gradient(135deg,var(--tm) 50%,transparent 50%);
-  background-position:calc(100% - 19px) 50%,calc(100% - 14px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
-select option{background:var(--hov);color:var(--tp)}
-button.btn{border:0;width:100%;font-size:15px}
-button.btn[disabled]{opacity:.45;cursor:progress}
-/* form feedback */
-.msg{grid-column:1/-1;display:none;border:1px solid;font-family:var(--fm);font-size:15px;
-  letter-spacing:.1em;line-height:1.7;padding:14px 16px}
-.msg.show{display:block}
-.msg.good{border-color:rgba(120,255,180,.3);background:rgba(120,255,180,.06);color:#7ef0b4}
-.msg.bad{border-color:rgba(255,122,60,.4);background:rgba(255,122,60,.07);color:#ff9d6e}
-.msg a{color:inherit;text-decoration:underline}
-.fe{display:none;font-family:var(--fm);font-size:13px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--accent-2);margin-top:7px}
-.fe.show{display:block}
-input.bad,select.bad,textarea.bad{border-color:var(--accent-2)}
-.people{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:56px}
-.people > div{background:var(--bg2);padding:26px}
-.people .nm{font-family:var(--fd);font-size:17px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--tp)}
-.people .rl{font-family:var(--fm);font-size:13.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin:6px 0 12px}
-.people a{font-size:15px;color:var(--accent);text-decoration:none;word-break:break-all}
-.people a:hover{text-decoration:underline}
-
-/* footer */
-footer{border-top:1px solid var(--border);padding:56px 0 40px;background:rgba(var(--bgRGB),.92)}
-.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:44px}
-footer h5{font-family:var(--fm);font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--tm);margin-bottom:16px}
-footer ul{list-style:none}
-footer li{margin-bottom:9px}
-footer li a{font-size:15.5px;color:var(--ts);text-decoration:none;transition:color .2s}
-footer li a:hover{color:var(--accent)}
-.legal{border-top:1px solid var(--border);padding-top:26px;font-size:15px;color:var(--tm);line-height:1.75}
-.legal .fine{margin-top:14px;font-size:14px;max-width:92ch}
-
-/* ══════════════ v2 additions ══════════════ */
-
-/* keep section content above the ghosted numerals */
-.wrap{position:relative;z-index:1}
-section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:clamp(4px,2vw,28px);
-  font-family:var(--fd);font-weight:700;font-size:clamp(180px,27vw,440px);line-height:.78;
-  letter-spacing:-.05em;pointer-events:none;z-index:0;user-select:none;
-  /* Blue rather than a neutral tint. The outline carries most of the visible
-     colour while covering very little area, so body copy sitting over a numeral
-     keeps its contrast: worst case 7.8:1 dark, 5.9:1 light. */
-  color:rgba(124,201,255,.095);
-  -webkit-text-stroke:2px rgba(124,201,255,.20)}
-
-/* full-bleed figure */
-/* locator map */
-.mapfig{background:var(--bg2)}
-#sitemap{display:block;width:100%;height:auto;aspect-ratio:170/76}
-@supports not (aspect-ratio:1){#sitemap{height:min(46vw,420px)}}
-/* Names live in HTML rather than on the canvas: no overlap at any width,
-   selectable, and readable on a phone where the map strip is only ~165px tall. */
-.maplegend{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  background:var(--border);border-top:1px solid var(--border)}
-.maplegend li{background:var(--bg2);padding:15px clamp(14px,2vw,22px);
-  display:flex;align-items:baseline;gap:11px;flex-wrap:wrap}
-.maplegend .mk{display:inline-flex;align-items:center;justify-content:center;
-  width:23px;height:23px;border:1px solid var(--accent);color:var(--accent);
-  font-family:var(--fm);font-size:13px;flex-shrink:0;align-self:center}
-.maplegend b{font-family:var(--fd);font-size:17px;font-weight:600;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--tp)}
-.maplegend i{font-family:var(--fm);font-size:13px;font-style:normal;color:var(--tm);
-  width:100%;padding-left:34px;letter-spacing:.06em}
-@media(max-width:760px){
-  .maplegend{grid-template-columns:1fr}
-  .maplegend li{padding:13px 16px}
-  .maplegend i{padding-left:0;width:auto}
-}
-
-/* statement / rhythm break */
-.statement{padding:clamp(104px,15vw,230px) 0;border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(var(--bgRGB),.35),rgba(var(--bg2RGB),.9))}
-.statement p{font-family:var(--fd);font-weight:600;text-transform:uppercase;color:var(--tp);
-  font-size:clamp(34px,6.2vw,86px);line-height:1.0;letter-spacing:-.012em;max-width:22ch}
-
-/* aerospace corner brackets on panels */
-.panel{position:relative}
-.panel::before,.panel::after{content:'';position:absolute;width:10px;height:10px;pointer-events:none;
-  border-color:var(--border-hi);transition:border-color .35s}
-.panel::before{top:-1px;left:-1px;border-top:1px solid;border-left:1px solid}
-.panel::after{bottom:-1px;right:-1px;border-bottom:1px solid;border-right:1px solid}
-.panel:hover::before,.panel:hover::after{border-color:var(--accent)}
-
-/* ember palette for the Africa / network material */
-#network{--accent:#ffb470;--border-hi:rgba(255,180,112,.32)}
-
-/* staggered grid children */
-.stag > *{opacity:0;transform:translateY(15px);
-  transition:opacity .62s cubic-bezier(.2,.7,.3,1) var(--d,0ms),transform .62s cubic-bezier(.2,.7,.3,1) var(--d,0ms)}
-.stag.in > *{opacity:1;transform:none}
-
-/* section rules draw in from the left */
-.rule{transform:scaleX(0);transform-origin:left center;
-  transition:transform .95s cubic-bezier(.2,.7,.3,1) .08s}
-.rv.in .rule{transform:none}
-
-@media(prefers-reduced-motion:reduce){
-  .stag > *{opacity:1;transform:none;transition:none}
-  .rule{transform:none;transition:none}
-  .tag .dot{animation:none}
-}
-
-/* responsive */
-/* The address is far wider than the old "Investor Enquiry" label, so the nav
-   runs out of room sooner. These live in their own queries so the section
-   layout breakpoint below is unaffected. */
-@media(max-width:1180px){.themetog .tt-lab{display:none}}
-@media(max-width:1100px){
-  .navlinks{display:none}.navcta{display:none}.burger{display:flex}.drawer{display:flex}
-  .themetog{margin-left:auto;margin-right:4px}
-}
-@media(max-width:1000px){
-  .split{grid-template-columns:1fr;gap:34px}
-  .sites{grid-template-columns:1fr}
-  .why{grid-template-columns:1fr}
-  .g4{grid-template-columns:repeat(2,1fr)}
-  .g3{grid-template-columns:1fr}
-  .people{grid-template-columns:1fr}
-  .fgrid{grid-template-columns:1fr;gap:28px}
-}
-@media(max-width:700px){
-  .tick{grid-template-columns:repeat(2,1fr)}
-  .tick > div{border-bottom:1px solid var(--border)}
-  .tick > div:nth-child(2n){border-right:0}
-  .g2{grid-template-columns:1fr}.g4{grid-template-columns:1fr}
-  .rows .r{grid-template-columns:1fr;gap:6px}
-  .nl > li{grid-template-columns:1fr;gap:8px}
-  form{grid-template-columns:1fr}
-  #globe{opacity:.5}
-  /* A three-column table cannot fit a phone; it was being clipped by
-     overflow-x:hidden, so the last column was unreachable. Stack it instead,
-     with each cell carrying its column heading. */
-  .tbl{font-size:14px;display:block}
-  .tbl thead{display:none}
-  .tbl tbody,.tbl tr,.tbl td{display:block;width:auto}
-  .tbl tr{border-bottom:1px solid var(--border);padding:16px 0}
-  .tbl tr:last-child{border-bottom:0}
-  .tbl td{border:0;padding:0 0 10px}
-  .tbl td:last-child{padding-bottom:0}
-  .tbl td::before{content:attr(data-l);display:block;font-family:var(--fm);font-size:13px;
-    letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin-bottom:5px}
-  .tbl td:first-child::before{display:none}
-  .tbl td:first-child{font-size:19px;padding-bottom:8px}
-  section[data-n]::before{font-size:clamp(120px,34vw,200px);
-    color:rgba(124,201,255,.07);-webkit-text-stroke-width:1.5px}
-  :root[data-theme="light"] section[data-n]::before{
-    color:rgba(11,92,150,.07);-webkit-text-stroke-width:1.5px}
-  .statement{padding:clamp(80px,18vw,120px) 0}
-}
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
@@ -464,6 +52,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
     <li><a href="#discipline">Discipline</a></li>
     <li><a href="#why">Why Nexus</a></li>
     <li><a href="#status">Status</a></li>
+    <li><a href="news/">News</a></li>
   </ul>
   <button class="themetog" id="themetog" type="button" aria-pressed="false" aria-label="Switch to light theme"><span class="tt-ico" aria-hidden="true"></span><span class="tt-lab">Light</span></button>
   <a class="navcta mailcta eml" data-m href="#invest"><span>info</span><span></span><span>nexus-spaceport</span><span></span><span>com</span></a>
@@ -476,6 +65,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   <a href="#discipline">Discipline</a>
   <a href="#why">Why Nexus</a>
   <a href="#status">Status</a>
+  <a href="news/">News</a>
   <a class="mailcta eml" data-m href="#invest"><span>info</span><span></span><span>nexus-spaceport</span><span></span><span>com</span></a>
 </div>
 
@@ -522,6 +112,21 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
         Nexus exists to take that position while it is still available. We have taken the first one:
         2,000 hectares of Mozambican coastline, reserved.
       </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ LATEST NEWS ══════════════════ -->
+<section id="news-strip" data-src="news/data/index.json" data-base="" hidden>
+  <div class="wrap">
+    <div class="ns-head">
+      <div class="eyebrow">Latest</div>
+      <a class="ns-all" href="news/">All news &rsaquo;</a>
+    </div>
+    <div class="ns-viewport">
+      <div class="ns-rail"><div class="ns-track"></div></div>
+      <button class="ns-nav ns-prev" type="button" aria-label="Previous news item">&lsaquo;</button>
+      <button class="ns-nav ns-next" type="button" aria-label="Next news item">&rsaquo;</button>
     </div>
   </div>
 </section>
@@ -1074,6 +679,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
           <li><a href="#discipline">Discipline</a></li>
           <li><a href="#why">Why Nexus</a></li>
           <li><a href="#status">Status</a></li>
+          <li><a href="news/">News</a></li>
         </ul>
       </div>
       <div>
@@ -1100,140 +706,7 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
   </div>
 </footer>
 
-<script>
-/* nav */
-(function(){
-  var nav=document.getElementById('nav'),b=document.getElementById('burger'),d=document.getElementById('drawer');
-  addEventListener('scroll',function(){nav.classList.toggle('solid',scrollY>40)},{passive:true});
-  b.addEventListener('click',function(){b.classList.toggle('open');d.classList.toggle('open')});
-  d.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){b.classList.remove('open');d.classList.remove('open')})});
-})();
-/* theme toggle - persists the choice, defaults to the OS preference */
-(function(){
-  var root=document.documentElement,btn=document.getElementById('themetog');
-  if(!btn)return;
-  function apply(t,save){
-    root.setAttribute('data-theme',t);
-    var light=t==='light';
-    btn.setAttribute('aria-pressed',light?'true':'false');
-    btn.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
-    btn.querySelector('.tt-lab').textContent=light?'Dark':'Light';
-    var m=document.querySelector('meta[name="theme-color"]');
-    if(m)m.setAttribute('content',light?'#eef4f9':'#04151c');
-    if(save){try{localStorage.setItem('nx-theme',t)}catch(e){}}
-    try{window.dispatchEvent(new CustomEvent('nx-theme',{detail:t}))}catch(e){}
-  }
-  apply(root.getAttribute('data-theme')==='light'?'light':'dark',false);
-  btn.addEventListener('click',function(){
-    apply(root.getAttribute('data-theme')==='light'?'dark':'light',true);
-  });
-})();
-/* Assemble the contact link at runtime. Commodity harvesters fetch HTML and
-   regex for addresses; they do not execute this. Without JS the links fall back
-   to the enquiry form, which is a working route rather than a dead end. */
-(function(){
-  var a=['info',String.fromCharCode(64),'nexus-spaceport','.','com'].join('');
-  var n=document.querySelectorAll('[data-m]');
-  for(var i=0;i<n.length;i++){
-    n[i].setAttribute('href','mai'+'lto'+':'+a);
-    /* Replace the split spans with real text. The CSS-generated @ and . render
-       correctly but are not picked up when a visitor copies the selection, so
-       without this they would copy a broken address. The served HTML is still
-       clean - this only ever exists in the live DOM. */
-    n[i].textContent=a;
-    n[i].classList.remove('eml');
-  }
-})();
-/* reveal on scroll, with staggered grid children */
-(function(){
-  var each=function(l,f){Array.prototype.forEach.call(l,f)};
-  each(document.querySelectorAll('.g2,.g3,.g4,.why,.sites'),function(g){
-    g.classList.add('stag');
-    each(g.children,function(c,i){c.style.setProperty('--d',(i*55)+'ms')});
-  });
-  var els=document.querySelectorAll('.rv,.stag');
-  if(!('IntersectionObserver' in window)){each(els,function(e){e.classList.add('in')});return}
-  var io=new IntersectionObserver(function(en){en.forEach(function(e){
-    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
-  })},{rootMargin:'0px 0px -8% 0px',threshold:.06});
-  each(els,function(e){io.observe(e)});
-})();
-/* ── enquiry form ───────────────────────────────────────────────────────────
-   To deliver enquiries to an inbox, create a free form at https://formspree.io
-   (or Netlify Forms / Basin) and paste its endpoint URL into ENDPOINT below.
-   Nothing else needs to change.
-
-   Every email address has been removed from the page at the client's request
-   (spam exposure), so there is deliberately NO mail fallback. Until ENDPOINT is
-   set there is no working contact route at all: the form tells the visitor
-   plainly that nothing was sent rather than pretending otherwise.
-   ─────────────────────────────────────────────────────────────────────────── */
-(function(){
-  var ENDPOINT = '';                          /* e.g. 'https://formspree.io/f/abcdwxyz' */
-
-  var f=document.getElementById('enq');if(!f)return;
-  var msg=document.getElementById('msg'),sub=document.getElementById('sub');
-
-  function setMsg(kind,html){msg.className='msg show '+kind;msg.innerHTML=html}
-  function clearMsg(){msg.className='msg';msg.innerHTML=''}
-
-  function mark(id,text){
-    var el=document.getElementById(id),e=document.getElementById('e-'+id);
-    if(text){el.classList.add('bad');e.textContent=text;e.classList.add('show')}
-    else{el.classList.remove('bad');e.textContent='';e.classList.remove('show')}
-    return !text;
-  }
-  function validate(){
-    var em=f.em.value.trim(),ok=true;
-    ok=mark('fn',f.fn.value.trim()?'':'Required')&&ok;
-    ok=mark('ln',f.ln.value.trim()?'':'Required')&&ok;
-    ok=mark('em',!em?'Required':(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)?'':'Enter a valid email address'))&&ok;
-    return ok;
-  }
-  ['fn','ln','em'].forEach(function(id){
-    document.getElementById(id).addEventListener('input',function(){
-      if(this.classList.contains('bad'))validate();
-    });
-  });
-
-  f.addEventListener('submit',function(ev){
-    ev.preventDefault();
-    clearMsg();
-    if(!validate()){
-      setMsg('bad','Please correct the highlighted fields.');
-      f.querySelector('.bad').focus();
-      return;
-    }
-    var d={
-      firstName:f.fn.value.trim(),lastName:f.ln.value.trim(),
-      organisation:f.org.value.trim(),email:f.em.value.trim(),
-      investorType:f.ty.value,message:f.ms.value.trim()
-    };
-
-    if(!ENDPOINT){
-      setMsg('bad','Enquiries are not being accepted on this preview build, so your message has '+
-             '<strong>not</strong> been sent. Please try again once the site is live.');
-      return;
-    }
-
-    sub.disabled=true;sub.textContent='Sending…';
-    fetch(ENDPOINT,{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify(d)
-    }).then(function(r){
-      if(!r.ok)throw new Error(r.status);
-      setMsg('good','Enquiry received. A member of the team will be in touch shortly.');
-      f.reset();
-    }).catch(function(){
-      setMsg('bad','Something went wrong and your enquiry was <strong>not</strong> submitted. '+
-             'Please try again in a moment.');
-    }).then(function(){
-      sub.disabled=false;sub.textContent='Submit enquiry →';
-    });
-  });
-})();
-</script>
+<script src="assets/site.js"></script>
 <script>window.__NX_COAST__="339,-10,53,-37,0,-38,11,-18,-8,-6,-49,-6,-9,21,-30,11,-11,18,-3,20,15,11,-4,23,35,1;-87,277,0,-18,-33,0,1,-25,-10,-1,0,-20,-42,-3,23,5,34,54,27,8;-1228,490,-46,18,-4,15,-27,20,5,16,-55,39,-20,-9,-35,14,0,94,45,-8,84,16,23,-10,14,7,1,-8,28,4,63,-9,13,-5,-14,-5,64,-5,11,5,-10,4,6,4,20,1,47,-12,31,2,7,8,16,-4,0,-9,19,18,-23,10,1,11,12,7,23,-6,14,-11,-9,-5,19,-2,-1,-10,14,8,12,-7,-3,-7,9,-7,18,16,1,11,29,-2,13,-5,-7,-11,6,-10,-44,-5,-15,-18,-34,-12,-35,-27,-5,-20,15,-1,9,-17,100,-20,2,-18,22,-21,13,14,-12,21,33,18,-20,23,12,11,-8,24,43,1,42,-13,3,-21,17,-8,30,21,32,-33,-4,-7,45,-17,15,-13,1,-12,-43,-19,-64,0,-47,-34,60,24,9,-5,-9,-6,6,-19,30,-3,10,11,7,-11,-56,-24,-8,10,18,8,-27,-2,-7,20,-14,3,-23,-24,-34,0,-75,-33,-7,3,10,16,-5,17,-58,30,-32,-2,-32,13,-280,-4;-798,728,-11,5,5,5,41,-10,-35,0;-936,750,-32,-1,19,7,13,-6;-968,788,12,-4,-17,-5,-13,10,18,-1;-882,744,-42,4,-15,15,-32,5,55,0,24,-12,81,1,10,-4,-4,-6,-77,-3;-1113,782,11,-5,-33,0,22,5;-556,513,-12,-15,33,-6,-3,-7,7,2,5,-12,-5,-8,-11,1,0,10,-12,-9,-9,7,-30,0,19,31,18,6;-839,651,38,-14,-71,-2,13,22,20,-6;-788,724,10,4,90,-23,18,-13,-18,-5,69,-18,-20,-19,-41,13,33,-29,-3,-7,-38,10,26,-18,-86,28,-29,-5,-9,4,7,7,39,2,13,18,-6,8,-57,21,-97,2,-8,4,10,4,-14,0,-3,10,18,13,26,3,-8,-6,8,-7,35,13,17,-11,-1,-6,19,3;-945,741,40,-2,-49,-18,-6,13,15,7;-1229,761,67,15,-9,-11,-58,-4;-1327,540,9,1,-2,-11,8,-8,-19,12,4,6;-1055,793,47,-5,11,-9,-55,5,10,3,-13,6;-1235,485,-22,3,-27,20,26,-5,23,-18;-1215,744,60,-9,-76,-26,-28,10,20,18,-10,6,34,1;-1078,758,19,2,-4,-10,-59,-6,-17,3,21,5,-59,0,23,13,63,-10,-14,9,9,4,18,-10;-1065,731,20,-21,35,-10,-17,-5,3,-7,-109,-3,-40,15,49,4,-55,1,18,8,-33,3,42,17,10,-2,-5,-4,48,3,17,-13,5,4,-7,10,19,0;-1004,727,-11,7,11,4,30,0,-7,-8,16,-4,-2,-9,-17,-4,-41,12,21,2;-985,767,8,-4,-5,-13,-43,6,-1,7,41,4;-960,806,36,7,66,-20,-32,-10,-39,0,-11,5,9,6,-36,8,7,4;-916,819,123,12,175,-5,-59,-11,22,0,-57,-17,-57,-5,15,-8,-44,-13,19,-4,-27,-6,-89,3,17,7,-5,7,33,-4,-30,9,29,9,-18,10,51,2,-58,0,-40,14;-752,674,-20,2,13,7,7,-9;-963,695,7,-4,-7,-3,-35,6,16,7,19,-6;-1228,490,280,4,32,-13,32,2,58,-30,-1,-36,78,33,34,0,23,24,14,-3,8,-23,-31,-11,-7,-14,8,-7,-37,-7,18,0,-21,-1,-9,-19,-6,6,4,-11,-8,-12,-5,20,1,-11,-7,1,13,-26,-56,-42,12,-45,-3,-17,-13,7,-20,40,-27,5,-32,-2,2,-10,-53,3,-24,-17,-4,-20,-15,6,-20,30,-29,-1,-26,25,-45,-5,-37,14,-24,-2,-14,15,-21,6,-38,57,5,52,-8,27,16,-2,5,-9,-2,19;-1532,580,11,-4,-24,-6,13,10;-1410,697,0,-94,35,-14,20,9,55,-39,-5,-11,-36,33,-58,14,-72,14,-46,-17,11,21,-34,-19,7,-5,-9,-8,-42,-21,-65,-14,62,24,17,19,-50,-2,-5,13,-28,5,-4,16,11,10,38,7,-7,6,7,4,-42,-4,-31,13,36,9,28,-5,-51,23,6,5,96,25,156,-17;874,492,-16,-7,-6,-15,-20,3,-7,-18,-25,-6,9,-17,-6,-8,-61,9,-7,-8,-23,2,-26,-20,-19,5,-6,18,-12,7,-29,-2,-35,21,-26,-6,1,-37,-19,10,-16,-5,0,10,-22,18,27,7,0,16,-39,-5,-26,20,10,21,11,-6,22,18,49,-11,56,2,-13,12,17,10,-3,10,77,14,43,-19,35,10,31,-36,34,2,40,-19;560,413,-1,37,26,6,35,-21,29,2,12,-7,6,-18,16,-5,27,16,-6,-8,27,-6,-13,-8,-25,6,-16,-11,7,-14,-6,-11,-92,57,-26,-15;1410,-26,66,-35,-4,-13,35,-32,-28,5,-32,25,-21,-17,-16,2,0,65;1513,-58,-30,1,25,2,13,14,-8,-17;1410,-26,0,-65,-9,8,-25,-1,11,11,-8,19,-42,19,-7,-6,-10,13,17,6,-32,13,35,1,4,-20,11,-6,19,17,36,-9;1250,-89,-6,-12,-9,-1,15,13;1179,41,-6,-9,17,-23,-12,-1,-17,-48,-59,11,-12,33,7,16,8,-12,33,4,8,2,13,29,20,-2;1294,-28,14,-11,-29,5,15,6;1279,22,8,-11,-6,-20,-7,19,5,12;1229,9,22,7,-7,-12,-42,-2,-2,-7,9,-9,24,8,-18,-13,17,-34,-10,0,5,8,-12,-1,-5,20,-12,-31,-10,29,10,30,11,11,20,-4;1085,-64,41,-5,31,-15,-92,10,-11,5,7,10,24,-5;1044,-11,17,-20,-3,-28,-11,0,-33,31,-61,83,22,-3,31,-31,19,-7,19,-25;-686,-526,8,-12,28,-9,-36,-2,0,23;-576,-302,-9,-42,13,-9,4,-16,-24,-18,-31,-1,-4,-22,-24,-1,1,-10,15,-5,-17,-9,-4,-15,-17,-6,-3,-7,20,-9,-35,-35,9,-17,-37,4,-15,27,22,45,-9,25,13,37,-3,19,13,25,-7,28,22,45,-1,24,21,27,19,-10,16,8,50,-32,-8,-19,29,-3,16,19,5,-14,-40,-33;-686,-526,0,-23,16,0,-11,-7,-29,5,-37,23,36,-13,8,12,17,3;-696,-176,18,-53,8,-1,-14,-15,1,-24,-22,-45,7,-28,-13,-25,3,-19,-13,-37,9,-25,-22,-45,15,-27,33,-3,-22,-6,-6,-10,-35,16,-7,36,15,18,-15,3,12,25,12,-4,5,21,-16,-8,11,39,-4,21,22,48,10,141,8,7;293,-45,14,-38,-20,-2,-3,-33,12,-4,1,-11,-25,17,-50,5,-5,38,-16,4,-26,-12,-12,22,-41,1,38,23,35,85,29,-10,32,13,41,-7,15,-24,-13,-16,-6,-51;416,-17,-6,45,11,14,29,8,39,45,0,19,22,6,-25,-67,-70,-70;392,-47,-53,37,11,29,-10,23,13,13,28,-19,38,3,-9,-11,6,-45,-24,-30;246,82,-11,8,-16,36,11,31,9,-1,-1,44,12,0,0,20,119,0,6,-34,9,-6,-15,-10,-6,-34,-20,-30,-3,-19,-13,35,-13,-24,-14,5,-10,-9,-22,1,-17,8,-12,-17,7,-4;238,196,1,-40,-9,1,-11,-31,10,-15,-49,-32,-27,-5,-13,21,15,5,-20,44,17,22,7,38,-10,25,10,5,79,-38;-717,197,0,-17,-28,3,22,4,-9,12,15,-2;-717,180,1,19,33,-13,-34,-6;486,458,-19,-12,19,-28,-8,-6,-103,35,-8,5,24,18,-8,5,14,4,4,17,-47,10,-16,17,-20,-2,-5,10,14,3,-19,14,1,8,-27,6,-8,25,17,13,-10,5,34,24,-15,7,4,6,-9,7,7,9,-11,11,9,8,-16,7,2,7,35,8,90,-24,0,-7,-27,-8,-52,6,16,-7,1,-15,21,-6,-5,10,7,3,24,-6,8,3,-6,7,23,10,19,-4,5,7,-10,18,27,-4,6,-5,-12,-7,7,-3,74,22,8,-1,-10,-6,53,7,11,-6,12,6,-11,6,6,3,79,-17,7,5,-23,9,-2,15,32,20,29,-8,-10,-8,10,-10,-2,-14,11,-6,-24,-21,11,-1,27,16,-2,12,-13,6,8,10,-13,8,18,7,-2,7,10,-5,-4,-10,11,-1,-5,7,17,4,39,-5,-10,18,63,3,-8,6,12,6,136,13,36,13,28,-12,39,2,30,-9,-47,-16,138,-12,1,7,37,-1,43,-28,10,10,76,-3,-8,9,14,4,90,-6,35,-14,60,1,19,-15,69,2,18,-9,12,3,-8,7,5,4,95,-11,0,-40,-26,-4,18,-23,-55,-6,-34,-18,-14,7,-54,-7,-15,-17,12,-6,-11,-27,-17,-6,-4,-11,-15,-2,-17,-20,-14,44,5,14,78,43,8,15,-44,-21,-8,13,-26,-4,-25,-16,8,-7,-37,-3,0,7,-15,2,-76,-7,-71,-43,31,-9,17,4,14,-11,-12,-47,-52,-50,-26,-1,-15,-11,2,28,21,1,19,34,-40,-7,-16,16,-17,4,-18,30,-23,7,-34,-7,5,-8,-28,-25,-35,7,-59,-9,-16,10,-32,-2,-48,19,-16,-23,-51,11,-48,-16,-40,19,-34,-2,-31,36,-35,-10,-43,19,-77,-14,3,-10,-17,-10,13,-12,-56,-2,-49,11,-22,-18,-11,6,-10,-21,22,-13,-1,-13;959,812,43,-14,-3,-9,-49,1,-38,13,47,9;1054,787,-60,-8,27,14,33,-6;1415,761,36,-5,-8,-8,-73,5,5,6,40,2;1408,738,28,-6,-36,1,8,5;468,808,47,-1,-39,-7,-28,6,20,2;209,543,-10,6,29,0,-19,-6;559,746,53,17,77,2,-104,-22,-31,-19,21,-17,-59,8,28,21,-9,2,24,8;1433,527,14,-37,-15,3,-6,-14,9,-18,-8,6,-6,-7,-4,73,10,11,6,-17;-1750,666,31,3,20,-9,-26,-6,-5,-11,-54,11,-3,7,-12,-2,-1,-9,0,40,51,-18,-1,-6;-1800,708,1,8,23,-3,-24,-5;151,797,19,4,45,-11,-56,-22,-55,29,47,0;311,696,-25,-5,4,7,-13,4,-30,-16,-35,8,-13,-10,-19,2,-44,-46,-10,1,-7,-10,4,-30,-13,-12,-6,6,-20,-12,-27,3,-7,34,142,78,90,14,31,-7,-13,-3,11,-6;274,801,-44,-7,-56,9,100,-2;247,779,-40,-2,22,8,18,-6;-468,826,82,9,115,0,63,-8,-106,-7,85,1,8,-4,-11,-5,74,7,36,-6,-78,-11,23,-1,-20,-13,0,-12,12,-6,-32,-4,19,-5,2,-9,-11,0,13,-9,-42,-10,13,-11,-25,1,30,-16,-37,7,3,-6,-12,-6,41,-1,-175,-46,-30,-28,4,-8,-10,-18,-14,-1,-35,9,-33,27,-24,36,31,27,-38,-3,3,12,30,-2,-44,11,11,9,-39,29,-99,6,-29,9,46,4,-65,6,76,14,-23,7,58,12,-5,5,123,6,59,-7,-23,9;689,-486,17,-7,-19,-5,2,12;163,-286,36,1,0,37,10,-20,7,1,17,14,24,-2,37,34,18,-2,7,-21,-1,-14,-8,1,-3,-10,21,0,-6,-21,-40,-40,-24,-11,-32,0,-25,-9,-17,7,-2,24,-19,31;290,-290,-20,-9,11,-6,9,15;290,-290,-9,-15,-11,6,20,9;-1171,325,24,2,37,-14,45,5,26,-25,22,5,27,-34,19,-5,-8,-35,20,-36,15,-7,30,8,11,21,32,5,-7,-32,-32,-5,-5,-5,10,-12,-12,0,-5,-16,-17,14,-27,-2,-69,26,-20,16,-5,29,-62,62,-9,22,-17,6,1,-16,53,-68,-6,-6,-22,19,-1,13,-28,17,9,9,-29,39;-576,-302,38,-18,6,-7,-6,-17,-24,-5,-22,10,8,37;-534,-338,-4,18,-38,18,40,41,-10,4,3,17,-11,0,-4,16,-21,3,4,39,-7,19,-20,0,-3,25,-49,22,1,18,-52,-12,0,15,-17,-6,-18,26,11,22,30,10,5,32,-6,16,8,5,-6,7,23,3,20,-12,21,14,-14,19,17,-3,24,14,7,-2,0,-22,10,-15,30,5,0,7,31,-4,16,21,13,-25,-4,-18,18,-1,0,-10,8,6,29,-10,3,-11,46,-2,44,-23,9,-21,-4,-17,-36,-41,-6,-48,-16,-40,-67,-30,-13,-38,-45,-51;-695,-110,42,12,-1,-18,49,-22,3,-25,20,0,3,-37,-39,4,-9,-26,-13,2,-4,-8,-19,10,-15,-11,-18,53,9,50,-8,16;-699,-43,-30,-10,-11,-22,18,-26,17,6,0,-15,10,0,8,-16,-3,-39,-14,-18,-56,37,-54,99,11,13,-1,-10,18,-1,8,15,23,14,4,15,20,-22,31,-4,-7,-10,8,-6;-669,13,-6,7,-23,-3,6,-7,-8,-5,6,-16,-5,-32,-8,6,7,10,-31,4,-20,22,-23,5,-16,13,19,21,-4,47,18,9,8,17,35,13,-19,-32,13,-22,47,-9,-5,-33,9,-15;-774,87,-5,-15,-12,18,-18,-18,-20,9,0,14,15,-7,24,8,16,-9;-825,96,-5,-14,-29,27,22,0,12,-13;-837,109,-20,2,-20,18,28,19,18,2,-6,-41;-831,150,-18,-2,-24,-18,-21,14,15,15,29,1,19,-10;-894,144,17,-6,-2,-7,-22,6,7,7;-922,145,5,16,12,0,-10,12,5,5,19,0,-1,-19,10,-2,-12,-13,-7,-7,-21,8;-891,178,10,5,-8,-24,-2,19;-607,52,-24,-14,-17,3,14,-19,-29,-15,-15,21,5,33,-47,9,-13,22,4,12,16,14,-8,-19,8,-8,-1,19,15,12,17,-16,33,-5,30,6,-5,-8,26,-15,-16,-24,7,-8;-565,19,-20,-6,-11,5,-4,32,-14,10,16,24,27,-24,-9,-19,15,-22;-545,23,-20,-4,-11,14,-4,8,9,19,31,-2,-5,-35;-517,42,-12,-21,-16,2,5,35,23,-16;62,495,19,-5,-21,-23,14,-30,-56,-14,-37,11,7,26,-34,27,30,-1,-3,12,9,-5,35,18,37,-16;-754,-2,-1,-14,-23,-14,-8,-15,-18,1,6,17,-12,5,1,11,8,19,12,6,35,-16;-823,232,40,-7,41,-22,-36,-4,7,5,-16,12,-31,10,-32,-7,27,13;312,-223,-32,8,-27,38,17,-2,33,24,25,-12,-1,-36,-15,-20;294,-221,-37,-34,-24,2,-17,-14,-7,-1,-10,20,10,65,44,6,27,-38,14,-6;199,-248,0,-37,-36,-1,-46,113,134,-3,-42,-7,-10,-65;-167,136,-9,11,15,18,15,1,24,-20,7,-22,-52,0,-1,8,30,3,-29,1;-115,124,-2,30,62,1,-10,95,16,0,81,-59,11,1,-7,-36,-47,-6,-29,-15,-20,-34,-20,1,-11,21,-24,1;-171,210,42,3,0,20,10,1,-1,25,33,0,0,15,38,-24,-16,0,10,-95,-62,-1,-5,-8,-24,20,-19,-5,2,40,-8,9;27,63,-8,-2,-11,44,20,17,10,-15,-11,-44;149,229,10,-25,-7,-38,-17,-22,11,-11,-4,-8,-11,11,-41,-8,-36,11,-13,-4,-5,-18,-26,12,-6,20,32,7,7,36,77,43,29,-6;27,63,17,74,46,-9,41,8,15,-15,-29,-51,-25,-6,-7,-16,-26,-5,-16,20,-16,0;145,129,10,-29,-15,-5,14,-18,-9,-30,14,-30,-63,6,-8,32,13,15,16,0,28,59;9,110,10,-49,-8,-2,-11,48,9,3;0,110,11,-51,-40,-9,0,60,29,0;-80,102,52,-6,-1,-46,-48,-6,1,13,-10,8,6,37;-137,126,46,-3,11,-21,-3,-25,-9,-4,-6,12,-7,-2,-6,17,-21,-11,-19,21,14,16;-167,124,30,2,0,-8,-14,-8,-16,14;-84,77,7,-33,-37,24,12,16,10,-11,8,4;-132,89,21,11,9,-16,-12,-16,-18,21;-54,104,11,28,32,18,15,-1,6,-20,12,-3,-13,-16,-38,0,1,-14,-26,8;274,52,-30,-1,-20,-11,-29,10,-10,-15,-14,2,-11,-14,-15,32,8,19,27,5,49,32,6,-21,39,-38;185,35,-25,-70,-14,-15,-20,6,-7,-6,-8,10,8,6,-4,6,11,9,14,-6,4,12,-1,25,-10,1,-2,10,28,-6,12,20,14,-2;113,23,17,0,3,-10,10,-1,1,-25,-4,-12,-14,6,-11,-9,4,-6,-8,-6,-23,29,7,21,18,1,0,12;96,23,17,0,0,-12,-18,-1,1,13;307,-83,25,-14,0,-43,-30,-8,1,-7,-33,-24,-38,4,-13,14,0,32,21,0,-1,20,33,-7,25,-17,-1,11,-12,4,0,26,23,9;328,-92,15,-10,3,-34,11,-10,-7,-22,-5,22,-18,9,8,32,-7,13;346,-115,29,-1,28,13,5,-44,-13,-20,-47,-31,7,-43,-34,-26,-9,44,15,20,1,36,-25,8,-1,11,30,8,13,-6,5,-22,7,22,-11,10,0,21;321,-267,-14,0,3,10,11,-10;123,-61,40,2,12,-22,26,12,16,-4,5,-38,18,-1,0,-17,-21,0,0,-32,13,-14,-115,2,20,60,-14,52;305,-24,3,-10,-15,-11,-3,17,15,4;357,327,-8,-32,-6,17,8,19,6,-4;495,-125,9,-32,-7,0,-26,-92,-17,-7,-14,6,-7,22,12,34,-5,20,4,12,19,4,32,33;95,303,-20,38,9,28,11,5,15,-3,-8,-28,13,-12,-20,-28;-87,274,0,14,74,35,-9,29,10,5,96,12,-9,-28,23,-47,-5,-33,27,-26,-63,-39,-25,-5,-119,83;355,324,33,10,4,-12,-22,-7,10,-10,-19,-13,-12,3,6,29;516,242,24,-1,23,16,-13,-32,-30,5,-4,12;480,300,4,-14,-18,5,14,9;392,322,-4,12,22,10,3,20,15,10,20,-2,13,-15,-7,-17,19,-15,13,-26,-39,-7,-55,30;552,227,12,22,34,-26,-20,-21,-1,-13,-46,-22,-11,23,30,10,2,27;1026,122,4,20,30,-3,5,7,11,-11,-1,-12,-17,-7,4,-6,-27,-4,-9,16;1052,143,-22,-1,-4,-20,-25,12,-9,-42,29,-30,-9,-5,-30,27,14,35,-14,32,7,11,-15,22,27,20,12,-9,-2,-20,21,8,15,-9,9,-18,-4,-13;1074,142,-22,1,4,13,-16,26,-29,-7,2,20,-12,9,17,8,-1,11,15,-15,12,0,4,-9,-9,-6,34,-34,1,-17;1001,204,-27,-20,15,-22,-7,-11,14,-32,-10,-20,-1,32,-13,38,-18,-12,-12,3,1,22,-20,33,28,51,20,5,8,12,8,-24,-11,-20,11,2,5,-20,20,-3,-11,-14;1043,105,19,5,-4,6,17,7,1,29,-37,41,9,6,-4,9,-12,0,-10,17,31,9,27,-18,-23,-25,32,-38,3,-36,-40,-31,-9,19;1306,424,-31,-26,7,-14,-35,-3,7,13,-11,5,8,7,18,12,13,-3,18,15,6,-6;1262,378,22,8,11,-18,-4,-17,-26,-7,-4,23,8,2,-7,9;878,493,44,15,51,-11,16,23,48,-19,32,2,16,-10,82,6,-10,-22,24,4,17,-11,-63,-22,-16,3,-1,-14,-14,-8,-54,-13,-87,11,-10,15,-44,11,1,16,-32,24;973,283,-2,-12,-20,-5,-24,-46,-6,16,-4,-6,-5,5,12,15,-25,3,-13,11,3,-12,-8,-7,8,-28,-19,-2,-5,-13,-62,-43,-4,-55,-24,-24,-40,80,-9,54,-21,-5,-23,28,28,7,-15,25,23,10,35,44,-15,20,40,12,11,-12,-2,-28,24,-13,-10,-14,32,-14,48,-10,6,17,10,-14,23,1,-3,10,44,17,1,-11,11,-1;927,220,-3,-13,-10,21,-9,0,-2,-10,-13,3,-9,24,8,7,-3,12,13,-11,25,-3,-12,-15,5,-5,4,6,6,-16;917,278,3,-10,-32,3,12,12,17,-5;881,279,0,-15,-9,0,-71,24,14,16,66,-25;778,355,-40,-12,15,-20,-35,-44,-23,-10,15,-25,-28,-7,-18,17,-49,-3,4,11,14,6,-24,30,54,1,6,14,24,6,25,46,34,6,26,-16;665,374,27,-2,16,13,10,-18,15,8,19,-4,-39,-10,3,-9,-7,-12,-10,0,4,-6,-10,-15,-24,-6,-6,-14,-54,-1,9,9,-13,23,7,26,18,-2,17,17,18,3;678,371,6,11,-7,14,30,14,3,-8,-15,-7,42,-1,13,-20,-32,-7,-10,18,-16,-13,-14,-1;710,423,32,10,61,-9,-85,-31,-23,2,36,14,-27,6,6,8;525,418,16,5,14,-10,16,0,15,15,79,-54,-8,3,-35,-24,-49,27,-34,-8,0,18,-12,10,2,9,18,1,-10,11,-9,-10,-3,7;486,299,-13,26,-19,15,7,17,-19,23,-1,14,20,-7,20,9,11,-20,31,-9,50,13,38,-15,-6,-35,13,-23,-9,-9,24,-30,-14,-6,-4,-11,-41,6,-4,13,-35,-2,-20,11,-14,22,-15,-2;357,327,10,41,57,4,-11,-8,-3,-20,-42,-21,-11,4;465,388,-28,15,-1,8,20,-3,9,-20;110,589,16,24,-7,18,49,49,38,11,29,-12,4,-19,-17,-3,-8,-13,-36,-17,-7,-14,17,-12,-20,-14,-9,-26,-30,-7,-19,35;282,562,27,-6,-1,-8,19,-14,-14,-3,5,-10,-12,-8,-71,3,0,23,20,4,27,19;322,521,16,2,16,-17,47,-10,-4,-17,-47,-16,13,-12,-24,-7,-14,9,11,6,-19,8,-30,-14,2,11,11,0,-13,17,-38,-4,-28,7,18,20,-4,12,71,-3,16,8;235,539,5,-32,-12,-17,-66,14,-21,26,0,8,35,11,59,-10;170,481,-10,-14,-14,-3,-51,7,34,4,7,14,34,-8;221,484,6,-5,-17,-16,-25,-5,-23,11,8,12,51,3;266,482,21,-1,13,-17,-11,0,-7,-9,-1,13,-15,14;282,455,14,-2,-10,-16,-57,1,-27,23,29,20,35,1,15,-14,1,-13;265,556,-10,-13,-20,-4,-24,21,38,4,16,-8;273,575,9,-13,-17,-6,-16,8,-38,-4,14,18,8,-8,19,10,21,-5;280,595,-7,-20,-30,3,-10,14,47,3;141,538,9,-27,-28,-8,14,-14,-7,-14,-54,1,6,14,-21,11,11,36,10,-2,4,15,14,0,10,-10,16,5,16,-7;227,442,59,-5,-6,-17,-50,-7,-3,29;230,413,36,3,-29,-9,7,-6,-18,2,14,-26,-9,2,1,-15,-7,0,-23,32,8,12,20,5;448,372,-81,-4,-5,-10,0,9,-15,1,-50,-7,-21,6,-14,28,30,17,43,8,48,-11,43,7,22,-19,-7,-3,7,-22;261,418,29,-5,-26,-11,-3,16;210,408,-8,-12,-8,7,3,24,13,-19;166,465,28,-13,-36,-4,26,-23,-24,10,-11,16,-12,0,29,14;96,475,8,-6,-5,-6,-39,0,7,12,29,0;62,508,-5,-13,-32,16,25,4,12,-7;69,535,-7,-27,-29,5,14,18,22,4;-90,419,26,-5,-15,-46,-10,1,-6,18,5,32;-75,371,0,25,11,18,-26,5,-4,11,14,7,110,-12,-22,-15,-7,-23,-22,-20,-33,-8,-21,12;-62,539,-6,-16,-32,-5,8,11,-5,10,21,12,0,-10,14,-2;1658,-211,13,-11,-9,1,-22,20,18,-10;1769,-401,-9,-12,-13,0,5,8,-14,10,9,21,-21,29,17,-8,17,-23,25,-1,-16,-24;1697,-436,31,31,14,-8,-11,-26,-16,-3,-22,-24,-28,7,32,23;1477,-408,6,-1,-4,-23,-19,-4,-13,29,30,-1;1261,-322,-24,-17,-38,-1,-19,-11,-30,9,8,20,-25,61,9,-2,-8,19,3,19,30,18,42,10,21,33,9,-7,-4,5,22,24,14,4,25,-12,10,25,20,4,-8,8,6,2,29,-11,12,3,5,-5,-15,-26,47,-27,11,13,12,57,14,-38,15,-5,10,-40,24,-14,9,-19,10,-1,22,-29,7,-28,-7,-35,-29,-58,-37,-16,-13,11,-14,-9,-30,8,-10,19,-15,5,1,12,-14,-9,10,24,-18,-20,-17,23,-30,11,-52,-7;818,75,-2,-10,-13,-5,-2,38,17,-23;1095,182,-9,12,22,7,-13,-19;803,424,6,8,-9,17,25,6,7,18,20,-3,6,15,20,8,32,-24,-1,-16,44,-11,10,-15,87,-11,42,9,26,12,1,14,16,-3,39,19,23,0,-16,14,-26,0,12,18,26,2,14,19,-5,8,20,6,37,-6,18,-30,17,-4,16,-16,40,7,-19,-34,-21,-1,-4,-26,-6,6,-18,-15,-13,3,-58,-29,11,15,-6,5,-41,-22,22,-15,11,7,16,-4,-32,-26,27,-32,-6,-10,8,-9,-4,-16,-30,-37,-28,-17,-51,-14,-4,-11,-5,11,-29,4,-17,16,-36,-11,1,-11,-26,9,-5,20,-11,-2,11,36,-25,9,-1,11,-36,-16,-25,4,-12,-10,-1,8,-29,1,-71,33,2,28,-27,16,-25,35,66,30;1218,244,-11,-24,-6,16,14,17,3,-9;104,469,34,-4,1,-9,-16,-2,3,-13,57,-43,-14,6,2,-15,-14,-10,4,11,-7,10,-42,24,-10,15,-13,5,-15,-7,-6,23,36,9;148,381,7,1,-4,-16,-27,10,24,5;87,409,11,-4,-1,-13,-9,-3,-1,20;99,550,-14,0,-4,15,25,12,3,-12,-10,-15;124,561,-3,-13,-11,6,14,7;-62,539,-14,2,0,10,19,-5,-5,-7;-31,534,-19,24,-6,-5,-6,15,12,18,20,0,-11,-10,21,1,-11,-17,48,-33,-11,-19,-58,-8,18,14,-19,6,11,3,-4,12,15,-1;-145,665,-2,-7,11,-7,-51,-16,-41,5,10,4,-22,5,18,5,-21,2,22,8,15,-7,61,8;464,419,14,-7,8,6,18,-15,-8,-1,-7,-19,-8,13,-16,-8,-9,11,-6,13,15,-1,-1,8;400,434,55,-9,11,-13,-50,3,-1,11,-15,8;1226,100,15,12,-11,-22,-4,10;1264,84,1,-12,-3,-9,-4,10,-4,-5,0,-12,-12,6,-6,16,-17,-6,16,15,20,3,-1,8,10,-14;1223,182,-6,-39,23,-5,1,-13,-35,14,4,6,-11,9,8,31,16,-3;1255,122,3,-12,-8,3,-2,-12,-5,25,12,-4;1001,65,29,-10,12,-42,-28,15,-13,37;1179,41,-20,2,-13,-29,-41,-6,-7,5,-1,7,15,-1,30,26,11,-2,14,26,25,-15,-13,-13;138,465,28,0,-13,-10,-16,0,1,10;286,691,-2,-7,16,-7,-9,-8,11,-11,-7,-9,9,-7,-4,-6,15,-7,-4,-5,-30,-19,-52,-7,-16,9,2,25,39,19,-18,13,-1,15,-29,12,41,-5,30,16,13,-4,-4,-7;226,491,-7,-8,-40,-5,-10,7,17,10,40,-4;150,511,39,-16,-46,-9,-21,17,28,8;364,144,5,26,15,10,9,-21,38,-32,-31,18,-36,-1;1419,392,-16,-41,-31,-5,-14,-11,-7,11,-41,-7,10,-7,-7,-18,-11,0,2,9,-10,10,32,21,31,1,10,18,7,-5,20,14,9,30,11,2,5,-22;1446,440,7,4,2,-11,-23,-13,-16,7,-5,-11,-11,0,-2,10,16,8,6,22,26,-16;1324,335,15,9,9,-6,-18,-11,-6,8;-582,-202,3,-19,21,-3,4,-16,11,0,-14,-34,-29,3,8,19,-49,30,9,26,27,2,9,-8;520,190,11,-23,-9,-11,-87,-30,-9,26,8,24,36,-6,21,16,29,4;350,294,25,6,5,5,-10,10,22,7,55,-30,28,-2,27,-23,18,-37,32,-3,-2,-27,-59,-14,-21,-16,-36,6,-6,-13,-37,50,-6,24,-39,44,4,13;-487,-780,48,-5,6,-15,-72,-10,-37,4,55,26;-663,-803,67,3,-6,-10,-61,7;-739,-713,18,1,4,17,14,6,20,-25,-5,-8,-36,-3,-26,4,11,8;-1637,-786,25,2,20,-11,-45,9;1800,-847,0,-53,-3600,0,0,53,9,6,91,2,119,-15,150,4,-105,13,7,17,-39,9,62,-2,42,10,-89,12,-28,11,-3,11,71,-5,52,9,-1,11,13,2,310,15,16,-10,117,-6,5,4,-24,8,-12,15,74,-10,62,3,9,7,77,-13,12,8,54,-8,75,14,-11,28,11,15,-3,9,41,24,58,16,2,-6,-44,-9,-6,-7,5,-7,-36,-18,39,-27,10,-30,-98,-29,-66,-1,35,-12,-42,-5,-1,-8,198,-40,84,15,70,-4,142,18,-11,10,-59,-2,3,14,178,30,18,6,-8,6,11,8,51,18,29,-4,5,8,67,-7,79,17,31,-9,26,8,137,-5,49,8,19,12,47,-13,159,40,69,-22,75,1,8,-13,-19,-11,13,-4,-11,-12,19,-4,40,24,37,4,52,23,40,0,12,10,17,-10,61,-2,39,2,31,16,34,-13,74,10,62,-14,150,11,3,9,24,-17,80,1,33,-15,55,-2,73,-20,96,-11,-19,-20,-32,-7,-25,-18,11,-20,23,-6,-52,-4,-20,-17,96,-29,106,-9;-22,352,9,-29,-74,-35,-1,-17,-26,-2,-34,-54,-22,-1,26,49,48,36,-2,13,11,20,28,26,37,-6;369,220,-119,0,2,96,37,-7,21,7,33,-4,6,-17,-7,-17,-19,20,32,-67,14,-11;250,220,0,-20,-12,-4,-79,38,-18,-9,-38,19,-10,17,7,53,15,17,76,-28,18,24,40,-8,1,-99;478,80,-28,-30,-54,-16,-34,10,-32,34,34,66,12,-2,3,8,37,-15,8,-10,-6,-14,10,-2,9,-17,41,-12;424,125,9,-1,-5,-15,-10,2,6,14;489,114,0,-19,-11,-15,-41,12,-11,14,5,9,10,-11,48,10;339,-10,-43,-3,16,51,28,4,5,-6,5,-17,-11,-29;304,-11,4,-12,-18,-5,3,12,11,5;186,426,-26,26,34,-3,-8,-23;224,423,6,-10,-24,-2,2,10,16,2;188,459,14,2,25,-15,-2,-21,-33,10,-4,24;201,426,-7,-7,-10,6,8,10,9,-9;206,419,0,13,12,-5,-12,-8;308,35,-11,11,-17,-2,-41,42,19,18,10,-9,22,-1,10,9,14,-5,10,13,-3,9,11,2,8,-35,-10,-9,23,-23,-19,-17,-26,-3";</script>
 <script>/* ==========================================================================
    NEXUS — orbital background

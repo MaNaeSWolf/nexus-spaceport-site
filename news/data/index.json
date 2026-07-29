@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "the-constraint-is-the-ground",
+    "title": "The constraint is the ground, not the rocket",
+    "date": "2026-07-29",
+    "dateLabel": "29 July 2026",
+    "image": null,
+    "imageAlt": "The constraint is the ground, not the rocket",
+    "summary": "Everyone is funding launch vehicles. Almost nobody is funding the ground they launch from — and that is where the bottleneck actually sits.",
+    "words": 257
+  },
+  {
+    "slug": "mou-ghana-philippines",
+    "title": "Memoranda of understanding in place for Ghana and the Philippines",
+    "date": "2026-07-28",
+    "dateLabel": "28 July 2026",
+    "image": "assets/pad.jpg",
+    "imageAlt": "Concept render of a Nexus launch pad",
+    "summary": "Phase 2 and Phase 3 sites are now at memorandum-of-understanding and site-selection stage, extending the network across two continents and both hemispheres.",
+    "words": 236
+  },
+  {
+    "slug": "morrumbene-site-reserved",
+    "title": "Morrumbene site reserved — 2,000 hectares on the Inhambane coast",
+    "date": "2026-07-24",
+    "dateLabel": "24 July 2026",
+    "image": "assets/site-render.jpg",
+    "imageAlt": "Concept masterplan of the Morrumbene launch complex, Mozambique",
+    "summary": "Two thousand hectares of Mozambican coastline are now reserved as the Phase 1 site, with the full launch complex planned around it.",
+    "words": 226
+  }
+]

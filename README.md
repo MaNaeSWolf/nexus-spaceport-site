@@ -6,15 +6,79 @@ Live at https://manaeswolf.github.io/nexus-spaceport-site/
 
 ## Structure
 
-- `index.html` — the entire site (markup, CSS and JS inlined)
-- `assets/` — logo, favicons, social card, imagery, and the un-minified globe animation source
+- `index.html` — the home page
+- `news/index.html` — the newsroom: post list, and a single post when opened with `?post=<slug>`
+- `news/posts/*.md` — **the posts you write.** Markdown with a small frontmatter block
+- `news/data/` — **generated, do not edit.** `index.json` plus one HTML file per post
+- `assets/site.css`, `assets/site.js` — shared by both pages
+- `assets/` — logo, favicons, social card, imagery, globe source, and `news/` post images
+- `tools/` — the post authoring and build scripts
 - `.nojekyll` — tells GitHub Pages to serve files as-is, without Jekyll processing
 - `robots.txt` — search-engine exclusion (see note below)
 - `.gitattributes` — pins LF endings; a CRLF checkout breaks the exact-string
-  tooling used to edit this file
+  tooling used to edit these files
+
+The globe, its coastline payload and the locator map stay inline in `index.html`
+— they are home-page only and the payload is large. Everything else is shared.
 
 The former `/v2/` concept has been promoted to the root and removed. Its history
 is in the git log if any of it needs recovering.
+
+## Writing a news post
+
+```
+node tools/new-post.js
+```
+
+It asks for a title, date, optional image and optional summary, then:
+
+- creates `news/posts/<date>-<slug>.md` with the frontmatter filled in
+- copies the image into `assets/news/`, resizing to 1600px wide and re-encoding
+  as JPEG (usually a 5–20× size reduction)
+- rebuilds `news/data/`
+
+Then open the `.md`, write the body in Markdown, and run:
+
+```
+node tools/build-news.js
+```
+
+Commit and push. The home page strip and the news page both pick it up.
+
+Non-interactive if you prefer:
+
+```
+node tools/new-post.js --title "Ghana MOU signed" --date 2026-08-01 --image C:\pics\signing.jpg
+```
+
+**Frontmatter fields.** `title` and `date` (YYYY-MM-DD) are required; the build
+refuses to run without them. `image`, `imageAlt` and `summary` are optional —
+without a summary the first ~320 characters of the body are used. Set
+`draft: true` to keep a post out of the build.
+
+**Markdown supported:** headings, paragraphs, `**bold**`, `*italic*`, links,
+images, bullet and numbered lists (including wrapped lines), blockquotes,
+`inline code` and horizontal rules. Post content is HTML-escaped at build time,
+so a stray `<` or `&` in your writing is safe.
+
+Posts are converted at build time, so the browser never downloads a Markdown
+parser. `index.json` holds only metadata and the excerpt; a post's body is
+fetched only when someone opens it, so the index stays small as posts pile up.
+
+The image step needs Windows PowerShell (it uses System.Drawing, which ships
+with Windows). Everything else is plain Node with no dependencies — there is no
+`npm install` for this repo.
+
+## The latest-news strip
+
+`#news-strip` sits directly under the hero on the home page. The active card
+takes 70% of the width with its neighbours peeking either side, dimmed and faded
+out by a mask on the rail. Hovering a neighbour slides it in after a short delay;
+the arrows do the same explicitly. On narrow screens cards go to 86% and stack
+their image above the text.
+
+If `news/data/index.json` is missing or unreadable the whole strip hides itself
+rather than leaving an empty shell on the page.
 
 ## ⚠ Wiring up the enquiry form — still outstanding
 

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<title>News — Nexus Spaceports</title>
+<meta name="description" content="News and updates from Nexus Spaceports, developer and operator of neutral, multi-user launch infrastructure.">
+<meta property="og:title" content="News — Nexus Spaceports">
+<meta property="og:description" content="News and updates from Nexus Spaceports.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://manaeswolf.github.io/nexus-spaceport-site/news/">
+<meta property="og:image" content="https://manaeswolf.github.io/nexus-spaceport-site/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Nexus Spaceports">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://manaeswolf.github.io/nexus-spaceport-site/assets/og-image.jpg">
+<meta name="theme-color" content="#eef4f9">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<script>/* set the theme before first paint so there is no flash */
+(function(){var t=null;try{t=localStorage.getItem('nx-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t||'light')})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@200;300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<!-- No globe canvas here: it is specific to the home page and its coastline
+     payload is large. The vignette and grain keep the surface consistent. -->
+<div id="bg" aria-hidden="true">
+  <div class="vign"></div>
+  <div class="grain"></div>
+</div>
+
+<nav id="nav">
+  <a class="brand" href="../">
+    <img src="../assets/logo.png" alt="Nexus" width="705" height="647">
+    <span class="bt">NEXUS&nbsp;SPACEPORTS</span>
+  </a>
+  <ul class="navlinks">
+    <li><a href="../#constraint">The Constraint</a></li>
+    <li><a href="../#model">The Model</a></li>
+    <li><a href="../#network">The Network</a></li>
+    <li><a href="../#discipline">Discipline</a></li>
+    <li><a href="../#why">Why Nexus</a></li>
+    <li><a href="../#status">Status</a></li>
+    <li><a href="./" aria-current="page">News</a></li>
+  </ul>
+  <button class="themetog" id="themetog" type="button" aria-pressed="false" aria-label="Switch to light theme"><span class="tt-ico" aria-hidden="true"></span><span class="tt-lab">Light</span></button>
+  <a class="navcta mailcta eml" data-m href="../#invest"><span>info</span><span></span><span>nexus-spaceport</span><span></span><span>com</span></a>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="drawer" id="drawer">
+  <a href="../#constraint">The Constraint</a>
+  <a href="../#model">The Model</a>
+  <a href="../#network">The Network</a>
+  <a href="../#discipline">Discipline</a>
+  <a href="../#why">Why Nexus</a>
+  <a href="../#status">Status</a>
+  <a href="./" aria-current="page">News</a>
+  <a class="mailcta eml" data-m href="../#invest"><span>info</span><span></span><span>nexus-spaceport</span><span></span><span>com</span></a>
+</div>
+
+<main>
+
+<section style="padding-top:clamp(120px,13vw,190px)">
+  <div class="wrap">
+
+    <div id="news-list-head">
+      <div class="eyebrow">Newsroom</div>
+      <h1 style="font-size:clamp(40px,7vw,88px)">News &amp;<br><span class="hollow">updates from</span><br>Nexus.</h1>
+      <p class="lead">
+        Site progress, agreements, and the thinking behind why launch infrastructure
+        is the constraint rather than the vehicles.
+      </p>
+      <div class="rule" style="margin-top:44px"></div>
+    </div>
+
+    <!-- Populated from news/data/index.json by assets/site.js -->
+    <div class="nx-list" id="news-list" data-src="data/index.json" data-base="../">
+      <p class="ns-empty">Loading news…</p>
+    </div>
+
+    <article class="nx-article" id="news-article" data-src="data/index.json" data-base="../" hidden></article>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="brand" href="../" style="margin-bottom:18px"><img src="../assets/logo.png" alt="Nexus" width="705" height="647"><span class="bt">NEXUS&nbsp;SPACEPORTS</span></a>
+        <p class="dim" style="max-width:44ch;font-size:15px">
+          Developing and operating the neutral, multi-user launch infrastructure that the next phase
+          of orbital growth depends on.
+        </p>
+      </div>
+      <div>
+        <h5>Site</h5>
+        <ul>
+          <li><a href="../#constraint">The Constraint</a></li>
+          <li><a href="../#model">The Model</a></li>
+          <li><a href="../#network">The Network</a></li>
+          <li><a href="../#discipline">Discipline</a></li>
+          <li><a href="../#why">Why Nexus</a></li>
+          <li><a href="../#status">Status</a></li>
+          <li><a href="./">News</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a class="eml" data-m href="../#invest"><span>info</span><span></span><span>nexus-spaceport</span><span></span><span>com</span></a></li>
+          <li class="dim" style="font-size:14px;color:var(--tm)">20 Wenlock Road<br>London N1 7GU<br>United Kingdom</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      © 2026 Nexus Launch Services Ltd · All rights reserved · Company No. 15915121
+      <div class="fine">
+        This website is provided for general information only. It does not constitute an offer to
+        sell, or a solicitation of an offer to buy, any security or interest in any Nexus entity, and
+        it should not be relied upon in connection with any investment decision. Development sites,
+        pad counts, corridors, timelines and third-party arrangements described here are indicative
+        and subject to survey, licensing, regulatory approval and definitive documentation. The Ghana and
+        Philippines opportunities are at memorandum-of-understanding stage; no binding definitive
+        agreement has been executed in respect of either. Forward-looking
+        statements are not guarantees of future performance.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+</body>
+</html>
