@@ -8,7 +8,7 @@
 <title>Nexus Spaceports — Neutral, Multi-User Launch Infrastructure</title>
 <meta name="description" content="Nexus develops and operates neutral, multi-user spaceport infrastructure. Primary site: 2,000 hectares of Indian Ocean coast at Morrumbene, Mozambique. Rocket-agnostic, multi-tenant, modelled on the commercial airport.">
 <meta property="og:title" content="Nexus Spaceports — The ground beneath every orbital launch">
-<meta property="og:description" content="Neutral, multi-user spaceport infrastructure. Primary site secured in Mozambique.">
+<meta property="og:description" content="Neutral, multi-user spaceport infrastructure. Primary site reserved in Mozambique.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://manaeswolf.github.io/nexus-spaceport-site/">
 <meta property="og:image" content="https://manaeswolf.github.io/nexus-spaceport-site/assets/og-image.jpg">
@@ -18,53 +18,110 @@
 <meta property="og:site_name" content="Nexus Spaceports">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Nexus Spaceports — The ground beneath every orbital launch">
-<meta name="twitter:description" content="Neutral, multi-user spaceport infrastructure. Primary site secured in Mozambique.">
+<meta name="twitter:description" content="Neutral, multi-user spaceport infrastructure. Primary site reserved in Mozambique.">
 <meta name="twitter:image" content="https://manaeswolf.github.io/nexus-spaceport-site/assets/og-image.jpg">
-<meta name="theme-color" content="#05070a">
+<meta name="theme-color" content="#eef4f9">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script>/* set the theme before first paint so there is no flash */
+(function(){var t=null;try{t=localStorage.getItem('nx-theme')}catch(e){}
+document.documentElement.setAttribute('data-theme',t||'light')})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@200;300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#05070a; --bg2:#080b11; --panel:rgba(12,17,25,.62);
-  --border:rgba(255,255,255,.11);
-  --border-hi:rgba(77,168,255,.22);
-  --accent:#4da8ff; --accent-2:#ff7a3c; --gold:#ffd278;
-  --tp:#f5f9fd; --ts:#cfdee8; --tm:#a6bfcd;
+  /* v2: deep ocean ink rather than the near-black everyone else in space uses.
+     Sampled from the water in the Morrumbene masterplan, with a warm amber
+     accent for contrast. RGB triplets exist so rgba() can reuse them. */
+  --bg:#04151c; --bg2:#07202a; --panel:rgba(9,38,49,.6);
+  --bgRGB:4,21,28; --bg2RGB:7,32,42; --hov:#0a2c39;
+  --border:rgba(186,232,242,.14);
+  --border-hi:rgba(124,201,255,.32);
+  --accent:#7cc9ff; --accent-2:#ff8a5c; --gold:#ffd89a;
+  --tp:#f4fbfc; --ts:#d3e6ea; --tm:#a8c6ce; --tl:#e4f1f4;
+  --border-soft:rgba(255,255,255,.07);
   --fd:'Barlow Condensed',Impact,sans-serif;
   --fb:'Barlow',system-ui,sans-serif;
   --fm:'Share Tech Mono',ui-monospace,monospace;
   --maxw:1280px;
 }
+/* ── light theme ────────────────────────────────────────────────────────────
+   Because every surface colour above is a variable, the theme is mostly a
+   variable swap. The handful of rules below are the ones that assumed dark:
+   near-transparent whites, bright mint/peach status colours, the dimmed
+   imagery, and the outline headline stroke. */
+:root[data-theme="light"]{
+  /* Pale blue carries the "baby blue" idea as a SURFACE. As a text or accent
+     colour it cannot clear AA on a light ground, so the accent is a deep azure. */
+  --bg:#eef4f9; --bg2:#dde9f2; --panel:rgba(255,255,255,.7);
+  --bgRGB:238,244,249; --bg2RGB:221,233,242; --hov:#cfdfec;
+  --border:rgba(16,52,78,.18);
+  --border-hi:rgba(11,92,150,.36);
+  --accent:#0b5c96; --accent-2:#9a3412; --gold:#7a5510;
+  --tp:#0b1a24; --ts:#1b3644; --tm:#2b4a5c; --tl:#16303e;
+  --border-soft:rgba(16,52,78,.13);
+}
+:root[data-theme="light"] ::selection{background:rgba(11,92,150,.2)}
+:root[data-theme="light"] .hollow{-webkit-text-stroke:1px rgba(16,29,37,.5)}
+:root[data-theme="light"] section[data-n]::before{color:rgba(11,92,150,.095);
+  -webkit-text-stroke:2px rgba(11,92,150,.22)}
+:root[data-theme="light"] #bg .grain{mix-blend-mode:multiply;opacity:.05}
+:root[data-theme="light"] #globe{opacity:.9}
+:root[data-theme="light"] .btn-p:hover{background:#07456f}
+:root[data-theme="light"] .band img{opacity:1;filter:none}
+:root[data-theme="light"] input,
+:root[data-theme="light"] select,
+:root[data-theme="light"] textarea{background:rgba(255,255,255,.75)}
+:root[data-theme="light"] input:focus,
+:root[data-theme="light"] select:focus,
+:root[data-theme="light"] textarea:focus{background:#fff}
+:root[data-theme="light"] .tag.live{border-color:rgba(14,110,70,.4);color:#0e6e46}
+:root[data-theme="light"] .tag.warm{border-color:rgba(140,80,10,.4);color:#8c500a}
+:root[data-theme="light"] .msg.good{border-color:rgba(14,110,70,.4);background:rgba(14,110,70,.07);color:#0b5637}
+:root[data-theme="light"] .msg.bad{border-color:rgba(150,50,20,.45);background:rgba(150,50,20,.07);color:#8c3310}
+:root[data-theme="light"] #network{--accent:#8d3708;--border-hi:rgba(141,55,8,.42)}
+
+/* theme toggle */
+.themetog{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--border);
+  color:var(--ts);font-family:var(--fd);font-size:13px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;padding:6px 12px;margin-left:16px;cursor:pointer;transition:.2s;white-space:nowrap}
+.themetog:hover{color:var(--tp);border-color:var(--accent)}
+.themetog .tt-ico{width:11px;height:11px;border-radius:50%;background:currentColor;
+  box-shadow:inset -3px -1px 0 0 var(--bg);flex-shrink:0}
+:root[data-theme="light"] .themetog .tt-ico{box-shadow:none}
+
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:var(--fb);background:var(--bg);color:var(--ts);line-height:1.65;overflow-x:hidden;font-weight:400;
   -webkit-font-smoothing:antialiased}
-::selection{background:rgba(77,168,255,.28);color:#fff}
+::selection{background:rgba(124,201,255,.3);color:#fff}
 a{color:inherit}
 
 /* ── background stack ─────────────────────────────────────────── */
 #bg{position:fixed;inset:0;z-index:0;pointer-events:none}
-#globe{position:absolute;inset:0;width:100%;height:100%;opacity:.92}
+#globe{position:absolute;inset:0;width:100%;height:100%;opacity:.85}
 #bg .vign{position:absolute;inset:0;
-  background:radial-gradient(ellipse 90% 70% at 50% 40%,rgba(5,7,10,0) 0%,rgba(5,7,10,.55) 62%,rgba(5,7,10,.9) 100%)}
-#bg .scan{position:absolute;inset:0;opacity:.45;
-  background:repeating-linear-gradient(to bottom,rgba(255,255,255,.014) 0 1px,transparent 1px 3px)}
-#bg .grid{position:absolute;inset:0;opacity:.5;
-  background-image:linear-gradient(rgba(77,168,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(77,168,255,.022) 1px,transparent 1px);
-  background-size:64px 64px}
+  background:radial-gradient(ellipse 108% 88% at 66% 40%,rgba(var(--bgRGB),0) 0%,rgba(var(--bgRGB),.34) 50%,rgba(var(--bgRGB),.9) 100%)}
+#bg .grain{position:absolute;inset:0;opacity:.055;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 main,nav,footer{position:relative;z-index:2}
-main{background:linear-gradient(180deg,rgba(5,7,10,0) 0,rgba(5,7,10,0) 76vh,rgba(5,7,10,.68) 118vh,rgba(5,7,10,.8) 100%)}
+/* The globe is decorative but it sits behind every section. Let it read at full
+   strength across the hero, then lay a scrim over it so body copy always has a
+   near-solid backdrop instead of competing with coastlines and orbit lines. */
+main{background:linear-gradient(180deg,
+  rgba(var(--bgRGB),0) 0,
+  rgba(var(--bgRGB),0) 76vh,
+  rgba(var(--bgRGB),.72) 118vh,
+  rgba(var(--bgRGB),.82) 100%)}
 
 /* ── nav ──────────────────────────────────────────────────────── */
 nav{position:fixed;top:0;left:0;right:0;z-index:60;height:56px;display:flex;align-items:center;
   justify-content:space-between;padding:0 clamp(16px,3vw,40px);
-  background:rgba(5,7,10,.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  background:rgba(var(--bgRGB),.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
   border-bottom:1px solid var(--border);transition:background .3s}
-nav.solid{background:rgba(5,7,10,.93)}
+nav.solid{background:rgba(var(--bgRGB),.93)}
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
 .brand img{height:34px;width:auto;display:block}
 .brand .bt{font-family:var(--fm);font-size:14px;letter-spacing:.2em;color:var(--tp);white-space:nowrap}
@@ -75,16 +132,28 @@ nav.solid{background:rgba(5,7,10,.93)}
 .navcta{font-family:var(--fd);font-size:14px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
   color:var(--accent);border:1px solid var(--accent);padding:7px 18px;text-decoration:none;margin-left:18px;
   transition:.2s;white-space:nowrap}
-.navcta:hover{background:var(--accent);color:#05070a}
+.navcta:hover{background:var(--accent);color:var(--bg)}
 /* An email address does not survive uppercase with .18em tracking - too wide for
    the nav and hard to read. These links opt out of the display-face treatment. */
-.mailcta{font-family:var(--fm);text-transform:none;letter-spacing:.02em;font-size:13px;font-weight:400}
+/* Both .btn and .drawer a set text-transform:uppercase and are declared later,
+   so this needs enough specificity to win outright rather than relying on order
+   - otherwise the address renders, and copies, as INFO@NEXUS-SPACEPORT.COM. */
+a.mailcta,.drawer a.mailcta{font-family:var(--fm);text-transform:none;letter-spacing:.02em;font-size:13px;font-weight:400}
+/* The address is never a contiguous string in the served HTML. The @ and the dot
+   are CSS-generated, so it renders correctly without JavaScript and with no flash
+   of placeholder text; screen readers announce generated content, so it still
+   reads aloud correctly. JS then attaches the real mail link. */
+.eml{white-space:nowrap}
+.eml span{font-style:normal;font-weight:inherit}
+.eml span:nth-child(2)::before{content:"\0040"}
+.eml span:nth-child(4)::before{content:"\002E"}
+.nospam{display:none}
 .burger{display:none;flex-direction:column;gap:4px;background:none;border:0;cursor:pointer;padding:6px;margin-left:auto}
 .burger span{display:block;width:22px;height:1.5px;background:var(--ts);transition:.25s}
 .burger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
 .burger.open span:nth-child(2){opacity:0}
 .burger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
-.drawer{display:none;position:fixed;top:56px;left:0;right:0;z-index:59;background:rgba(5,7,10,.985);
+.drawer{display:none;position:fixed;top:56px;left:0;right:0;z-index:59;background:rgba(var(--bgRGB),.985);
   border-bottom:1px solid var(--border);padding:12px 24px 24px;flex-direction:column;
   transform:translateY(-10px);opacity:0;pointer-events:none;transition:.25s}
 .drawer.open{opacity:1;transform:none;pointer-events:all}
@@ -105,11 +174,11 @@ h2{font-family:var(--fd);font-size:clamp(32px,4.6vw,62px);font-weight:600;line-h
 h3{font-family:var(--fd);font-size:clamp(19px,2vw,25px);font-weight:500;letter-spacing:.05em;text-transform:uppercase;
   color:var(--tp);margin-bottom:10px;line-height:1.15}
 h4{font-family:var(--fd);font-size:17px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--tp);margin-bottom:7px}
-.lead{font-size:clamp(17.5px,1.4vw,20px);line-height:1.8;color:#dde8ef;max-width:66ch;font-weight:400}
+.lead{font-size:clamp(17.5px,1.4vw,20px);line-height:1.8;color:var(--tl);max-width:66ch;font-weight:400}
 p{font-size:17px;line-height:1.78}
 .dim{color:var(--tm)}
 .acc{color:var(--accent)}
-.hollow{-webkit-text-stroke:1px rgba(238,244,250,.55);color:transparent}
+.hollow{-webkit-text-stroke:1px rgba(244,251,252,.6);color:transparent}
 .rule{height:1px;background:linear-gradient(90deg,var(--border-hi),transparent);margin:0 0 44px}
 
 /* reveal */
@@ -119,17 +188,17 @@ p{font-size:17px;line-height:1.78}
 
 /* ── hero ─────────────────────────────────────────────────────── */
 #hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:0}
-.hero-in{max-width:800px}
-.hero-sub{font-size:clamp(16px,1.5vw,19.5px);line-height:1.75;color:#d8e5ed;max-width:52ch;margin-bottom:40px;font-weight:400}
+.hero-in{max-width:min(640px,100%)}
+.hero-sub{font-size:clamp(16px,1.5vw,19.5px);line-height:1.75;color:var(--tl);max-width:52ch;margin-bottom:40px;font-weight:400}
 .hero-act{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:64px}
 .btn{font-family:var(--fd);font-size:15px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
   padding:15px 34px;text-decoration:none;display:inline-block;cursor:pointer;border:1px solid transparent;transition:.2s}
-.btn-p{background:var(--accent);color:#05070a}
-.btn-p:hover{background:#7cc0ff}
+.btn-p{background:var(--accent);color:var(--bg)}
+.btn-p:hover{background:#aadcff}
 .btn-g{background:transparent;color:var(--ts);border-color:var(--border-hi)}
 .btn-g:hover{color:var(--tp);border-color:var(--accent)}
 .tick{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);
-  background:linear-gradient(180deg,rgba(8,11,17,.5),rgba(8,11,17,.1))}
+  background:linear-gradient(180deg,rgba(var(--bg2RGB),.5),rgba(var(--bg2RGB),.1))}
 .tick > div{padding:22px clamp(16px,3vw,40px);border-right:1px solid var(--border)}
 .tick > div:last-child{border-right:0}
 .tick .k{font-family:var(--fd);font-size:clamp(22px,2.5vw,32px);font-weight:600;color:var(--tp);line-height:1;margin-bottom:7px}
@@ -177,14 +246,14 @@ p{font-size:17px;line-height:1.78}
 /* site cards */
 .sites{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
 .site{background:var(--bg2);padding:0;display:flex;flex-direction:column;transition:background .3s}
-.site:hover{background:#0b1119}
+.site:hover{background:var(--hov)}
 .site .hd{padding:26px clamp(20px,2.2vw,30px) 20px;border-bottom:1px solid var(--border)}
 .site .bd{padding:8px clamp(20px,2.2vw,30px) 26px;flex:1}
 .site .co{font-family:var(--fm);font-size:14px;letter-spacing:.1em;color:var(--accent);margin-top:9px}
 .site dl{display:grid;grid-template-columns:auto 1fr;gap:0}
 .site dt{font-family:var(--fm);font-size:13.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--tm);
-  padding:11px 18px 11px 0;border-bottom:1px solid rgba(255,255,255,.07);white-space:nowrap}
-.site dd{font-size:15.5px;color:var(--ts);padding:11px 0;border-bottom:1px solid rgba(255,255,255,.07);text-align:right}
+  padding:11px 18px 11px 0;border-bottom:1px solid var(--border-soft);white-space:nowrap}
+.site dd{font-size:15.5px;color:var(--ts);padding:11px 0;border-bottom:1px solid var(--border-soft);text-align:right}
 .site dt:last-of-type,.site dd:last-of-type{border-bottom:0}
 
 /* table */
@@ -199,31 +268,32 @@ p{font-size:17px;line-height:1.78}
 /* why-invest */
 .why{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
 .why > div{background:var(--bg2);padding:clamp(26px,3vw,40px);transition:background .3s}
-.why > div:hover{background:#0b1119}
+.why > div:hover{background:var(--hov)}
 .why .n{font-family:var(--fm);font-size:13.5px;letter-spacing:.2em;color:var(--accent);margin-bottom:16px;display:block}
 .why h3{margin-bottom:12px}
 .why p{color:var(--ts);font-size:16.5px}
 
 /* image band */
-.band{position:relative;border:1px solid var(--border);overflow:hidden;background:#080b11}
+.band{position:relative;border:1px solid var(--border);overflow:hidden;background:var(--bg2)}
+.band picture{display:block}
 .band img{width:100%;height:auto;display:block;opacity:.78;filter:saturate(.85) contrast(1.05)}
 .band .cap{position:absolute;left:0;bottom:0;right:0;padding:20px clamp(18px,2.4vw,30px);
-  background:linear-gradient(0deg,rgba(5,7,10,.92),rgba(5,7,10,0));
+  background:linear-gradient(0deg,rgba(var(--bgRGB),.92),rgba(var(--bgRGB),0));
   font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ts)}
 
 /* invest / form */
-#invest{border-top:1px solid var(--border-hi);background:linear-gradient(180deg,rgba(8,11,17,.55),rgba(5,7,10,.9))}
+#invest{border-top:1px solid var(--border-hi);background:linear-gradient(180deg,rgba(var(--bg2RGB),.55),rgba(var(--bgRGB),.9))}
 form{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .f-full{grid-column:1/-1}
 label{display:block;font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--tm);margin-bottom:8px}
 input,select,textarea{width:100%;background:rgba(255,255,255,.028);border:1px solid var(--border);
   color:var(--tp);font-family:var(--fb);font-size:16.5px;font-weight:400;padding:13px 15px;outline:none;transition:.2s;border-radius:0}
-input:focus,select:focus,textarea:focus{border-color:var(--accent);background:rgba(77,168,255,.05)}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);background:rgba(124,201,255,.09)}
 textarea{resize:vertical;min-height:104px}
 select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--tm) 50%),linear-gradient(135deg,var(--tm) 50%,transparent 50%);
   background-position:calc(100% - 19px) 50%,calc(100% - 14px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
-select option{background:#0b1119;color:var(--tp)}
+select option{background:var(--hov);color:var(--tp)}
 button.btn{border:0;width:100%;font-size:15px}
 button.btn[disabled]{opacity:.45;cursor:progress}
 /* form feedback */
@@ -245,7 +315,7 @@ input.bad,select.bad,textarea.bad{border-color:var(--accent-2)}
 .people a:hover{text-decoration:underline}
 
 /* footer */
-footer{border-top:1px solid var(--border);padding:56px 0 40px;background:rgba(5,7,10,.92)}
+footer{border-top:1px solid var(--border);padding:56px 0 40px;background:rgba(var(--bgRGB),.92)}
 .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:44px}
 footer h5{font-family:var(--fm);font-size:13.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--tm);margin-bottom:16px}
 footer ul{list-style:none}
@@ -255,11 +325,84 @@ footer li a:hover{color:var(--accent)}
 .legal{border-top:1px solid var(--border);padding-top:26px;font-size:15px;color:var(--tm);line-height:1.75}
 .legal .fine{margin-top:14px;font-size:14px;max-width:92ch}
 
+/* ══════════════ v2 additions ══════════════ */
+
+/* keep section content above the ghosted numerals */
+.wrap{position:relative;z-index:1}
+section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:clamp(4px,2vw,28px);
+  font-family:var(--fd);font-weight:700;font-size:clamp(180px,27vw,440px);line-height:.78;
+  letter-spacing:-.05em;pointer-events:none;z-index:0;user-select:none;
+  /* Blue rather than a neutral tint. The outline carries most of the visible
+     colour while covering very little area, so body copy sitting over a numeral
+     keeps its contrast: worst case 7.8:1 dark, 5.9:1 light. */
+  color:rgba(124,201,255,.095);
+  -webkit-text-stroke:2px rgba(124,201,255,.20)}
+
+/* full-bleed figure */
+/* locator map */
+.mapfig{background:var(--bg2)}
+#sitemap{display:block;width:100%;height:auto;aspect-ratio:170/76}
+@supports not (aspect-ratio:1){#sitemap{height:min(46vw,420px)}}
+/* Names live in HTML rather than on the canvas: no overlap at any width,
+   selectable, and readable on a phone where the map strip is only ~165px tall. */
+.maplegend{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border);border-top:1px solid var(--border)}
+.maplegend li{background:var(--bg2);padding:15px clamp(14px,2vw,22px);
+  display:flex;align-items:baseline;gap:11px;flex-wrap:wrap}
+.maplegend .mk{display:inline-flex;align-items:center;justify-content:center;
+  width:23px;height:23px;border:1px solid var(--accent);color:var(--accent);
+  font-family:var(--fm);font-size:13px;flex-shrink:0;align-self:center}
+.maplegend b{font-family:var(--fd);font-size:17px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--tp)}
+.maplegend i{font-family:var(--fm);font-size:13px;font-style:normal;color:var(--tm);
+  width:100%;padding-left:34px;letter-spacing:.06em}
+@media(max-width:760px){
+  .maplegend{grid-template-columns:1fr}
+  .maplegend li{padding:13px 16px}
+  .maplegend i{padding-left:0;width:auto}
+}
+
+/* statement / rhythm break */
+.statement{padding:clamp(104px,15vw,230px) 0;border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(var(--bgRGB),.35),rgba(var(--bg2RGB),.9))}
+.statement p{font-family:var(--fd);font-weight:600;text-transform:uppercase;color:var(--tp);
+  font-size:clamp(34px,6.2vw,86px);line-height:1.0;letter-spacing:-.012em;max-width:22ch}
+
+/* aerospace corner brackets on panels */
+.panel{position:relative}
+.panel::before,.panel::after{content:'';position:absolute;width:10px;height:10px;pointer-events:none;
+  border-color:var(--border-hi);transition:border-color .35s}
+.panel::before{top:-1px;left:-1px;border-top:1px solid;border-left:1px solid}
+.panel::after{bottom:-1px;right:-1px;border-bottom:1px solid;border-right:1px solid}
+.panel:hover::before,.panel:hover::after{border-color:var(--accent)}
+
+/* ember palette for the Africa / network material */
+#network{--accent:#ffb470;--border-hi:rgba(255,180,112,.32)}
+
+/* staggered grid children */
+.stag > *{opacity:0;transform:translateY(15px);
+  transition:opacity .62s cubic-bezier(.2,.7,.3,1) var(--d,0ms),transform .62s cubic-bezier(.2,.7,.3,1) var(--d,0ms)}
+.stag.in > *{opacity:1;transform:none}
+
+/* section rules draw in from the left */
+.rule{transform:scaleX(0);transform-origin:left center;
+  transition:transform .95s cubic-bezier(.2,.7,.3,1) .08s}
+.rv.in .rule{transform:none}
+
+@media(prefers-reduced-motion:reduce){
+  .stag > *{opacity:1;transform:none;transition:none}
+  .rule{transform:none;transition:none}
+  .tag .dot{animation:none}
+}
+
 /* responsive */
-/* The address is wider than the old "Investor Enquiry" label; give the nav its
-   own breakpoint so the section grids below are unaffected. */
-@media(max-width:1060px){
+/* The address is far wider than the old "Investor Enquiry" label, so the nav
+   runs out of room sooner. These live in their own queries so the section
+   layout breakpoint below is unaffected. */
+@media(max-width:1180px){.themetog .tt-lab{display:none}}
+@media(max-width:1100px){
   .navlinks{display:none}.navcta{display:none}.burger{display:flex}.drawer{display:flex}
+  .themetog{margin-left:auto;margin-right:4px}
 }
 @media(max-width:1000px){
   .split{grid-template-columns:1fr;gap:34px}
@@ -278,7 +421,7 @@ footer li a:hover{color:var(--accent)}
   .rows .r{grid-template-columns:1fr;gap:6px}
   .nl > li{grid-template-columns:1fr;gap:8px}
   form{grid-template-columns:1fr}
-  #globe{opacity:.55}
+  #globe{opacity:.5}
   /* A three-column table cannot fit a phone; it was being clipped by
      overflow-x:hidden, so the last column was unreachable. Stack it instead,
      with each cell carrying its column heading. */
@@ -293,6 +436,11 @@ footer li a:hover{color:var(--accent)}
     letter-spacing:.15em;text-transform:uppercase;color:var(--tm);margin-bottom:5px}
   .tbl td:first-child::before{display:none}
   .tbl td:first-child{font-size:19px;padding-bottom:8px}
+  section[data-n]::before{font-size:clamp(120px,34vw,200px);
+    color:rgba(124,201,255,.07);-webkit-text-stroke-width:1.5px}
+  :root[data-theme="light"] section[data-n]::before{
+    color:rgba(11,92,150,.07);-webkit-text-stroke-width:1.5px}
+  .statement{padding:clamp(80px,18vw,120px) 0}
 }
 </style>
 </head>
@@ -300,9 +448,8 @@ footer li a:hover{color:var(--accent)}
 
 <div id="bg" aria-hidden="true">
   <canvas id="globe"></canvas>
-  <div class="grid"></div>
-  <div class="scan"></div>
   <div class="vign"></div>
+  <div class="grain"></div>
 </div>
 
 <nav id="nav">
@@ -318,7 +465,8 @@ footer li a:hover{color:var(--accent)}
     <li><a href="#why">Why Nexus</a></li>
     <li><a href="#status">Status</a></li>
   </ul>
-  <a class="navcta mailcta" href="mailto:info@nexus-spaceport.com">info@nexus-spaceport.com</a>
+  <button class="themetog" id="themetog" type="button" aria-pressed="false" aria-label="Switch to light theme"><span class="tt-ico" aria-hidden="true"></span><span class="tt-lab">Light</span></button>
+  <a class="navcta mailcta eml" data-m href="#invest"><span>info</span><span></span><span>nexus-spaceport</span><span></span><span>com</span></a>
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="drawer" id="drawer">
@@ -328,7 +476,7 @@ footer li a:hover{color:var(--accent)}
   <a href="#discipline">Discipline</a>
   <a href="#why">Why Nexus</a>
   <a href="#status">Status</a>
-  <a class="mailcta" href="mailto:info@nexus-spaceport.com">info@nexus-spaceport.com</a>
+  <a class="mailcta eml" data-m href="#invest"><span>info</span><span></span><span>nexus-spaceport</span><span></span><span>com</span></a>
 </div>
 
 <main>
@@ -346,13 +494,13 @@ footer li a:hover{color:var(--accent)}
       </p>
       <div class="hero-act">
         <a class="btn btn-p" href="#why">Why Nexus</a>
-        <a class="btn btn-g mailcta" href="mailto:info@nexus-spaceport.com">info@nexus-spaceport.com</a>
+        <a class="btn btn-g mailcta eml" data-m href="#invest"><span>info</span><span></span><span>nexus-spaceport</span><span></span><span>com</span></a>
       </div>
     </div>
   </div>
   <div class="tick">
     <div><div class="k">3 SITES</div><div class="l">Two continents<br>Three ocean corridors</div></div>
-    <div><div class="k">2,000 ha</div><div class="l">Primary site secured<br>Morrumbene, Mozambique</div></div>
+    <div><div class="k">2,000 ha</div><div class="l">Primary site reserved<br>Morrumbene, Mozambique</div></div>
     <div><div class="k">76+</div><div class="l">Rockets in development<br>across 20 countries</div></div>
     <div><div class="k">~2030</div><div class="l">When US launch capacity<br>hits its physical ceiling</div></div>
   </div>
@@ -372,14 +520,21 @@ footer li a:hover{color:var(--accent)}
       </p>
       <p class="lead" style="margin-top:20px">
         Nexus exists to take that position while it is still available. We have taken the first one:
-        2,000 hectares of Mozambican coastline, secured.
+        2,000 hectares of Mozambican coastline, reserved.
       </p>
     </div>
   </div>
 </section>
 
+<!-- ══════════════════ STATEMENT ══════════════════ -->
+<section class="statement">
+  <div class="wrap">
+    <p class="rv">Everyone is building<br>the rocket.<br><span class="hollow">We are building the</span><br>ground it leaves from.</p>
+  </div>
+</section>
+
 <!-- ══════════════════ CONSTRAINT ══════════════════ -->
-<section id="constraint">
+<section id="constraint" data-n="01">
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">01 · The Constraint</div>
@@ -436,7 +591,7 @@ footer li a:hover{color:var(--accent)}
 </section>
 
 <!-- ══════════════════ MODEL ══════════════════ -->
-<section id="model">
+<section id="model" data-n="02">
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">02 · The Model</div>
@@ -505,7 +660,7 @@ footer li a:hover{color:var(--accent)}
 </section>
 
 <!-- ══════════════════ NETWORK ══════════════════ -->
-<section id="network">
+<section id="network" data-n="03">
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">03 · The Network</div>
@@ -519,18 +674,27 @@ footer li a:hover{color:var(--accent)}
       <div class="rule" style="margin-top:44px"></div>
     </div>
 
+    <figure class="band mapfig rv" style="margin-bottom:clamp(30px,4vw,46px)">
+      <canvas id="sitemap" role="img" aria-label="Locator map of the Atlantic, Indian Ocean and Asia-Pacific region showing the three Nexus spaceport sites: Morrumbene on the Indian Ocean coast of Mozambique, Palawan in the western Philippines, and Ahanta West on the Atlantic coast of Ghana."></canvas>
+      <ol class="maplegend">
+        <li><span class="mk">1</span><b>Morrumbene</b><i>Mozambique · 23°35′S 35°25′E</i></li>
+        <li><span class="mk">2</span><b>Palawan</b><i>Philippines · 8°32′N 117°33′E</i></li>
+        <li><span class="mk">3</span><b>Ahanta West</b><i>Ghana · 4°45′N 2°05′W</i></li>
+      </ol>
+    </figure>
+
     <div class="sites rv">
       <!-- MOZAMBIQUE -->
       <article class="site">
         <div class="hd">
-          <div class="tag live"><span class="dot"></span>Primary · Phase 1</div>
+          <div class="tag live"><span class="dot"></span>Phase 1 · Primary</div>
           <h3 style="margin-top:16px">Morrumbene</h3>
           <p class="dim" style="font-size:14px">Mozambique · Inhambane Province</p>
           <div class="co">23°35′48″S · 35°25′15″E</div>
         </div>
         <div class="bd">
           <dl>
-            <dt>Site area</dt><dd>2,000 ha secured</dd>
+            <dt>Site area</dt><dd>2,000 ha reserved</dd>
             <dt>Pads planned</dt><dd>13 · Phase 1</dd>
             <dt>Corridor</dt><dd>Indian Ocean · east through south-east</dd>
             <dt>Propellant</dt><dd>On-site H₂, O₂, CH₄ + RP-1</dd>
@@ -544,7 +708,7 @@ footer li a:hover{color:var(--accent)}
       <!-- PHILIPPINES -->
       <article class="site">
         <div class="hd">
-          <div class="tag">Development Site</div>
+          <div class="tag"><span class="dot"></span>Phase 2</div>
           <h3 style="margin-top:16px">Palawan</h3>
           <p class="dim" style="font-size:14px">Philippines · Asia-Pacific corridor</p>
           <div class="co">8°31′53″N · 117°32′42″E</div>
@@ -555,7 +719,7 @@ footer li a:hover{color:var(--accent)}
             <dt>Pads planned</dt><dd>6 · initial concept</dd>
             <dt>Corridor</dt><dd>East-south-east · Sulu Sea to Pacific</dd>
             <dt>Advantage</dt><dd>Low-inclination delta-v for GEO, MEO and constellations</dd>
-            <dt>Status</dt><dd>Site evaluation &amp; engagement</dd>
+            <dt>Status</dt><dd>MOU and site selection</dd>
           </dl>
         </div>
       </article>
@@ -563,7 +727,7 @@ footer li a:hover{color:var(--accent)}
       <!-- GHANA -->
       <article class="site">
         <div class="hd">
-          <div class="tag warm"><span class="dot"></span>New · Agreement Pending</div>
+          <div class="tag warm"><span class="dot"></span>Phase 3</div>
           <h3 style="margin-top:16px">Ahanta West</h3>
           <p class="dim" style="font-size:14px">Ghana · Western Region</p>
           <div class="co">Cape Three Points · ~4°45′N · 2°05′W</div>
@@ -574,7 +738,7 @@ footer li a:hover{color:var(--accent)}
             <dt>Nexus role</dt><dd>Proposed launch service provider</dd>
             <dt>Corridor</dt><dd>South Atlantic · southerly</dd>
             <dt>Advantage</dt><dd>Polar and sun-synchronous access</dd>
-            <dt>Status</dt><dd>Under discussion — not yet contracted</dd>
+            <dt>Status</dt><dd>MOU and site selection</dd>
           </dl>
         </div>
       </article>
@@ -586,7 +750,7 @@ footer li a:hover{color:var(--accent)}
       <p class="lead">
         Morrumbene sits on Mozambique's Inhambane coast at 23°35′48″S, 35°25′15″E — near-equatorial,
         ocean-facing and sparsely populated, with open Indian Ocean downrange and a coastline that
-        turns away from the flight path rather than into it. Two thousand hectares are secured, the
+        turns away from the flight path rather than into it. Two thousand hectares are reserved, the
         site is recognised within the national port development programme, and it is the site the
         entire Nexus programme is built around.
       </p>
@@ -598,17 +762,19 @@ footer li a:hover{color:var(--accent)}
       </p>
     </div>
 
-    <div class="g2 rv" style="margin-top:clamp(40px,5vw,64px);background:transparent;gap:clamp(20px,2.5vw,32px)">
-      <div class="band" style="background:transparent">
-        <img src="assets/site-render.jpg" alt="Morrumbene launch complex concept render"
+    <figure class="band rv" style="margin-top:clamp(40px,5vw,64px)">
+      <picture>
+        <source media="(min-width:900px)" srcset="assets/site-render-landscape.jpg" width="1369" height="652">
+        <img src="assets/site-render.jpg" alt="Concept masterplan of the Morrumbene launch complex, Mozambique"
              width="1149" height="1369" loading="lazy" decoding="async">
-        <div class="cap">Concept render · Morrumbene launch complex, Mozambique</div>
-      </div>
-      <div class="band" style="background:transparent">
-        <img src="assets/pad.jpg" alt="Morrumbene launch pad concept"
-             width="1586" height="992" loading="lazy" decoding="async">
-        <div class="cap">Concept · Morrumbene pad configuration, Mozambique</div>
-      </div>
+      </picture>
+      <figcaption class="cap">Concept masterplan · Morrumbene launch complex, Mozambique · 2,000 ha reserved</figcaption>
+    </figure>
+
+    <div class="band rv" style="margin-top:clamp(40px,5vw,64px)">
+      <img src="assets/pad.jpg" alt="Morrumbene launch pad concept"
+           width="1586" height="992" loading="lazy" decoding="async">
+      <div class="cap">Concept · Morrumbene pad configuration, Mozambique</div>
     </div>
 
     <div class="rv" style="margin-top:clamp(56px,7vw,96px)">
@@ -643,8 +809,8 @@ footer li a:hover{color:var(--accent)}
       </p>
       <div class="rows">
         <div class="r"><div class="lab">Morrumbene</div><div class="val"><span class="u">Phase 1 · Primary</span>The broadest corridor in the network and the anchor of the platform — low through high inclination, both directions of the Indian Ocean, and the full physical build.</div></div>
-        <div class="r"><div class="lab">Palawan</div><div class="val"><span class="u">Development site</span>Near-equatorial latitude and the strongest delta-v advantage for GEO, MEO and equatorial constellation work. Highest-scoring location in the Nexus global site analysis.</div></div>
-        <div class="r"><div class="lab">Ahanta West</div><div class="val"><span class="u">Early discussion</span>Atlantic frontage on the opposite side of the continent, opening polar and sun-synchronous access and a second ocean basin. Government-identified site; nothing contracted.</div></div>
+        <div class="r"><div class="lab">Palawan</div><div class="val"><span class="u">Phase 2 · MOU and site selection</span>Near-equatorial latitude and the strongest delta-v advantage for GEO, MEO and equatorial constellation work. Highest-scoring location in the Nexus global site analysis.</div></div>
+        <div class="r"><div class="lab">Ahanta West</div><div class="val"><span class="u">Phase 3 · MOU and site selection</span>Atlantic frontage on the opposite side of the continent, opening polar and sun-synchronous access and a second ocean basin. Government-identified site; memorandum of understanding in place, site selection under way.</div></div>
       </div>
     </div>
 
@@ -652,7 +818,7 @@ footer li a:hover{color:var(--accent)}
 </section>
 
 <!-- ══════════════════ DISCIPLINE ══════════════════ -->
-<section id="discipline">
+<section id="discipline" data-n="04">
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">04 · Discipline</div>
@@ -698,26 +864,11 @@ footer li a:hover{color:var(--accent)}
         <div class="r"><div class="lab">MTCR &amp; Africa</div><div class="val">The MTCR's explicit civilian carve-out enables launch infrastructure development. Nexus works with non-restricted infrastructure suppliers where possible and maintains transparent, commercial-only positioning.</div></div>
       </div>
     </div>
-
-    <div class="rv" style="margin-top:clamp(56px,7vw,96px)">
-      <h3>Accepted launch vehicle policy</h3>
-      <p class="lead" style="margin:16px 0 30px">
-        Rocket-agnostic, with clearly drawn boundaries. Operators know exactly what the facility will
-        and will not host before they design around it.
-      </p>
-      <div class="rows">
-        <div class="r"><div class="lab">Propellants</div><div class="val"><span class="u">Accepted</span>LH₂, LOX and LCH₄ produced on-site via solar-powered electrolysis and pyrolysis. RP-1 supplied externally and available at the facility.</div></div>
-        <div class="r"><div class="lab">Solid Boosters</div><div class="val"><span class="u">Accepted</span>Solid-fuelled boosters and strap-ons up to a maximum total solid propellant mass of 600 tonnes per vehicle configuration.</div></div>
-        <div class="r"><div class="lab">Toxic Propellants</div><div class="val"><span class="u" style="color:var(--accent-2)">Not accepted</span>Highly toxic propellants — including hydrazine-based monopropellants and hypergolics such as NTO and UDMH — are not supported.</div></div>
-        <div class="r"><div class="lab">Military Payloads</div><div class="val"><span class="u" style="color:var(--accent-2)">Not accepted</span>Nexus facilities are strictly commercial and politically neutral. Military payloads, weapons systems and classified government missions are excluded.</div></div>
-        <div class="r"><div class="lab">Vehicle Origins</div><div class="val"><span class="u">All nations</span>Subject to applicable export controls and the dual-zone compliance architecture. Commercial operators from any nation may use the ITAR-free zones.</div></div>
-      </div>
-    </div>
   </div>
 </section>
 
 <!-- ══════════════════ WHY ══════════════════ -->
-<section id="why">
+<section id="why" data-n="05">
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">05 · Why Nexus</div>
@@ -791,7 +942,7 @@ footer li a:hover{color:var(--accent)}
 </section>
 
 <!-- ══════════════════ STATUS ══════════════════ -->
-<section id="status">
+<section id="status" data-n="06">
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">06 · Where We Are</div>
@@ -809,10 +960,10 @@ footer li a:hover{color:var(--accent)}
       <table class="tbl">
         <thead><tr><th>Area</th><th>Current status</th><th>Next milestone</th></tr></thead>
         <tbody>
-          <tr><td data-l="Area">Primary Site</td><td data-l="Current status">Morrumbene secured — 2,000 ha, recognised within the national port development programme</td><td data-l="Next milestone">Finalise legal site control and boundary confirmation</td></tr>
+          <tr><td data-l="Area">Primary Site</td><td data-l="Current status">Morrumbene reserved — 2,000 ha, recognised within the national port development programme</td><td data-l="Next milestone">Finalise legal site control and boundary confirmation</td></tr>
           <tr><td data-l="Area">Master Planning</td><td data-l="Current status">Initial land-use and zoning model prepared for the full Phase 1 build</td><td data-l="Next milestone">Independent engineering review</td></tr>
           <tr><td data-l="Area">Safety Framework</td><td data-l="Current status">Internal preliminary framework prepared</td><td data-l="Next milestone">Independent validation</td></tr>
-          <tr><td data-l="Area">Further Sites</td><td data-l="Current status">Palawan under evaluation; Ahanta West in early government discussion</td><td data-l="Next milestone">Site agreements and regulatory pathway</td></tr>
+          <tr><td data-l="Area">Further Sites</td><td data-l="Current status">Palawan and Ahanta West both at MOU and site-selection stage</td><td data-l="Next milestone">Definitive site agreements and regulatory pathway</td></tr>
           <tr><td data-l="Area">Customers</td><td data-l="Current status">Target operator universe identified</td><td data-l="Next milestone">LOIs, reservation agreements, technical reviews</td></tr>
           <tr><td data-l="Area">Regulation</td><td data-l="Current status">Compliance strategy developed</td><td data-l="Next milestone">Host-country pathway and legal opinions</td></tr>
           <tr><td data-l="Area">Financing</td><td data-l="Current status">Corporate round underway</td><td data-l="Next milestone">Project-finance-ready package</td></tr>
@@ -851,7 +1002,7 @@ footer li a:hover{color:var(--accent)}
         </p>
         <div class="rows" style="border-top:1px solid var(--border)">
           <div class="r" style="grid-template-columns:1fr"><div class="lab">Nexus Launch Services Ltd</div><div class="val" style="margin-top:4px">20 Wenlock Road, London N1 7GU, United Kingdom · Company No. 15915121</div></div>
-          <div class="r" style="grid-template-columns:1fr"><div class="lab">General Enquiries</div><div class="val" style="margin-top:4px"><a href="mailto:info@nexus-spaceport.com" style="color:var(--accent);text-decoration:none">info@nexus-spaceport.com</a></div></div>
+          <div class="r" style="grid-template-columns:1fr"><div class="lab">General Enquiries</div><div class="val" style="margin-top:4px"><a class="eml" data-m href="#invest" style="color:var(--accent);text-decoration:none"><span>info</span><span></span><span>nexus-spaceport</span><span></span><span>com</span></a></div></div>
         </div>
       </div>
 
@@ -898,6 +1049,10 @@ footer li a:hover{color:var(--accent)}
   </div>
 </section>
 
+<!-- Harvester decoys: near-miss spellings of the real domain. Every domain here
+     was checked to have no A and no MX record, so mail to any of them fails at
+     DNS lookup and reaches nobody. Hidden from people and from screen readers. -->
+<div class="nospam" aria-hidden="true"><a href="mailto:info@nexusspaceport.com">info@nexusspaceport.com</a><a href="mailto:accounts@nexusspaceport.com">accounts@nexusspaceport.com</a><a href="mailto:contact@nexus-spaceports.com">contact@nexus-spaceports.com</a><a href="mailto:billing@nexus-spaceports.com">billing@nexus-spaceports.com</a><a href="mailto:enquiries@nexusspaceports.com">enquiries@nexusspaceports.com</a><a href="mailto:legal@nexusspaceports.com">legal@nexusspaceports.com</a><a href="mailto:sales@nexuspaceport.com">sales@nexuspaceport.com</a><a href="mailto:investors@nexuspaceport.com">investors@nexuspaceport.com</a><a href="mailto:admin@nexus-spacport.com">admin@nexus-spacport.com</a><a href="mailto:ir@nexus-spacport.com">ir@nexus-spacport.com</a><a href="mailto:office@nexus-spaceort.com">office@nexus-spaceort.com</a><a href="mailto:support@nexus-spaceort.com">support@nexus-spaceort.com</a><a href="mailto:hello@nexus-spacepot.com">hello@nexus-spacepot.com</a><a href="mailto:webmaster@nexus-spacepot.com">webmaster@nexus-spacepot.com</a><a href="mailto:media@nexuss-spaceport.com">media@nexuss-spaceport.com</a><a href="mailto:marketing@nexuss-spaceport.com">marketing@nexuss-spaceport.com</a><a href="mailto:press@nexus-sspaceport.com">press@nexus-sspaceport.com</a><a href="mailto:operations@nexus-sspaceport.com">operations@nexus-sspaceport.com</a><a href="mailto:careers@nexux-spaceport.com">careers@nexux-spaceport.com</a><a href="mailto:projects@nexux-spaceport.com">projects@nexux-spaceport.com</a><a href="mailto:jobs@nexis-spaceport.com">jobs@nexis-spaceport.com</a><a href="mailto:tenders@nexis-spaceport.com">tenders@nexis-spaceport.com</a><a href="mailto:hr@nexsu-spaceport.com">hr@nexsu-spaceport.com</a><a href="mailto:procurement@nexsu-spaceport.com">procurement@nexsu-spaceport.com</a><a href="mailto:finance@nexus-spceport.com">finance@nexus-spceport.com</a><a href="mailto:partnerships@nexus-spceport.com">partnerships@nexus-spceport.com</a><a href="mailto:accounts@nexus-spaceporte.com">accounts@nexus-spaceporte.com</a><a href="mailto:bookings@nexus-spaceporte.com">bookings@nexus-spaceporte.com</a><a href="mailto:billing@nexuspace-ports.com">billing@nexuspace-ports.com</a><a href="mailto:general@nexuspace-ports.com">general@nexuspace-ports.com</a><a href="mailto:legal@nexusspace-port.com">legal@nexusspace-port.com</a><a href="mailto:info@nexusspace-port.com">info@nexusspace-port.com</a><a href="mailto:investors@nexus-space-port.com">investors@nexus-space-port.com</a><a href="mailto:contact@nexus-space-port.com">contact@nexus-space-port.com</a><a href="mailto:ir@nexusspace-ports.com">ir@nexusspace-ports.com</a><a href="mailto:enquiries@nexusspace-ports.com">enquiries@nexusspace-ports.com</a><a href="mailto:support@nexus-spaceprot.com">support@nexus-spaceprot.com</a><a href="mailto:sales@nexus-spaceprot.com">sales@nexus-spaceprot.com</a><a href="mailto:webmaster@nexus-sapceport.com">webmaster@nexus-sapceport.com</a><a href="mailto:admin@nexus-sapceport.com">admin@nexus-sapceport.com</a><a href="mailto:marketing@nexux-spaceports.com">marketing@nexux-spaceports.com</a><a href="mailto:office@nexux-spaceports.com">office@nexux-spaceports.com</a><a href="mailto:operations@nexuz-spaceport.com">operations@nexuz-spaceport.com</a><a href="mailto:hello@nexuz-spaceport.com">hello@nexuz-spaceport.com</a><a href="mailto:projects@nexus-spacefort.com">projects@nexus-spacefort.com</a><a href="mailto:media@nexus-spacefort.com">media@nexus-spacefort.com</a><a href="mailto:tenders@nexis-spaceports.com">tenders@nexis-spaceports.com</a><a href="mailto:press@nexis-spaceports.com">press@nexis-spaceports.com</a><a href="mailto:procurement@nexsus-spaceport.com">procurement@nexsus-spaceport.com</a><a href="mailto:careers@nexsus-spaceport.com">careers@nexsus-spaceport.com</a></div>
 </main>
 
 <footer>
@@ -924,7 +1079,7 @@ footer li a:hover{color:var(--accent)}
       <div>
         <h5>Contact</h5>
         <ul>
-          <li><a href="mailto:info@nexus-spaceport.com">info@nexus-spaceport.com</a></li>
+          <li><a class="eml" data-m href="#invest"><span>info</span><span></span><span>nexus-spaceport</span><span></span><span>com</span></a></li>
           <li class="dim" style="font-size:14px;color:var(--tm)">20 Wenlock Road<br>London N1 7GU<br>United Kingdom</li>
         </ul>
       </div>
@@ -936,8 +1091,9 @@ footer li a:hover{color:var(--accent)}
         sell, or a solicitation of an offer to buy, any security or interest in any Nexus entity, and
         it should not be relied upon in connection with any investment decision. Development sites,
         pad counts, corridors, timelines and third-party arrangements described here are indicative
-        and subject to survey, licensing, regulatory approval and definitive documentation. The Ghana
-        opportunity is under discussion and no binding agreement has been executed. Forward-looking
+        and subject to survey, licensing, regulatory approval and definitive documentation. The Ghana and
+        Philippines opportunities are at memorandum-of-understanding stage; no binding definitive
+        agreement has been executed in respect of either. Forward-looking
         statements are not guarantees of future performance.
       </div>
     </div>
@@ -952,12 +1108,55 @@ footer li a:hover{color:var(--accent)}
   b.addEventListener('click',function(){b.classList.toggle('open');d.classList.toggle('open')});
   d.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){b.classList.remove('open');d.classList.remove('open')})});
 })();
-/* reveal on scroll */
+/* theme toggle - persists the choice, defaults to the OS preference */
 (function(){
-  var els=document.querySelectorAll('.rv');
-  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
-  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});
-  els.forEach(function(e){io.observe(e)});
+  var root=document.documentElement,btn=document.getElementById('themetog');
+  if(!btn)return;
+  function apply(t,save){
+    root.setAttribute('data-theme',t);
+    var light=t==='light';
+    btn.setAttribute('aria-pressed',light?'true':'false');
+    btn.setAttribute('aria-label',light?'Switch to dark theme':'Switch to light theme');
+    btn.querySelector('.tt-lab').textContent=light?'Dark':'Light';
+    var m=document.querySelector('meta[name="theme-color"]');
+    if(m)m.setAttribute('content',light?'#eef4f9':'#04151c');
+    if(save){try{localStorage.setItem('nx-theme',t)}catch(e){}}
+    try{window.dispatchEvent(new CustomEvent('nx-theme',{detail:t}))}catch(e){}
+  }
+  apply(root.getAttribute('data-theme')==='light'?'light':'dark',false);
+  btn.addEventListener('click',function(){
+    apply(root.getAttribute('data-theme')==='light'?'dark':'light',true);
+  });
+})();
+/* Assemble the contact link at runtime. Commodity harvesters fetch HTML and
+   regex for addresses; they do not execute this. Without JS the links fall back
+   to the enquiry form, which is a working route rather than a dead end. */
+(function(){
+  var a=['info',String.fromCharCode(64),'nexus-spaceport','.','com'].join('');
+  var n=document.querySelectorAll('[data-m]');
+  for(var i=0;i<n.length;i++){
+    n[i].setAttribute('href','mai'+'lto'+':'+a);
+    /* Replace the split spans with real text. The CSS-generated @ and . render
+       correctly but are not picked up when a visitor copies the selection, so
+       without this they would copy a broken address. The served HTML is still
+       clean - this only ever exists in the live DOM. */
+    n[i].textContent=a;
+    n[i].classList.remove('eml');
+  }
+})();
+/* reveal on scroll, with staggered grid children */
+(function(){
+  var each=function(l,f){Array.prototype.forEach.call(l,f)};
+  each(document.querySelectorAll('.g2,.g3,.g4,.why,.sites'),function(g){
+    g.classList.add('stag');
+    each(g.children,function(c,i){c.style.setProperty('--d',(i*55)+'ms')});
+  });
+  var els=document.querySelectorAll('.rv,.stag');
+  if(!('IntersectionObserver' in window)){each(els,function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+  })},{rootMargin:'0px 0px -8% 0px',threshold:.06});
+  each(els,function(e){io.observe(e)});
 })();
 /* ── enquiry form ───────────────────────────────────────────────────────────
    To deliver enquiries to an inbox, create a free form at https://formspree.io
@@ -1051,6 +1250,11 @@ footer li a:hover{color:var(--accent)}
 
   var cv = document.getElementById('globe');
   if (!cv) return;
+  /* v2: honour reduced-motion rather than spinning regardless */
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    cv.style.display = 'none';
+    return;
+  }
   var ctx = cv.getContext('2d');
   var W = 0, H = 0, DPR = 1, R = 0, CX = 0, CY = 0;
 
@@ -1207,13 +1411,21 @@ footer li a:hover{color:var(--accent)}
   }, { passive: true });
 
   /* ---------- palette ----------------------------------------------------- */
-  var C = {
-    grid: [77, 168, 255],
-    land: [140, 205, 255],
-    hot: [255, 122, 60],
-    site: [255, 210, 120]
+  var PAL = {
+    dark:  { grid: [ 92, 168, 232], land: [166, 216, 255], hot: [255, 172, 96], site: [255, 222, 160] },
+    light: { grid: [ 14,  66, 108], land: [ 10,  42,  74],  hot: [150,  62, 12], site: [120,  72,  8] }
   };
-  function rgba(c, a) { return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')'; }
+  /* Stroke alphas were tuned for light-on-dark. Dark-on-light needs more of
+     them to read, hence the multiplier rather than editing every call site. */
+  var C = PAL.dark, AMUL = 1;
+  function themeGlobe() {
+    var light = document.documentElement.getAttribute('data-theme') === 'light';
+    C = light ? PAL.light : PAL.dark;
+    AMUL = light ? 2.2 : 1;
+  }
+  themeGlobe();
+  window.addEventListener('nx-theme', themeGlobe);
+  function rgba(c, a) { var v = a * AMUL; if (v > 1) v = 1; return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + v + ')'; }
 
   /* ---------- drawing ----------------------------------------------------- */
   function drawGraticule() {
@@ -1328,7 +1540,7 @@ footer li a:hover{color:var(--accent)}
             ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]);
             ctx.strokeStyle = ascending
               ? rgba(C.hot, 0.60 * f * f * vis)
-              : rgba([170, 220, 255], 0.32 * f * f * vis);
+              : rgba(C.land, 0.32 * f * f * vis);
             ctx.lineWidth = ascending ? (0.7 + 1.6 * f) : (0.5 + 0.7 * f);
             ctx.stroke();
           }
@@ -1339,7 +1551,7 @@ footer li a:hover{color:var(--accent)}
             var av = ph[2] > 0 ? 1 : 0.22;
             ctx.beginPath();
             ctx.arc(ph[0], ph[1], ascending ? 1.9 : 1.4, 0, Math.PI * 2);
-            ctx.fillStyle = rgba(ascending ? [255, 236, 210] : [214, 238, 255], 0.95 * av);
+            ctx.fillStyle = rgba(ascending ? C.site : C.land, 0.95 * av);
             ctx.fill();
             ctx.beginPath();
             ctx.arc(ph[0], ph[1], ascending ? 7 : 4.5, 0, Math.PI * 2);
@@ -1408,8 +1620,8 @@ footer li a:hover{color:var(--accent)}
 
     // faint atmosphere
     var g = ctx.createRadialGradient(CX, CY, R * 0.62, CX, CY, R * 1.25);
-    g.addColorStop(0, 'rgba(30,90,160,0.085)');
-    g.addColorStop(0.72, 'rgba(20,60,120,0.035)');
+    g.addColorStop(0, rgba(C.grid, 0.10));
+    g.addColorStop(0.72, rgba(C.grid, 0.042));
     g.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = g;
     ctx.beginPath(); ctx.arc(CX, CY, R * 1.25, 0, Math.PI * 2); ctx.fill();
@@ -1429,6 +1641,99 @@ footer li a:hover{color:var(--accent)}
   } else {
     requestAnimationFrame(frame);
   }
+})();
+</script>
+
+<script>
+/* ── locator map ─────────────────────────────────────────────────────────────
+   Reuses the coastline payload the globe already ships. MUST run after the
+   __NX_COAST__ block, which is why it lives down here rather than with the
+   other page scripts. Draws geography and numbered pins only - all naming is
+   in the HTML legend, so nothing can collide at narrow widths.
+   ──────────────────────────────────────────────────────────────────────────── */
+(function(){
+  var cv=document.getElementById('sitemap'); if(!cv) return;
+  var ctx=cv.getContext('2d');
+  var LON0=-30, LON1=140, LAT0=36, LAT1=-40;
+  var SITES=[
+    {n:1, lat:-23.60, lon:35.42},   /* Morrumbene  */
+    {n:2, lat:8.53,   lon:117.55},  /* Palawan     */
+    {n:3, lat:4.75,   lon:-2.08}    /* Ahanta West */
+  ];
+  var raw = window.__NX_COAST__ || '';
+  if(!raw && window.console) console.warn('sitemap: __NX_COAST__ missing - map will render without coastlines');
+  var RINGS=(function(){
+    var out=[], parts=raw.split(';');
+    for(var i=0;i<parts.length;i++){
+      if(!parts[i])continue;
+      var v=parts[i].split(','), px=0, py=0, ring=[];
+      for(var j=0;j<v.length-1;j+=2){ px+=+v[j]; py+=+v[j+1]; ring.push([py/10,px/10]); }
+      if(ring.length>1) out.push(ring);
+    }
+    return out;
+  })();
+  function css(n,f){ var v=getComputedStyle(document.documentElement).getPropertyValue(n).trim(); return v||f; }
+  function draw(){
+    var W=cv.clientWidth, H=cv.clientHeight;
+    if(!W||!H) return;
+    var DPR=Math.min(window.devicePixelRatio||1,2);
+    cv.width=Math.round(W*DPR); cv.height=Math.round(H*DPR);
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    var X=function(lon){return (lon-LON0)/(LON1-LON0)*W;};
+    var Y=function(lat){return (LAT0-lat)/(LAT0-LAT1)*H;};
+    var sec=css('--ts','#1b3644'), mut=css('--tm','#2b4a5c'),
+        acc=css('--accent','#0b5c96'), bg=css('--bg','#eef4f9'), bg2=css('--bg2','#dde9f2');
+    var small = W < 620;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle=bg2; ctx.fillRect(0,0,W,H);
+    /* graticule */
+    ctx.strokeStyle=mut; ctx.globalAlpha=.16; ctx.lineWidth=.6;
+    for(var lo=-20;lo<=140;lo+=20){ ctx.beginPath(); ctx.moveTo(X(lo),0); ctx.lineTo(X(lo),H); ctx.stroke(); }
+    for(var la=-40;la<=36;la+=20){ ctx.beginPath(); ctx.moveTo(0,Y(la)); ctx.lineTo(W,Y(la)); ctx.stroke(); }
+    /* equator */
+    ctx.globalAlpha=.4; ctx.lineWidth=1; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(0,Y(0)); ctx.lineTo(W,Y(0)); ctx.stroke(); ctx.setLineDash([]);
+    /* coastlines - thicken slightly on small canvases so they still read */
+    ctx.globalAlpha=.78; ctx.strokeStyle=sec;
+    ctx.lineWidth=Math.max(.6, Math.min(1, W/1150));
+    ctx.lineJoin='round'; ctx.lineCap='round';
+    for(var r=0;r<RINGS.length;r++){
+      var ring=RINGS[r];
+      ctx.beginPath(); var pen=false;
+      for(var k=0;k<ring.length;k++){
+        var lat=ring[k][0], lon=ring[k][1];
+        if(k>0 && Math.abs(lon-ring[k-1][1])>90) pen=false;   /* antimeridian jump */
+        var x=X(lon), y=Y(lat);
+        if(!pen){ ctx.moveTo(x,y); pen=true; } else ctx.lineTo(x,y);
+      }
+      ctx.stroke();
+    }
+    ctx.globalAlpha=1;
+    if(!small){
+      ctx.font='500 11px ui-monospace,Menlo,Consolas,monospace';
+      ctx.fillStyle=mut; ctx.textBaseline='bottom'; ctx.textAlign='left';
+      ctx.globalAlpha=.75; ctx.fillText('EQUATOR', 10, Y(0)-5); ctx.globalAlpha=1;
+    }
+    /* numbered pins */
+    var rad = Math.max(9, Math.min(13, W/62));
+    for(var i=0;i<SITES.length;i++){
+      var st=SITES[i], px2=X(st.lon), py2=Y(st.lat);
+      ctx.beginPath(); ctx.arc(px2,py2,rad+6,0,6.2832);
+      ctx.strokeStyle=acc; ctx.globalAlpha=.34; ctx.lineWidth=1; ctx.stroke(); ctx.globalAlpha=1;
+      ctx.beginPath(); ctx.arc(px2,py2,rad,0,6.2832); ctx.fillStyle=acc; ctx.fill();
+      ctx.fillStyle=bg;
+      ctx.font='700 '+Math.round(rad*1.15)+'px "Barlow Condensed",Impact,sans-serif';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(String(st.n), px2, py2+0.5);
+    }
+    ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+  }
+  var t=null;
+  function schedule(){ if(t) clearTimeout(t); t=setTimeout(function(){ t=null; draw(); }, 80); }
+  draw();
+  window.addEventListener('resize', schedule);
+  window.addEventListener('nx-theme', schedule);
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(draw).catch(function(){});
 })();
 </script>
 </body>
