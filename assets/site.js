@@ -203,7 +203,6 @@
       if(prev) prev.addEventListener('click',function(){ go(idx-1); });
       if(next) next.addEventListener('click',function(){ go(idx+1); });
       window.addEventListener('resize',function(){ clearTimeout(hoverTimer); layout(); });
-      strip.hidden=false;
       layout();
       /* re-measure once webfonts land, since card height can shift */
       if(document.fonts&&document.fonts.ready) document.fonts.ready.then(layout).catch(function(){});
@@ -242,7 +241,8 @@
         });
     }
   }).catch(function(){
-    if(strip) strip.hidden=true;   /* never leave a broken shell on the home page */
+    if(strip) strip.hidden=true;   /* only hide on failure - otherwise the space
+                                      is reserved from the start, so nothing shifts */
     if(list) list.innerHTML='<p class="ns-empty">News could not be loaded.</p>';
   });
 })();

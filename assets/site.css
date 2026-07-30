@@ -136,8 +136,9 @@ section{padding:clamp(72px,9vw,132px) 0;position:relative}
 .eyebrow{font-family:var(--fm);font-size:13.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);
   display:flex;align-items:center;gap:13px;margin-bottom:26px}
 .eyebrow::before{content:'';width:32px;height:1px;background:var(--accent);flex-shrink:0}
-h1{font-family:var(--fd);font-size:clamp(46px,8.4vw,104px);font-weight:700;line-height:.92;letter-spacing:-.005em;
-  color:var(--tp);text-transform:uppercase;margin-bottom:30px}
+#hero .eyebrow{margin-bottom:clamp(11px,1.6vh,26px)}
+h1{font-family:var(--fd);font-size:clamp(46px,min(8.4vw,8.8vh),104px);font-weight:700;line-height:.92;
+  letter-spacing:-.005em;color:var(--tp);text-transform:uppercase;margin-bottom:clamp(16px,2.4vh,30px)}
 h2{font-family:var(--fd);font-size:clamp(32px,4.6vw,62px);font-weight:600;line-height:.98;letter-spacing:.002em;
   color:var(--tp);text-transform:uppercase;margin-bottom:26px}
 h3{font-family:var(--fd);font-size:clamp(19px,2vw,25px);font-weight:500;letter-spacing:.05em;text-transform:uppercase;
@@ -156,10 +157,11 @@ p{font-size:17px;line-height:1.78}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
 /* ── hero ─────────────────────────────────────────────────────── */
-#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:0}
+#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding-top:clamp(56px,7.6vh,96px);padding-bottom:0}
 .hero-in{max-width:min(640px,100%)}
-.hero-sub{font-size:clamp(16px,1.5vw,19.5px);line-height:1.75;color:var(--tl);max-width:52ch;margin-bottom:40px;font-weight:400}
-.hero-act{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:64px}
+.hero-sub{font-size:clamp(16px,1.5vw,19.5px);line-height:1.75;color:var(--tl);max-width:52ch;margin-bottom:clamp(18px,2.8vh,40px);font-weight:400}
+.hero-act{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:clamp(16px,2.6vh,64px)}
 .btn{font-family:var(--fd);font-size:15px;font-weight:600;letter-spacing:.17em;text-transform:uppercase;
   padding:15px 34px;text-decoration:none;display:inline-block;cursor:pointer;border:1px solid transparent;transition:.2s}
 .btn-p{background:var(--accent);color:var(--bg)}
@@ -168,7 +170,7 @@ p{font-size:17px;line-height:1.78}
 .btn-g:hover{color:var(--tp);border-color:var(--accent)}
 .tick{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);
   background:linear-gradient(180deg,rgba(var(--bg2RGB),.5),rgba(var(--bg2RGB),.1))}
-.tick > div{padding:22px clamp(16px,3vw,40px);border-right:1px solid var(--border)}
+.tick > div{padding:clamp(12px,1.7vh,22px) clamp(16px,3vw,40px);border-right:1px solid var(--border)}
 .tick > div:last-child{border-right:0}
 .tick .k{font-family:var(--fd);font-size:clamp(22px,2.5vw,32px);font-weight:600;color:var(--tp);line-height:1;margin-bottom:7px}
 .tick .l{font-family:var(--fm);font-size:13.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tm);line-height:1.5}
@@ -418,11 +420,37 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
 /* latest-news strip under the hero. The active card takes 70% of the width and
    its neighbours sit either side, dimmed and faded out by a mask on the rail.
    Hovering a neighbour brings it in; the arrows do the same thing explicitly. */
-#news-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  background:linear-gradient(180deg,rgba(var(--bg2RGB),.55),rgba(var(--bg2RGB),.12));
-  padding:clamp(38px,4.6vw,62px) 0}
+/* The strip lives at the foot of the hero, directly above the ticker, so it is
+   on screen without scrolling. One auto margin on .hero-foot pushes the pair
+   down; the ticker keeps its own auto margin for the case where the strip is
+   hidden because news failed to load. */
+:root{--ns-h:clamp(112px,13vh,134px)}
+@media(max-height:760px){:root{--ns-h:118px}}
+/* Short windows (a 1366x768 laptop leaves roughly 700px of viewport) cannot fit
+   the headline, the strip and the ticker at full size. Compact the hero rather
+   than let the ticker clip halfway through its labels. Only applies below this
+   height, so nothing changes on a normal desktop. */
+@media(max-height:745px){
+  #hero{padding-top:46px}
+  #hero h1{font-size:clamp(40px,min(8.4vw,7.9vh),104px);margin-bottom:14px}
+  #hero .eyebrow{margin-bottom:10px}
+  .hero-sub{margin-bottom:16px}
+  .hero-act{margin-bottom:14px}
+  :root{--ns-h:106px}
+  #news-strip .ns-title{font-size:17px}
+  #news-strip .ns-body{padding:9px 15px}
+  .tick > div{padding:10px clamp(16px,3vw,40px)}
+  .tick .k{font-size:clamp(19px,2.1vw,25px);margin-bottom:4px}
+  .tick .l{line-height:1.4}
+}
+
+.hero-foot{margin-top:auto}
+.hero-foot .tick{margin-top:0}
+#news-strip{border-top:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(var(--bg2RGB),.5),rgba(var(--bg2RGB),.1));
+  padding:clamp(9px,1.2vh,16px) 0 clamp(10px,1.3vh,17px)}
 .ns-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;
-  margin-bottom:clamp(18px,2.4vw,28px)}
+  margin-bottom:clamp(6px,0.9vh,12px)}
 .ns-head .eyebrow{margin-bottom:0}
 .ns-all{font-family:var(--fd);font-size:14px;font-weight:600;letter-spacing:.16em;
   text-transform:uppercase;color:var(--accent);text-decoration:none;white-space:nowrap}
@@ -434,22 +462,32 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
 .ns-track{display:flex;align-items:stretch;gap:clamp(14px,1.6vw,22px);
   transition:transform .55s cubic-bezier(.2,.7,.3,1)}
 .ns-card{flex:0 0 70%;background:var(--bg2);border:1px solid var(--border);
-  display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);text-decoration:none;
-  color:inherit;transition:opacity .45s,border-color .3s}
+  display:grid;grid-template-columns:minmax(0,36%) minmax(0,1fr);text-decoration:none;
+  color:inherit;transition:opacity .45s,border-color .3s;
+  /* fixed so the webfont swap and the lazy image cannot resize it mid-scroll */
+  height:var(--ns-h);overflow:hidden}
 .ns-card.noimg{grid-template-columns:minmax(0,1fr)}
 .ns-card.dim{opacity:.3}
 .ns-card:not(.dim):hover{border-color:var(--border-hi)}
-.ns-img{position:relative;overflow:hidden;background:var(--hov);min-height:180px}
+.ns-img{position:relative;overflow:hidden;background:var(--hov)}
 .ns-img img{width:100%;height:100%;object-fit:cover;display:block}
-.ns-body{padding:clamp(20px,2.2vw,32px);display:flex;flex-direction:column;justify-content:center;min-width:0}
+.ns-body{padding:clamp(13px,1.5vw,20px) clamp(16px,1.8vw,24px);display:flex;
+  flex-direction:column;justify-content:center;min-width:0;overflow:hidden}
 .ns-date{font-family:var(--fm);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--tm);margin-bottom:11px}
-.ns-title{font-family:var(--fd);font-size:clamp(21px,2.1vw,28px);font-weight:600;line-height:1.08;
-  letter-spacing:.04em;text-transform:uppercase;color:var(--tp);margin-bottom:11px}
-.ns-excerpt{font-size:15.5px;line-height:1.62;color:var(--ts);
-  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  color:var(--tm);margin-bottom:6px}
+.ns-title{font-family:var(--fd);font-size:clamp(18px,1.7vw,23px);font-weight:600;line-height:1.1;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--tp);margin-bottom:6px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ns-excerpt{font-size:14.5px;line-height:1.55;color:var(--ts);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .ns-more{font-family:var(--fm);font-size:13px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--accent);margin-top:15px}
+#news-strip .ns-more{display:none}
+/* the strip is a teaser, so one line of excerpt: it keeps the content inside
+   the fixed card height at every viewport, instead of being clipped mid-word */
+#news-strip .ns-title{font-size:clamp(17px,1.4vw,20px)}
+#news-strip .ns-excerpt{-webkit-line-clamp:1}
+#news-strip .ns-body{padding:clamp(10px,1.1vw,16px) clamp(15px,1.7vw,22px)}
 .ns-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:40px;height:40px;
   display:flex;align-items:center;justify-content:center;background:var(--bg);
   border:1px solid var(--border-hi);color:var(--tp);cursor:pointer;transition:.2s;
@@ -460,8 +498,11 @@ section[data-n]::before{content:attr(data-n);position:absolute;left:-.055em;top:
 .ns-next{right:-8px}
 .ns-empty{font-size:15.5px;color:var(--tm);padding:20px 0}
 @media(max-width:760px){
-  .ns-card{flex:0 0 86%;grid-template-columns:minmax(0,1fr)}
-  .ns-img{min-height:0;aspect-ratio:16/9}
+  :root{--ns-h:104px}
+  .ns-card{flex:0 0 86%;grid-template-columns:minmax(0,34%) minmax(0,1fr)}
+  .ns-img{min-height:0}
+  .ns-title{-webkit-line-clamp:2}
+  .ns-excerpt{-webkit-line-clamp:2;font-size:13.5px}
   .ns-rail{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);
     mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%)}
   .ns-nav{width:34px;height:34px;font-size:17px}
