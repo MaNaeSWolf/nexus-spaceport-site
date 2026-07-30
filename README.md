@@ -24,7 +24,32 @@ The globe, its coastline payload and the locator map stay inline in `index.html`
 The former `/v2/` concept has been promoted to the root and removed. Its history
 is in the git log if any of it needs recovering.
 
-## Writing a news post
+## Writing a news post — the editor
+
+```
+node tools/admin.js
+```
+
+Then open **http://127.0.0.1:8787**. It walks through three steps:
+
+1. **Details** — headline, date, image, summary, draft toggle
+2. **Write** — Markdown on the left, live preview on the right
+3. **Publish** — rebuild the site, then commit and push
+
+The sidebar lists every post; click one to edit it, or use **Delete this post**.
+Images are resized and converted automatically when you pick them.
+
+It is a local tool. The server binds to `127.0.0.1` only and is not reachable
+from the network — it writes files in this repo and can run `git`, so it must
+not be exposed. Stop it with Ctrl+C when you are done.
+
+**Publishing is the only step that touches the live site.** Everything before it
+is local, so you can write, save and preview freely and nothing is public until
+you press the button and confirm.
+
+## Writing a news post — the command line
+
+The editor is a front end for these; either works, and they can be mixed.
 
 ```
 node tools/new-post.js

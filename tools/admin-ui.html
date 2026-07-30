@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexus Newsroom</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#eef4f9; --panel:#fff; --line:rgba(16,52,78,.16); --line2:rgba(16,52,78,.08);
+  --tp:#0b1a24; --ts:#1b3644; --tm:#516a78; --accent:#0b5c96; --accent2:#08456f;
+  --good:#0b5637; --goodbg:#e3f3ec; --bad:#8c3310; --badbg:#fbeae4; --warnbg:#fdf5e3;
+  --mono:ui-monospace,Menlo,Consolas,monospace;
+}
+body{font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ts)}
+h1,h2,h3{color:var(--tp);letter-spacing:.01em}
+a{color:var(--accent)}
+
+header{background:var(--tp);color:#eaf3f8;padding:13px 22px;display:flex;align-items:center;gap:16px}
+header b{font-size:16px;letter-spacing:.14em;text-transform:uppercase}
+header .sp{margin-left:auto;font-family:var(--mono);font-size:12px;opacity:.75}
+
+.shell{display:grid;grid-template-columns:290px minmax(0,1fr);gap:20px;padding:20px;align-items:start;max-width:1500px;margin:0 auto}
+@media(max-width:900px){.shell{grid-template-columns:1fr}}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px}
+.card h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--tm);
+  padding:13px 16px;border-bottom:1px solid var(--line2);font-family:var(--mono);font-weight:600}
+
+.plist{max-height:70vh;overflow:auto}
+.pitem{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line2);
+  padding:12px 16px;cursor:pointer;font:inherit;color:inherit}
+.pitem:hover{background:#f2f7fb}
+.pitem.on{background:#e6f0f8;box-shadow:inset 3px 0 0 var(--accent)}
+.pitem .t{font-weight:600;color:var(--tp);line-height:1.25;margin-bottom:3px}
+.pitem .m{font-family:var(--mono);font-size:11.5px;color:var(--tm)}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;padding:1px 6px;border-radius:3px;margin-left:6px;
+  background:var(--warnbg);color:#7a5510;border:1px solid rgba(122,85,16,.3)}
+
+.steps{display:flex;gap:8px;padding:14px 16px;border-bottom:1px solid var(--line2);flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:8px;background:none;border:1px solid var(--line);border-radius:99px;
+  padding:6px 14px 6px 7px;cursor:pointer;font:inherit;font-size:13.5px;color:var(--tm)}
+.step .n{width:21px;height:21px;border-radius:50%;background:var(--line2);color:var(--tm);
+  display:grid;place-items:center;font-family:var(--mono);font-size:12px}
+.step.on{border-color:var(--accent);color:var(--tp);background:#eaf2f9}
+.step.on .n{background:var(--accent);color:#fff}
+.step.done .n{background:var(--good);color:#fff}
+
+.pane{padding:18px}
+.pane[hidden]{display:none}
+label{display:block;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--tm);margin:0 0 6px}
+input[type=text],input[type=date],textarea,select{width:100%;font:inherit;color:var(--tp);
+  background:#fff;border:1px solid var(--line);border-radius:4px;padding:9px 11px}
+textarea{resize:vertical;line-height:1.6}
+input:focus,textarea:focus{outline:2px solid rgba(11,92,150,.35);border-color:var(--accent)}
+.row{display:grid;grid-template-columns:1fr 190px;gap:14px}
+.fld{margin-bottom:15px}
+.hint{font-size:12.5px;color:var(--tm);margin-top:5px}
+.hint code{font-family:var(--mono);background:#eef2f6;padding:1px 5px;border-radius:3px}
+
+.btn{font:inherit;font-weight:600;border:1px solid var(--accent);background:var(--accent);color:#fff;
+  padding:9px 18px;border-radius:4px;cursor:pointer}
+.btn:hover{background:var(--accent2);border-color:var(--accent2)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:none;color:var(--accent)}
+.btn.ghost:hover{background:#eaf2f9}
+.btn.danger{background:none;border-color:rgba(140,51,16,.5);color:var(--bad)}
+.btn.danger:hover{background:var(--badbg)}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--line2)}
+.bar .sp{margin-left:auto}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:1100px){.split{grid-template-columns:1fr}}
+.split textarea{min-height:52vh;font-family:var(--mono);font-size:13.5px}
+.prev{border:1px solid var(--line);border-radius:4px;padding:16px 18px;background:#fff;
+  min-height:52vh;overflow:auto;max-height:60vh}
+.prev h1,.prev h2,.prev h3{margin:18px 0 8px;line-height:1.2}
+.prev h2{font-size:21px}.prev h3{font-size:17px}
+.prev p{margin-bottom:12px}
+.prev ul,.prev ol{margin:0 0 12px 22px}
+.prev li{margin-bottom:5px}
+.prev blockquote{border-left:3px solid var(--line);padding-left:14px;color:var(--tm);margin-bottom:12px}
+.prev img{max-width:100%;height:auto;border:1px solid var(--line);margin:10px 0}
+.prev code{font-family:var(--mono);background:#eef2f6;padding:1px 5px;border-radius:3px}
+
+.msg{padding:11px 14px;border-radius:4px;font-size:14px;margin-bottom:14px;border:1px solid transparent}
+.msg.ok{background:var(--goodbg);color:var(--good);border-color:rgba(11,86,55,.25)}
+.msg.err{background:var(--badbg);color:var(--bad);border-color:rgba(140,51,16,.3)}
+.msg.info{background:#e9f1f8;color:var(--accent2);border-color:rgba(11,92,150,.25)}
+.msg[hidden]{display:none}
+
+pre.log{background:#0b1a24;color:#cfe3ee;font-family:var(--mono);font-size:12.5px;line-height:1.5;
+  padding:13px 15px;border-radius:4px;overflow:auto;max-height:300px;white-space:pre-wrap;margin-top:12px}
+pre.log[hidden]{display:none}
+.thumb{display:flex;align-items:center;gap:12px;margin-top:9px}
+.thumb img{width:120px;height:74px;object-fit:cover;border:1px solid var(--line);border-radius:3px}
+.chk{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12.5px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--tm)}
+.chk input{width:16px;height:16px}
+</style>
+</head>
+<body>
+
+<header>
+  <b>Nexus Newsroom</b>
+  <span class="sp" id="where">local editor</span>
+</header>
+
+<div class="shell">
+
+  <aside class="card">
+    <h2>Posts</h2>
+    <div class="plist" id="plist"></div>
+    <div style="padding:14px 16px;border-top:1px solid var(--line2)">
+      <button class="btn" id="newBtn" style="width:100%">+ New post</button>
+    </div>
+  </aside>
+
+  <main class="card">
+    <div class="steps">
+      <button class="step on" data-step="1"><span class="n">1</span> Details</button>
+      <button class="step" data-step="2"><span class="n">2</span> Write</button>
+      <button class="step" data-step="3"><span class="n">3</span> Publish</button>
+    </div>
+
+    <!-- ── step 1 ── -->
+    <section class="pane" id="p1">
+      <div class="msg err" id="err1" hidden></div>
+      <div class="fld">
+        <label for="title">Headline</label>
+        <input type="text" id="title" placeholder="Memoranda of understanding signed in Ghana">
+        <div class="hint" id="urlHint">The web address is made from the headline.</div>
+      </div>
+      <div class="row">
+        <div class="fld">
+          <label for="summary">Summary <span style="text-transform:none">(optional)</span></label>
+          <input type="text" id="summary" placeholder="Leave blank to use the opening lines">
+        </div>
+        <div class="fld">
+          <label for="date">Date</label>
+          <input type="date" id="date">
+        </div>
+      </div>
+      <div class="fld">
+        <label for="imgFile">Image <span style="text-transform:none">(optional)</span></label>
+        <input type="file" id="imgFile" accept="image/*">
+        <div class="hint">Resized to 1600px wide and converted to JPEG automatically.</div>
+        <div class="thumb" id="thumb" hidden>
+          <img id="thumbImg" alt="">
+          <div>
+            <div class="hint" id="imgPath" style="margin:0"></div>
+            <button class="btn ghost" id="rmImg" style="margin-top:6px;padding:5px 12px">Remove</button>
+          </div>
+        </div>
+      </div>
+      <div class="fld">
+        <label class="chk"><input type="checkbox" id="draft"> Draft — keep it off the site</label>
+      </div>
+      <div class="bar">
+        <button class="btn" id="toWrite">Continue to writing &rsaquo;</button>
+        <span class="sp"></span>
+        <button class="btn danger" id="delBtn" hidden>Delete this post</button>
+      </div>
+    </section>
+
+    <!-- ── step 2 ── -->
+    <section class="pane" id="p2" hidden>
+      <div class="split">
+        <div>
+          <label for="body">Body — Markdown</label>
+          <textarea id="body" placeholder="Write the post here.&#10;&#10;Blank lines separate paragraphs. Use **bold**, *italic*, [links](https://example.com), &quot;- &quot; for bullets and &quot;## &quot; for a subheading."></textarea>
+          <div class="hint">
+            <code>## </code> subheading · <code>**bold**</code> · <code>*italic*</code> ·
+            <code>- </code> bullet · <code>&gt; </code> quote · <code>[text](url)</code>
+          </div>
+        </div>
+        <div>
+          <label>Preview</label>
+          <div class="prev" id="prev"></div>
+        </div>
+      </div>
+      <div class="bar">
+        <button class="btn ghost" data-goto="1">&lsaquo; Back</button>
+        <button class="btn" id="saveBtn">Save post</button>
+        <span class="sp"></span>
+        <button class="btn ghost" id="toPublish">Continue to publish &rsaquo;</button>
+      </div>
+    </section>
+
+    <!-- ── step 3 ── -->
+    <section class="pane" id="p3" hidden>
+      <div class="msg info" id="pubInfo" hidden></div>
+      <div class="msg ok" id="pubOk" hidden></div>
+      <div class="msg err" id="pubErr" hidden></div>
+
+      <h3 style="font-size:16px;margin-bottom:6px">1 · Rebuild the site</h3>
+      <p class="hint" style="margin-bottom:10px">
+        Turns your Markdown into the files the website reads, and clears out anything left by a deleted post.
+      </p>
+      <button class="btn" id="buildBtn">Rebuild</button>
+      <pre class="log" id="buildLog" hidden></pre>
+
+      <h3 style="font-size:16px;margin:26px 0 6px">2 · Publish</h3>
+      <p class="hint" style="margin-bottom:10px">
+        Commits the changes and pushes them. <strong>This puts them on the live website.</strong>
+      </p>
+      <div class="fld" style="max-width:520px">
+        <label for="commitMsg">What changed</label>
+        <input type="text" id="commitMsg" placeholder="Add news post: ...">
+      </div>
+      <div id="changes"></div>
+      <div class="bar" style="border:0;margin-top:6px;padding-top:0">
+        <button class="btn" id="pubBtn">Publish to the live site</button>
+        <button class="btn ghost" id="refreshGit">Refresh</button>
+      </div>
+      <pre class="log" id="pubLog" hidden></pre>
+    </section>
+  </main>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const api = async (method, url, body) => {
+  const r = await fetch(url, {
+    method,
+    headers: body ? { 'Content-Type': 'application/json' } : undefined,
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const d = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(d.error || ('HTTP ' + r.status));
+  return d;
+};
+
+let current = null;      // filename of the post being edited, null for a new one
+let posts = [];
+let dirty = false;
+
+/* ── steps ── */
+function goto(n) {
+  // dataset values are strings; coerce or the === checks below never fire
+  n = Number(n);
+  for (const el of document.querySelectorAll('.pane')) el.hidden = true;
+  $('#p' + n).hidden = false;
+  document.querySelectorAll('.step').forEach(s => s.classList.toggle('on', s.dataset.step === String(n)));
+  if (n === 3) refreshGit();
+  if (n === 2) preview();
+}
+document.querySelectorAll('.step').forEach(s => s.addEventListener('click', () => goto(s.dataset.step)));
+document.querySelectorAll('[data-goto]').forEach(b => b.addEventListener('click', () => goto(b.dataset.goto)));
+
+/* ── post list ── */
+async function loadPosts(selectFile) {
+  const d = await api('GET', '/api/posts');
+  posts = d.posts;
+  const list = $('#plist');
+  list.innerHTML = posts.length ? '' : '<div style="padding:16px;color:var(--tm);font-size:14px">No posts yet.</div>';
+  for (const p of posts) {
+    const b = document.createElement('button');
+    b.className = 'pitem' + (p.file === (selectFile || current) ? ' on' : '');
+    b.innerHTML = '<div class="t">' + esc(p.title) + (p.draft ? '<span class="tag">Draft</span>' : '') + '</div>' +
+                  '<div class="m">' + esc(p.date) + ' · ' + p.words + ' words' + (p.image ? ' · image' : '') + '</div>';
+    b.addEventListener('click', () => openPost(p.file));
+    list.appendChild(b);
+  }
+}
+
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c])); }
+
+/* ── load / new ── */
+async function openPost(file) {
+  if (dirty && !confirm('You have unsaved changes. Discard them?')) return;
+  const d = await api('GET', '/api/post?file=' + encodeURIComponent(file));
+  current = d.file;
+  $('#title').value = d.meta.title || '';
+  $('#date').value = d.meta.date || '';
+  $('#summary').value = d.meta.summary || '';
+  $('#draft').checked = String(d.meta.draft) === 'true';
+  setImage(d.meta.image || '');
+  $('#body').value = d.body.trim();
+  $('#delBtn').hidden = false;
+  $('#urlHint').innerHTML = 'Address: <code>/news/?post=' + esc(d.meta.slug || file.replace(/\.md$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '')) +
+    '</code> — kept as-is when you edit, so shared links keep working.';
+  dirty = false;
+  loadPosts(file);
+  goto(1);
+}
+
+$('#newBtn').addEventListener('click', () => {
+  if (dirty && !confirm('You have unsaved changes. Discard them?')) return;
+  current = null;
+  $('#title').value = ''; $('#summary').value = ''; $('#body').value = '';
+  $('#draft').checked = false;
+  $('#date').value = new Date().toISOString().slice(0, 10);
+  setImage('');
+  $('#delBtn').hidden = true;
+  $('#urlHint').textContent = 'The web address is made from the headline.';
+  dirty = false;
+  loadPosts(null);
+  goto(1);
+});
+
+/* ── image ── */
+function setImage(p) {
+  $('#thumb').hidden = !p;
+  $('#imgPath').textContent = p || '';
+  // /files/ serves anything under assets/, so a saved post shows its thumbnail
+  // even when it points at general site imagery rather than assets/news
+  if (p) $('#thumbImg').src = '/files/' + p.replace(/^assets\//, '') + '?t=' + Date.now();
+  $('#thumb').dataset.path = p || '';
+}
+$('#imgFile').addEventListener('change', async e => {
+  const f = e.target.files[0]; if (!f) return;
+  const slug = ($('#title').value || 'image').trim();
+  const reader = new FileReader();
+  reader.onload = async () => {
+    try {
+      showErr('#err1', '');
+      const d = await api('POST', '/api/image', { dataUrl: reader.result, slug });
+      $('#thumb').hidden = false;
+      $('#thumbImg').src = reader.result;
+      $('#imgPath').textContent = d.path + '  ·  ' + (d.log || '');
+      $('#thumb').dataset.path = d.path;
+      dirty = true;
+    } catch (err) { showErr('#err1', err.message); }
+  };
+  reader.readAsDataURL(f);
+});
+$('#rmImg').addEventListener('click', () => { setImage(''); dirty = true; });
+
+/* ── preview ── */
+let pvTimer = null;
+function preview() {
+  clearTimeout(pvTimer);
+  pvTimer = setTimeout(async () => {
+    try { $('#prev').innerHTML = (await api('POST', '/api/preview', { body: $('#body').value })).html; }
+    catch (e) { $('#prev').textContent = 'Preview unavailable: ' + e.message; }
+  }, 220);
+}
+$('#body').addEventListener('input', () => { dirty = true; preview(); });
+['#title','#summary','#date','#draft'].forEach(s => $(s).addEventListener('input', () => { dirty = true; }));
+
+function showErr(sel, msg) { const el = $(sel); el.textContent = msg; el.hidden = !msg; }
+
+/* ── save ── */
+$('#toWrite').addEventListener('click', () => {
+  if (!$('#title').value.trim()) return showErr('#err1', 'Give the post a headline first.');
+  if (!$('#date').value) return showErr('#err1', 'Pick a date.');
+  showErr('#err1', ''); goto(2);
+});
+
+async function save() {
+  const meta = {
+    title: $('#title').value.trim(),
+    date: $('#date').value,
+    summary: $('#summary').value.trim(),
+    image: $('#thumb').dataset.path || '',
+    draft: $('#draft').checked ? 'true' : 'false',
+  };
+  if (meta.image) meta.imageAlt = meta.title;
+  const d = await api('POST', '/api/post', { file: current, meta, body: $('#body').value });
+  current = d.file;
+  dirty = false;
+  await loadPosts(current);
+  $('#delBtn').hidden = false;
+  return d;
+}
+$('#saveBtn').addEventListener('click', async () => {
+  try { const d = await save(); flash('#saveBtn', 'Saved ' + d.file); }
+  catch (e) { alert(e.message); }
+});
+$('#toPublish').addEventListener('click', async () => {
+  try { if (dirty || !current) await save(); goto(3); }
+  catch (e) { alert(e.message); }
+});
+
+function flash(sel, text) {
+  const b = $(sel), old = b.textContent;
+  b.textContent = text; b.disabled = true;
+  setTimeout(() => { b.textContent = old; b.disabled = false; }, 1400);
+}
+
+/* ── delete ── */
+$('#delBtn').addEventListener('click', async () => {
+  if (!current) return;
+  if (!confirm('Delete this post?\n\nIt is removed from the site when you rebuild. The file is gone from disk, though git history keeps a copy.')) return;
+  try {
+    await api('DELETE', '/api/post?file=' + encodeURIComponent(current));
+    current = null; dirty = false;
+    $('#newBtn').click();
+    await loadPosts(null);
+    goto(3);
+    $('#pubInfo').textContent = 'Post deleted. Rebuild, then publish, to take it off the live site.';
+    $('#pubInfo').hidden = false;
+  } catch (e) { alert(e.message); }
+});
+
+/* ── build / publish ── */
+$('#buildBtn').addEventListener('click', async () => {
+  const btn = $('#buildBtn'); btn.disabled = true; btn.textContent = 'Rebuilding…';
+  try {
+    const d = await api('POST', '/api/build');
+    $('#buildLog').textContent = d.log; $('#buildLog').hidden = false;
+    $('#pubErr').hidden = true;
+    refreshGit();
+  } catch (e) { showErr('#pubErr', e.message); }
+  btn.disabled = false; btn.textContent = 'Rebuild';
+});
+
+async function refreshGit() {
+  try {
+    const d = await api('GET', '/api/git');
+    const box = $('#changes');
+    if (!d.available) { box.innerHTML = '<p class="hint">git is not available here.</p>'; return; }
+    box.innerHTML = d.changes.length
+      ? '<p class="hint" style="margin-bottom:6px">' + d.changes.length + ' file(s) will be published:</p><pre class="log" style="max-height:150px">' + esc(d.changes.join('\n')) + '</pre>'
+      : '<p class="hint">Nothing to publish — everything is already live.</p>';
+    $('#pubBtn').disabled = d.changes.length === 0;
+    if (!$('#commitMsg').value && current) {
+      const p = posts.find(x => x.file === current);
+      if (p) $('#commitMsg').value = 'Add news post: ' + p.title;
+    }
+  } catch (e) { /* leave the panel as-is */ }
+}
+$('#refreshGit').addEventListener('click', refreshGit);
+
+$('#pubBtn').addEventListener('click', async () => {
+  if (!confirm('Publish to the live website?\n\nThis commits and pushes, and the changes go public.')) return;
+  const btn = $('#pubBtn'); btn.disabled = true; btn.textContent = 'Publishing…';
+  $('#pubOk').hidden = true; $('#pubErr').hidden = true;
+  try {
+    const d = await api('POST', '/api/publish', { message: $('#commitMsg').value || 'Update news' });
+    $('#pubLog').textContent = d.log; $('#pubLog').hidden = false;
+    $('#pubOk').textContent = 'Published. GitHub Pages usually takes about a minute to update.';
+    $('#pubOk').hidden = false;
+    refreshGit();
+  } catch (e) { showErr('#pubErr', e.message); }
+  btn.disabled = false; btn.textContent = 'Publish to the live site';
+});
+
+addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+
+loadPosts();
+$('#date').value = new Date().toISOString().slice(0, 10);
+</script>
+</body>
+</html>
