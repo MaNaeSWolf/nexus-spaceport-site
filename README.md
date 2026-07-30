@@ -51,10 +51,43 @@ Non-interactive if you prefer:
 node tools/new-post.js --title "Ghana MOU signed" --date 2026-08-01 --image C:\pics\signing.jpg
 ```
 
+### Editing a post
+
+Open its file in `news/posts/`, change whatever you like, then:
+
+```
+node tools/build-news.js
+```
+
+Commit and push. That is the whole loop — the same for fixing a typo or
+rewriting the thing.
+
+**Changing the title changes the URL.** The slug is derived from the title, so a
+retitled post gets a new address and the old link stops working. If a post has
+already been shared, keep the old address by pinning it in the frontmatter:
+
+```
+slug: original-slug-here
+```
+
+### Deleting a post
+
+Delete its `.md` from `news/posts/`, then run `node tools/build-news.js`. The
+build removes the rendered file that has no source, so nothing is left behind.
+Post images are only reported, never deleted — remove them from `assets/news/`
+by hand once you are sure.
+
+To take a post down without losing it, set `draft: true` in its frontmatter and
+rebuild. It stays in the repo and vanishes from the site.
+
 **Frontmatter fields.** `title` and `date` (YYYY-MM-DD) are required; the build
-refuses to run without them. `image`, `imageAlt` and `summary` are optional —
-without a summary the first ~320 characters of the body are used. Set
+refuses to run without them. `image`, `imageAlt`, `summary` and `slug` are
+optional — without a summary the first ~320 characters of the body are used. Set
 `draft: true` to keep a post out of the build.
+
+The build fails loudly and writes nothing if a post is missing a title, has a
+malformed date, or points at an image that does not exist. It will not leave the
+site in a half-updated state.
 
 **Markdown supported:** headings, paragraphs, `**bold**`, `*italic*`, links,
 images, bullet and numbered lists (including wrapped lines), blockquotes,

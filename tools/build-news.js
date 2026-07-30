@@ -74,8 +74,42 @@ function build() {
   posts.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
   fs.writeFileSync(path.join(OUT, 'index.json'), JSON.stringify(posts, null, 2) + '\n', 'utf8');
 
+  /* Delete rendered bodies with no matching source. Without this, deleting a
+     post - or renaming one, which changes its slug - would leave the old HTML
+     behind: invisible on the site but still fetchable and still in the repo. */
+  const keep = new Set(posts.map(p => p.slug + '.html'));
+  const pruned = [];
+  for (const f of fs.readdirSync(OUT)) {
+    if (f === 'index.json' || !f.endsWith('.html')) continue;
+    if (!keep.has(f)) { fs.unlinkSync(path.join(OUT, f)); pruned.push(f); }
+  }
+
+  /* Images are only warned about, never deleted: one may be referenced from a
+     post body rather than the frontmatter, and losing an original is worse
+     than leaving a stray file. */
+  const IMG = path.join(ROOT, 'assets', 'news');
+  const orphanImages = [];
+  if (fs.existsSync(IMG)) {
+    const referenced = new Set();
+    for (const p of posts) if (p.image) referenced.add(path.basename(p.image));
+    for (const f of fs.readdirSync(OUT)) {
+      if (!f.endsWith('.html')) continue;
+      const body = fs.readFileSync(path.join(OUT, f), 'utf8');
+      for (const m of body.matchAll(/assets\/news\/([^"')\s]+)/g)) referenced.add(m[1]);
+    }
+    for (const f of fs.readdirSync(IMG)) if (!referenced.has(f)) orphanImages.push(f);
+  }
+
   console.log(`\nBuilt ${posts.length} post${posts.length === 1 ? '' : 's'}:`);
   posts.forEach(p => console.log(`  ${p.date}  ${p.title}${p.image ? '  [image]' : ''}  (${p.words} words)`));
+  if (pruned.length) {
+    console.log(`\nRemoved ${pruned.length} orphaned file${pruned.length === 1 ? '' : 's'} (no matching post):`);
+    pruned.forEach(f => console.log(`  ${f}`));
+  }
+  if (orphanImages.length) {
+    console.log(`\nUnused image${orphanImages.length === 1 ? '' : 's'} in assets/news/ (not deleted - remove by hand if you are sure):`);
+    orphanImages.forEach(f => console.log(`  ${f}`));
+  }
   console.log(`\n  -> news/data/index.json`);
   return posts;
 }
