@@ -203,16 +203,77 @@ Open Graph tags still produce link previews when the URL is shared in WhatsApp,
 LinkedIn or Slack. That is deliberate: noindex stops search engines finding it,
 while previews still work for links you send on purpose.
 
-## Moving to a custom domain
+## Going live on nexus-spaceport.com
 
-Two absolute URLs in `<head>` are hard-coded to the GitHub Pages address and must
-be updated or link previews will break:
+The domain is registered at one.com, which also runs its DNS and its email. The
+website currently on it is a **Wix** site, which this replaces.
 
-- `og:url`
-- `og:image` (and `twitter:image`)
+### Step 1 — change the DNS at one.com
 
-Also reconsider the `noindex` tag at that point, and note that `robots.txt`
-becomes effective once the site is at a domain root.
+In the one.com control panel, DNS settings for `nexus-spaceport.com`:
+
+**Delete** the three existing apex `A` records (`185.230.63.171`, `.186`, `.107`
+— these are Wix) and **add four**, all with host `@`:
+
+```
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+```
+
+**Change** the `www` record from `CNAME → cdn1.wixdns.net` to:
+
+```
+www   CNAME   manaeswolf.github.io
+```
+
+> **Leave the MX records alone.** They point at `mailpod12-cph3.one.com` and are
+> what deliver `info@nexus-spaceport.com`. Changing A and CNAME records does not
+> affect email; deleting or editing MX would break it — and that address is
+> currently the site's only working contact route.
+
+The old records have a 3600s TTL, so allow up to an hour for the change to
+spread, though it is usually far quicker.
+
+### Step 2 — cut the repo over
+
+```
+node tools/go-live.js --check     is DNS ready?
+node tools/go-live.js             do it
+```
+
+The script writes `CNAME` (which is how Pages is told the custom domain) and
+rewrites the absolute `og:url`, `og:image` and `twitter:image` on both pages.
+**It refuses to run until DNS points at GitHub** — setting the custom domain
+early would make the `github.io` preview link redirect to whatever is still
+answering on the domain, which during the switch is the old Wix site.
+
+Then commit and push.
+
+### Step 3 — HTTPS
+
+In GitHub → Settings → Pages, wait for the certificate to be issued (usually a
+few minutes), then tick **Enforce HTTPS**.
+
+### Step 4 — afterwards
+
+- Check `https://nexus-spaceport.com` and `https://www.nexus-spaceport.com` both load
+- Paste the link somewhere and confirm the preview card renders
+- **Cancel the Wix subscription** — it bills regardless of whether anyone can reach it
+- Decide about `noindex` (below); it is still on
+
+## noindex is still on
+
+`<meta name="robots" content="noindex, nofollow">` in both pages keeps the site
+out of search results. That was right for a preview. On the real domain you will
+probably want to be found, but it is left **on** deliberately, because removing
+it is one line and reversible while being indexed prematurely is not.
+
+Remove it from `index.html` and `news/index.html` when you are ready — ideally
+once the enquiry form is wired up, so people who find you can actually get in
+touch. `robots.txt` also becomes effective at a domain root, so update or delete
+it at the same time.
 
 ## Local preview
 
