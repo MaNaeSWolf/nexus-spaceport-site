@@ -116,7 +116,7 @@ a.mailcta,.drawer a.mailcta{font-family:var(--fm);text-transform:none;letter-spa
 .eml span{font-style:normal;font-weight:inherit}
 .eml span:nth-child(2)::before{content:"\0040"}
 .eml span:nth-child(4)::before{content:"\002E"}
-.nospam{display:none}
+.ftx{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 .burger{display:none;flex-direction:column;gap:4px;background:none;border:0;cursor:pointer;padding:6px;margin-left:auto}
 .burger span{display:block;width:22px;height:1.5px;background:var(--ts);transition:.25s}
 .burger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}

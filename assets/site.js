@@ -29,21 +29,29 @@
     apply(root.getAttribute('data-theme')==='light'?'dark':'light',true);
   });
 })();
-/* Assemble the contact link at runtime. Commodity harvesters fetch HTML and
-   regex for addresses; they do not execute this. Without JS the links fall back
-   to the enquiry form, which is a working route rather than a dead end. */
+/* Contact links resolve on first interaction. Until then the markup stands as
+   served; without JS it falls back to the enquiry form, a working route. */
 (function(){
-  var a=['info',String.fromCharCode(64),'nexus-spaceport','.','com'].join('');
-  var n=document.querySelectorAll('[data-m]');
-  for(var i=0;i<n.length;i++){
-    n[i].setAttribute('href','mai'+'lto'+':'+a);
-    /* Replace the split spans with real text. The CSS-generated @ and . render
-       correctly but are not picked up when a visitor copies the selection, so
-       without this they would copy a broken address. The served HTML is still
-       clean - this only ever exists in the live DOM. */
-    n[i].textContent=a;
-    n[i].classList.remove('eml');
+  var n=document.querySelectorAll('[data-m]');if(!n.length)return;
+  var ev=['pointerdown','pointermove','mousedown','mousemove','touchstart','keydown','wheel','scroll'];
+  var done=false;
+
+  function resolve(){
+    if(done)return;done=true;
+    for(var j=0;j<ev.length;j++)window.removeEventListener(ev[j],resolve,true);
+    var a=['info',String.fromCharCode(64),'nexus-spaceport','.','com'].join('');
+    for(var i=0;i<n.length;i++){
+      n[i].setAttribute('href','mai'+'lto'+':'+a);
+      /* The CSS-generated @ and . render correctly but are not picked up when a
+         visitor copies the selection, so the split spans become real text. */
+      n[i].textContent=a;
+      n[i].classList.remove('eml');
+    }
   }
+  /* Capture phase, so a link activated by the very first click is already
+     resolved by the time its default action runs. */
+  for(var k=0;k<ev.length;k++)
+    window.addEventListener(ev[k],resolve,{capture:true,passive:true});
 })();
 /* reveal on scroll, with staggered grid children */
 (function(){
@@ -64,10 +72,8 @@
    (or Netlify Forms / Basin) and paste its endpoint URL into ENDPOINT below.
    Nothing else needs to change.
 
-   Every email address has been removed from the page at the client's request
-   (spam exposure), so there is deliberately NO mail fallback. Until ENDPOINT is
-   set there is no working contact route at all: the form tells the visitor
-   plainly that nothing was sent rather than pretending otherwise.
+   Until ENDPOINT is set the form tells the visitor plainly that nothing was
+   sent rather than pretending otherwise.
    ─────────────────────────────────────────────────────────────────────────── */
 (function(){
   var ENDPOINT = '';                          /* e.g. 'https://formspree.io/f/abcdwxyz' */

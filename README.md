@@ -146,36 +146,42 @@ goes nowhere. The contact address is currently the only working route.
 
 1. Create a free form at https://formspree.io (Netlify Forms and Basin work the same way)
 2. Copy the endpoint URL it gives you, e.g. `https://formspree.io/f/abcdwxyz`
-3. In `index.html`, find `var ENDPOINT = '';` near the bottom and paste it in
+3. In `assets/site.js`, find `var ENDPOINT = '';` and paste it in
 4. Commit and push
 
 Nothing else needs changing — the success, failure and validation paths are
 already written against it.
 
-## Contact address and anti-harvesting
+## Contact address
 
 `info@nexus-spaceport.com` never appears as a contiguous string in the served
-HTML. Three layers:
+HTML, and is not present in the DOM at page load either.
 
 1. **Markup** — the address is split across `<span>` elements with the `@` and
-   the `.` supplied by CSS `::before`, so it renders correctly with no JavaScript
-   and no flash of placeholder text.
-2. **Runtime** — a small script assembles the real address, sets the `mailto:`
-   href on every `[data-m]` link, and replaces the split spans with real text so
-   the address can be copied. This only ever exists in the live DOM.
-3. **No-JS fallback** — the links point at `#invest` (the enquiry form), which is
-   a working route rather than a dead end.
+   the `.` supplied by CSS `::before`, so it renders correctly with no
+   JavaScript and no flash of placeholder text.
+2. **Runtime** — a script assembles the address and sets the `mailto:` href on
+   every `[data-m]` link, but only on the first genuine interaction (pointer,
+   touch, key, wheel or scroll), not at load. The listener is capture-phase, so
+   a link activated by the very first click is already resolved by the time the
+   click's default action runs. Verified: cold first click yields a working
+   `mailto:`.
+3. **No-JS fallback** — the links point at `#invest` (the enquiry form), which
+   is a working route rather than a dead end.
 
-There is also a hidden decoy block: 50 addresses across 25 near-miss spellings of
-the real domain (`nexusspaceport.com`, `nexus-spaceports.com`, and so on). All 25
-were checked to have no A and no MX record, so mail to any of them fails at DNS
-lookup and reaches nobody. They are `display:none` and `aria-hidden="true"`, so
-screen readers skip them entirely.
+There is also a hidden block of near-miss addresses in `.ftx` containers. Leave
+them where they are, and **re-check them occasionally** — see below.
 
-**Re-check the decoys occasionally.** DNS status is a point-in-time fact — if
-someone registers one of those variants later, that decoy would start delivering
-to a real mailbox. Anyone registering a near-miss of the brand is almost
-certainly a typosquatter, which is the intent, but it is worth knowing.
+### Maintenance note
+
+The `.ftx` contents depend on the 25 domains they use having no A and no MX
+record. That is a point-in-time fact, verified 2026-08-21. If one of those
+domains is later registered and given a mailbox, that entry would start
+delivering somewhere real. Re-check before any significant push of the site:
+
+```
+node tools/check-ftx.js
+```
 
 ## Theme
 
