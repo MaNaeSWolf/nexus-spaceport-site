@@ -138,19 +138,42 @@ their image above the text.
 If `news/data/index.json` is missing or unreadable the whole strip hides itself
 rather than leaving an empty shell on the page.
 
-## ⚠ Wiring up the enquiry form — still outstanding
+## The enquiry form
 
-The form is not connected to an inbox. It states plainly that nothing was sent
-rather than pretending to succeed, so nobody is misled — but a submitted enquiry
-goes nowhere. The contact address is currently the only working route.
+The form posts to a small PHP endpoint on one.com, which emails the enquiry on.
+GitHub Pages cannot do this itself: it serves files and runs no code, and a
+browser cannot send email, so something with a mail server has to sit in the
+middle.
 
-1. Create a free form at https://formspree.io (Netlify Forms and Basin work the same way)
-2. Copy the endpoint URL it gives you, e.g. `https://formspree.io/f/abcdwxyz`
-3. In `assets/site.js`, find `var ENDPOINT = '';` and paste it in
-4. Commit and push
+```
+form.nexus-spaceport.com  ->  /webroots/<id>/enquiry.php   (one.com, PHP 8.4)
+```
 
-Nothing else needs changing — the success, failure and validation paths are
-already written against it.
+That subdomain is a normal one.com subdomain with its own web root, created
+under Domain > Subdomains. Its **Outgoing Site Email** is set to the contact
+address, which is also what the script sends as, so the mail server recognises
+the sender as its own.
+
+**The script is deliberately not in this repo.** This repo is public and Pages
+serves `.php` files as plain text, which would publish the recipient list. The
+working copy lives beside the repo, outside version control. Recipients are a
+plain array at the top of it; add or remove addresses there.
+
+What the endpoint does, beyond sending the mail:
+
+- accepts posts only from this site's origin, and answers the CORS preflight
+- rejects anything that is not a POST
+- rate limits to 5 submissions per IP per hour
+- strips CR/LF from anything used in a mail header, so a crafted name cannot
+  turn one message into several — the usual way contact forms become relays
+- ignores submissions that fill the hidden `website` field, while replying with
+  success so the sender does not adapt
+- returns an error rather than a false success if the mail fails to send, so
+  the page tells the visitor plainly that nothing was sent
+
+Switching to a hosted form service instead is a one-line change: put its
+endpoint in `ENDPOINT` in `assets/site.js`. The payload is already JSON with an
+`Accept: application/json` header, which is what most of them expect.
 
 ## Contact address
 

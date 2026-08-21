@@ -68,15 +68,17 @@
   each(els,function(e){io.observe(e)});
 })();
 /* ── enquiry form ───────────────────────────────────────────────────────────
-   To deliver enquiries to an inbox, create a free form at https://formspree.io
-   (or Netlify Forms / Basin) and paste its endpoint URL into ENDPOINT below.
-   Nothing else needs to change.
+   Posts to a small PHP endpoint on one.com, which mails the enquiry on. The
+   site is served from GitHub Pages, so this is cross-origin: the endpoint
+   answers the browser's preflight and only accepts posts from this site.
 
-   Until ENDPOINT is set the form tells the visitor plainly that nothing was
-   sent rather than pretending otherwise.
+   The recipients live in that script, not here - this file is public.
+
+   Clearing ENDPOINT puts the form back to telling the visitor plainly that
+   nothing was sent, rather than pretending otherwise.
    ─────────────────────────────────────────────────────────────────────────── */
 (function(){
-  var ENDPOINT = '';                          /* e.g. 'https://formspree.io/f/abcdwxyz' */
+  var ENDPOINT = 'https://form.nexus-spaceport.com/enquiry.php';
 
   var f=document.getElementById('enq');if(!f)return;
   var msg=document.getElementById('msg'),sub=document.getElementById('sub');
@@ -114,7 +116,10 @@
     var d={
       firstName:f.fn.value.trim(),lastName:f.ln.value.trim(),
       organisation:f.org.value.trim(),email:f.em.value.trim(),
-      investorType:f.ty.value,message:f.ms.value.trim()
+      investorType:f.ty.value,message:f.ms.value.trim(),
+      /* Honeypot. Off-canvas and not tabbable, so a person never fills it;
+         anything here means a bot, and the endpoint bins it silently. */
+      website:f.website.value
     };
 
     if(!ENDPOINT){
